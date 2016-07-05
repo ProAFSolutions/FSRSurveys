@@ -22,9 +22,9 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\administrative\administrative.html" />
     <Content Include="app\components\top-menu.html" />
-    <Content Include="app\manager\manager.html" />
+    <Content Include="app\components\main-content.html" />
+    <Content Include="app\components\user-info.html" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\scripts\base.js" />
@@ -116,6 +116,7 @@
     <Content Include="assets\styles\bootstrap\mixins\_text-overflow.scss" />
     <Content Include="assets\styles\bootstrap\mixins\_vendor-prefixes.scss" />
     <Content Include="assets\styles\colors.scss" />
+    <Content Include="assets\styles\_rzslider.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -141,6 +142,7 @@
     <Content Include="assets\styles\font-awesome\_variables.scss" />
     <Content Include="assets\styles\_forms.scss" />
     <Content Include="assets\styles\_base.scss" />
+    <Content Include="packages.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -148,12 +150,20 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <TypeScriptCompile Include="app\administrative\administrative.controller.ts" />
-    <TypeScriptCompile Include="app\manager\manager.controller.ts" />
+    <Folder Include="app\directives\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app\controller\survey.controller.ts" />
+    <TypeScriptCompile Include="app\model\survey.category.ts" />
+    <TypeScriptCompile Include="app\model\survey.userInfo.ts" />
     <TypeScriptCompile Include="app\survey.config.ts" />
     <TypeScriptCompile Include="app\service\survey.service.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

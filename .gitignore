@@ -2,3 +2,6 @@
 /FSRSurveys/dist
 /FSRSurveys/bin
 /FSRSurveys/obj
+/FSRSurveys.API/bin
+/packages
+/FSRSurveys.API/obj

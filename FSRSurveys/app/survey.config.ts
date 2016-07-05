@@ -1,33 +1,29 @@
-﻿///<reference path="../node_modules/definitely-typed-angular/angular.d.ts" />
+﻿
+///<reference path="../node_modules/definitely-typed-angular/angular.d.ts" />
 ///<reference path="../node_modules/definitely-typed-angular/angular-resource.d.ts" />
+///<reference path="../node_modules/definitely-typed-angular-ui-bootstrap/angular-ui-bootstrap.d.ts" />
 ///<reference path="../node_modules/definitely-typed-angular-ui-router/angular-ui-router.d.ts" />
 ///<reference path="../node_modules/definitely-typed-jquery/jquery.d.ts" />
-
-module survey {
+namespace survey {
     
-    function configure($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider) {
+    function init($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider) {
         $urlRouterProvider.otherwise("");
 
         $stateProvider
             .state("root", {
-                url: '',   
-                abstract: true,         
+                url: '',
                 views: {
                     "top-menu": {
                         templateUrl: 'app/components/top-menu.html'
+                    },
+                    "container": {
+                        templateUrl: 'app/components/main-content.html',
+                        controller: "SurveyController as vm"
                     }
                 }
-            }).state("root.manager", {
-                url: '/survey-manager',
-                views: {
-                    'container@': {
-                        templateUrl: 'app/manager/manager.html',
-                        controller: "ManagerController as vm"
-                    }
-                }
-            })
+            });
     }; 
 
-    angular.module("survey", ["ngResource", "ui.router"])
-           .config(configure);
+    angular.module("survey", ["ui.bootstrap", "ngResource", "ui.router", "rzModule"])
+           .config(init);
 }

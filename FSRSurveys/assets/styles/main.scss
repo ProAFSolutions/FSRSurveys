@@ -2,10 +2,17 @@
 @import "font";
 @import "colors";
 @import "forms";
+@import "rzslider";
 @import "base";
 
 
 body{
+    font-size: 14px;
+
+    ul{
+        list-style-type: none;
+
+    }
 
     .navbar{
         .navbar-header{
@@ -24,12 +31,21 @@ body{
     .form-box{
         padding-top: 0;
 
-        p.info{
-            font-size: 12px;
-            line-height: 1.5;
-            text-align: left;
+        .completed{
+            position: absolute;
+            right: 25px;
+            top: 0;           
+            font-size: 12px;   
+            color: $color-blue;            
         }
 
+        p.info{
+            font-size: 12px;
+            font-style: italic;
+            line-height: 1.5;
+            text-align: left;
+            width: calc(100% - 65px);
+        }
 
         .f1-steps{            
             .f1-progress{                 
@@ -63,12 +79,21 @@ body{
             button.btn-next,
             button.btn-submit{
                  background-color: $color-blue;
+            }           
+
+
+            .page1{
+
             }
 
-            .completed{
-                margin-top: 30px;
-                font-size: 14px;
-                float: left;
+            .page2{
+                ul.categories{
+                    text-align: left;
+                }
+            }
+
+            .page3{
+
             }
         }
     }
