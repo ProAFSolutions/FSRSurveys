@@ -1,0 +1,76 @@
+﻿@import "bootstrap";
+@import "font";
+@import "colors";
+@import "forms";
+@import "base";
+
+
+body{
+
+    .navbar{
+        .navbar-header{
+             .navbar-brand {
+                margin-left: 95px !important;
+            }
+        }
+    }   
+
+    .top-content{
+        .container{
+          
+        }
+    }
+
+    .form-box{
+        padding-top: 0;
+
+        p.info{
+            font-size: 12px;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+
+        .f1-steps{            
+            .f1-progress{                 
+                 .f1-progress-line {
+                     background-color: $color-blue;
+                  }   
+            }           
+
+            .f1-step{
+
+                &.active {                
+                    .f1-step-icon {
+                       background-color: $color-blue;
+                    }
+                    p{
+                        color: $color-blue;
+                    }
+                }
+
+                .f1-step-icon{
+                     background-color: $color-gray;
+                }
+            }
+        }     
+
+        .wizard-pages {
+            fieldset{
+                display: block;
+            }
+
+            button.btn-next,
+            button.btn-submit{
+                 background-color: $color-blue;
+            }
+
+            .completed{
+                margin-top: 30px;
+                font-size: 14px;
+                float: left;
+            }
+        }
+    }
+
+}

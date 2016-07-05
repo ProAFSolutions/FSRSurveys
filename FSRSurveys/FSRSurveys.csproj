@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{1845E979-0E3B-485B-B96D-ED2194CCA637}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\administrative\administrative.html" />
+    <Content Include="app\components\top-menu.html" />
+    <Content Include="app\manager\manager.html" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\scripts\base.js" />
+    <Content Include="assets\img\background-image.jpg" />
+    <Content Include="assets\scripts\jquery.backstretch.js" />
+    <Content Include="assets\scripts\retina-1.1.0.js" />
+    <Content Include="assets\styles\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\styles\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="gulpfile.js" />
+    <Content Include="index.html" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include="assets\styles\main.scss" />
+    <Content Include="assets\styles\_bootstrap.scss" />
+    <Content Include="assets\styles\bootstrap\_alerts.scss" />
+    <Content Include="assets\styles\bootstrap\_badges.scss" />
+    <Content Include="assets\styles\bootstrap\_breadcrumbs.scss" />
+    <Content Include="assets\styles\bootstrap\_button-groups.scss" />
+    <Content Include="assets\styles\bootstrap\_buttons.scss" />
+    <Content Include="assets\styles\bootstrap\_carousel.scss" />
+    <Content Include="assets\styles\bootstrap\_close.scss" />
+    <Content Include="assets\styles\bootstrap\_code.scss" />
+    <Content Include="assets\styles\bootstrap\_component-animations.scss" />
+    <Content Include="assets\styles\bootstrap\_dropdowns.scss" />
+    <Content Include="assets\styles\bootstrap\_forms.scss" />
+    <Content Include="assets\styles\bootstrap\_glyphicons.scss" />
+    <Content Include="assets\styles\bootstrap\_grid.scss" />
+    <Content Include="assets\styles\bootstrap\_input-groups.scss" />
+    <Content Include="assets\styles\bootstrap\_jumbotron.scss" />
+    <Content Include="assets\styles\bootstrap\_labels.scss" />
+    <Content Include="assets\styles\bootstrap\_list-group.scss" />
+    <Content Include="assets\styles\bootstrap\_media.scss" />
+    <Content Include="assets\styles\bootstrap\_mixins.scss" />
+    <Content Include="assets\styles\bootstrap\_modals.scss" />
+    <Content Include="assets\styles\bootstrap\_navbar.scss" />
+    <Content Include="assets\styles\bootstrap\_navs.scss" />
+    <Content Include="assets\styles\bootstrap\_normalize.scss" />
+    <Content Include="assets\styles\bootstrap\_pager.scss" />
+    <Content Include="assets\styles\bootstrap\_pagination.scss" />
+    <Content Include="assets\styles\bootstrap\_panels.scss" />
+    <Content Include="assets\styles\bootstrap\_popovers.scss" />
+    <Content Include="assets\styles\bootstrap\_print.scss" />
+    <Content Include="assets\styles\bootstrap\_progress-bars.scss" />
+    <Content Include="assets\styles\bootstrap\_responsive-embed.scss" />
+    <Content Include="assets\styles\bootstrap\_responsive-utilities.scss" />
+    <Content Include="assets\styles\bootstrap\_scaffolding.scss" />
+    <Content Include="assets\styles\bootstrap\_tables.scss" />
+    <Content Include="assets\styles\bootstrap\_theme.scss" />
+    <Content Include="assets\styles\bootstrap\_thumbnails.scss" />
+    <Content Include="assets\styles\bootstrap\_tooltip.scss" />
+    <Content Include="assets\styles\bootstrap\_type.scss" />
+    <Content Include="assets\styles\bootstrap\_utilities.scss" />
+    <Content Include="assets\styles\bootstrap\_variables.scss" />
+    <Content Include="assets\styles\bootstrap\_wells.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_alerts.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_buttons.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_center-block.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_forms.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_gradients.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_grid.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_hide-text.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_image.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_labels.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_list-group.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_nav-vertical-align.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_opacity.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_pagination.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_panels.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_progress-bar.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_reset-filter.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_resize.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_responsive-visibility.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_size.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_tab-focus.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_table-row.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_text-overflow.scss" />
+    <Content Include="assets\styles\bootstrap\mixins\_vendor-prefixes.scss" />
+    <Content Include="assets\styles\colors.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\styles\_font.scss" />
+    <Content Include="assets\styles\font-awesome\_animated.scss" />
+    <Content Include="assets\styles\font-awesome\_bordered-pulled.scss" />
+    <Content Include="assets\styles\font-awesome\_core.scss" />
+    <Content Include="assets\styles\font-awesome\_fixed-width.scss" />
+    <Content Include="assets\styles\font-awesome\_icons.scss" />
+    <Content Include="assets\styles\font-awesome\_larger.scss" />
+    <Content Include="assets\styles\font-awesome\_list.scss" />
+    <Content Include="assets\styles\font-awesome\_mixins.scss" />
+    <Content Include="assets\styles\font-awesome\_path.scss" />
+    <Content Include="assets\styles\font-awesome\_rotated-flipped.scss" />
+    <Content Include="assets\styles\font-awesome\_screen-reader.scss" />
+    <Content Include="assets\styles\font-awesome\_stacked.scss" />
+    <Content Include="assets\styles\font-awesome\_variables.scss" />
+    <Content Include="assets\styles\_forms.scss" />
+    <Content Include="assets\styles\_base.scss" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="app\administrative\administrative.controller.ts" />
+    <TypeScriptCompile Include="app\manager\manager.controller.ts" />
+    <TypeScriptCompile Include="app\survey.config.ts" />
+    <TypeScriptCompile Include="app\service\survey.service.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>FSRSurveys</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61326</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61326/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptOutFile>
+    </TypeScriptOutFile>
+    <TypeScriptOutDir>
+    </TypeScriptOutDir>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>cd $(ProjectDir)node_modules\.bin
+set NODE_ENV=$(ConfigurationName)
+gulp</PreBuildEvent>
+  </PropertyGroup>
+</Project>
