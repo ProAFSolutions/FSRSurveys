@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bcda3fbc4a79427994adec9e5ba1d103" Name="Diagram1">
+        <EntityTypeShape EntityType="SurveyDataModel.AdminInfo" Width="1.5" PointX="2.875" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.ManagerInfo" Width="1.5" PointX="0.875" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.SurveyAnswers" Width="1.5" PointX="7" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.UserInfo" Width="1.5" PointX="1.875" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SurveyDataModel.FK_UserInfoSurvey" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="SurveyDataModel.AdminInfo" />
+        <InheritanceConnector EntityType="SurveyDataModel.ManagerInfo" />
+        <EntityTypeShape EntityType="SurveyDataModel.Category" Width="1.5" PointX="7" PointY="4.625" />
+        <AssociationConnector Association="SurveyDataModel.FK_CategorySurvey" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

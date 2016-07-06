@@ -13,11 +13,12 @@ namespace FSRSurveys.API.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SurveyDataContext : DbContext
+    public partial class SurveyDbContext : DbContext
     {
-        public SurveyDataContext()
-            : base("name=SurveyDataContext")
+        public SurveyDbContext()
+            : base("name=SurveyDbContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,8 +26,8 @@ namespace FSRSurveys.API.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<UserInfo> UserInfoes { get; set; }
-        public virtual DbSet<Survey> Surveys { get; set; }
+        public virtual DbSet<SurveyAnswers> SurveyAnswers { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
     }
 }

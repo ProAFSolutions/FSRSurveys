@@ -17,7 +17,7 @@ namespace FSRSurveys.API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserInfo()
         {
-            this.Surveys = new HashSet<Survey>();
+            this.SurveyAnswers = new HashSet<SurveyAnswers>();
         }
     
         public int Id { get; set; }
@@ -27,12 +27,10 @@ namespace FSRSurveys.API.Models
         public string PropertyType { get; set; }
         public string PropertyName { get; set; }
         public string AssociationsNumber { get; set; }
-        public int UnitsTotal { get; set; }
-        public string RdSupervisorName { get; set; }
-        public string VpSupervisorName { get; set; }
         public string MarketName { get; set; }
+        public int UnitsTotal { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Survey> Surveys { get; set; }
+        public virtual ICollection<SurveyAnswers> SurveyAnswers { get; set; }
     }
 }

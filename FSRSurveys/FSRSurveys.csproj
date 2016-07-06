@@ -151,12 +151,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\build\" />
     <Folder Include="app\directives\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\controller\survey.controller.ts" />
     <TypeScriptCompile Include="app\model\survey.category.ts" />
+    <TypeScriptCompile Include="app\model\survey.answer.ts" />
     <TypeScriptCompile Include="app\model\survey.userInfo.ts" />
+    <TypeScriptCompile Include="app\presentation\survey.categoryPresentation.ts" />
     <TypeScriptCompile Include="app\survey.config.ts" />
     <TypeScriptCompile Include="app\service\survey.service.ts" />
   </ItemGroup>
@@ -201,8 +204,7 @@
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
-    <TypeScriptOutDir>
-    </TypeScriptOutDir>
+    <TypeScriptOutDir>C:\Alex\Projects\FSRSurveys\FSRSurveys\app\build</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot />

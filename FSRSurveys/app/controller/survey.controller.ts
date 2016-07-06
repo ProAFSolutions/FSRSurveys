@@ -2,10 +2,11 @@
 
     class SurveyController {       
 
-        static $inject = ["SurveyService"];
+        static $inject = ["SurveyService"];       
 
         private surveyService: SurveyService;
 
+        public surveyType: number;
         public currentStep: number;
         public visibleNext: boolean;
         public visiblePrev: boolean;
@@ -16,51 +17,47 @@
         public marketOptions: Array<string>;
         public propertyTypeOptions: Array<string>;
 
-        public userInfo: UserInfo;
-        public categories: Array<Category>;        
+        public categories: Array<Category>; 
+        public userInfo: any;
+               
                
 
         constructor(surveyService: SurveyService) {
             this.surveyService = surveyService;
-            this.initVars();
-            this.resolveCategories();
-            this.resolveMarketData();  
-            this.setupPropertyTypes();   
+            this.init(); 
         }
                                                            
-        initVars(): void
+        init(): void
         {
+            this.surveyType = 1;
             this.currentStep = 1;
             this.visibleNext = true;
             this.visiblePrev = false;
             this.visibleFinish = false;
             this.porcentage = 0;
             this.sliderOptions = { floor: 0, ceil: 25 };
-            this.userInfo = new UserInfo();            
-        }
 
-        resolveCategories(): void
-        {
-            this.categories = new Array<Category>();
-            this.categories.push(new Category("Category1", "JobActivity1", 5, "AcivityOwner", "AcivityPerformed", "Technology"));  
-            this.categories.push(new Category("Category2", "JobActivity2", 5, "AcivityOwner2", "AcivityPerformed", "Technology"));  
-            this.categories.push(new Category("Category3", "JobActivity3", 5, "AcivityOwner3", "AcivityPerformed", "Technology"));     
-        }
+            this.populateMarketOptions();
+            this.populateCategories();            
 
-        resolveMarketData(): void
-        {
+            this.propertyTypeOptions = new Array<string>();
+            this.propertyTypeOptions.push('Sited', 'Non-Sited', 'Mixed Sited and Non-Sited');
+
+            this.userInfo = this.surveyType == 1 ? new ManagerInfo() : new AdminInfo();            
+        }    
+
+        populateMarketOptions(): void {
             let controller = this;
-            let result = this.surveyService.resolveMarketStates();
-            result.get((response) => {
-                if (response) {                   
-                    controller.marketOptions = response.RestResponse.result;
-                }
+            this.surveyService.resolveMarketStates().then(response => {
+                controller.marketOptions = response.RestResponse.result;
             });
         }
 
-        setupPropertyTypes(): void {
-            this.propertyTypeOptions = new Array<string>();           
-            this.propertyTypeOptions.push('Sited', 'Non-Sited', 'Mixed Sited and Non-Sited');
+        populateCategories(): void {
+            let controller = this;
+            this.surveyService.resolveCategories().then(response => {
+                controller.categories = response;
+            });
         }
 
         nextClick(): void {

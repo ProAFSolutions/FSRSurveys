@@ -12,13 +12,9 @@ namespace FSRSurveys.API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Survey
+    public partial class ManagerInfo : UserInfo
     {
-        public int Id { get; set; }
-        public string Type { get; set; }
-        public System.DateTime Date { get; set; }
-    
-        public virtual Category Category { get; set; }
-        public virtual UserInfo UserInfo { get; set; }
+        public string RdSupervisorName { get; set; }
+        public string VpSupervisorName { get; set; }
     }
 }

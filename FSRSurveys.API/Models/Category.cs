@@ -17,18 +17,15 @@ namespace FSRSurveys.API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Surveys = new HashSet<Survey>();
+            this.SurveyAnswers = new HashSet<SurveyAnswers>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string JobActivity { get; set; }
-        public decimal TimeEffort { get; set; }
-        public string ActivityOwner { get; set; }
-        public string ActivityPerformed { get; set; }
-        public string Technology { get; set; }
+        public Nullable<int> DefinedByUser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Survey> Surveys { get; set; }
+        public virtual ICollection<SurveyAnswers> SurveyAnswers { get; set; }
     }
 }

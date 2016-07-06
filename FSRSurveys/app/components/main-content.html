@@ -1,6 +1,4 @@
-﻿<div ng-controller="SurveyController as vm">
- 
-    <div class="top-content">
+﻿   <div class="top-content">
         <div class="container">           
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 form-box">
@@ -39,8 +37,35 @@
 
                             <div class="page2" ng-show="vm.currentStep == 2">
                                 <ul class="categories">
-                                    <li ng-repeat="categoryItem in vm.categories">
-                                        
+                                    <li class="category" ng-repeat="categoryItem in vm.categories">                                        
+                                        <div class="row" >
+                                            <div class="category-field col-lg-2"><b>{{categoryItem.name}}</b></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="category-field col-lg-3">{{categoryItem.jobActivity}}</div>
+                                            <div class="category-field col-lg-2">
+                                                <rzslider rz-slider-model="0" rz-slider-options="vm.sliderOptions"></rzslider>
+                                            </div>
+                                            <div class="category-field col-lg-2" uib-dropdown>
+                                                <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                                                    Select <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+                                                    <li ng-repeat="typeItem in vm.propertyTypeOptions" role="menuitem">{{typeItem}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="category-field col-lg-2" uib-dropdown>
+                                                <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                                                    Select <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+                                                    <li ng-repeat="typeItem in vm.propertyTypeOptions" role="menuitem">{{typeItem}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="category-field col-lg-2">
+                                                <textarea></textarea>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -60,6 +85,6 @@
             </div>
         </div>
     </div>
-</div>
+
 
 

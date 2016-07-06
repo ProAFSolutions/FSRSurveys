@@ -1,29 +1,48 @@
 ﻿namespace survey { 
 
-    const SURVEY_API_BASE_URL = "http://localhost:61326/api/survey";
+    const SURVEY_API_BASE_URL = "http://localhost:23611/api/survey";
     const STATES_REST_URL = "http://services.groupkt.com/state/get/usa/all";
 
     interface ISurveyService {
-        save(userInfo: UserInfo, categories: Array<number>): void;
+
+         resolveMarketStates(): ng.IPromise<any>;
+
+        resolveCategories(): ng.IPromise<any>;
+
+        saveManagerSurvey(userInfo: ManagerInfo, categories: Array<Category>): void;
+
+        saveAdminSurvey(userInfo: AdminInfo, categories: Array<Category>): void
     }
     
     export class SurveyService implements ISurveyService {
 
-        static $inject = ["$resource"];
+        static $inject = ["$q", "$http"];
 
-        private $resource: ng.resource.IResourceService;
+        private $http: ng.IHttpService;
+        private $q: ng.IQService;
 
-        constructor($resource: ng.resource.IResourceService) {
-            this.$resource = $resource;
+        constructor($q: ng.IQService, $httpService: ng.IHttpService)
+        {
+            this.$q = $q;
+            this.$http = $httpService;
         }  
 
-        save(userInfo: UserInfo, categories: Array<number>): void
+        public saveManagerSurvey(userInfo: ManagerInfo, categories: Array<Category>): void
         {
 
         }
 
-        resolveMarketStates(): ng.resource.IResourceClass<ng.resource.IResource<any>> {
-            return this.$resource(STATES_REST_URL);
+        public saveAdminSurvey(userInfo: AdminInfo, categories: Array<Category>): void
+        {
+
+        }
+
+        public resolveCategories(): ng.IPromise<Array<Category>> {
+            return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
+        }
+
+        public resolveMarketStates(): ng.IPromise<any> {
+            return this.$http.get(STATES_REST_URL).then(response => response.data);                      
         }
     }
 

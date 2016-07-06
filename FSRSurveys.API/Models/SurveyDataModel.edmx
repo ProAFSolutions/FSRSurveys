@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NpsSurveyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="OfficeLocation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManagersNumber" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JobActivity" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DefinedByUser" Type="int" />
+        </EntityType>
+        <EntityType Name="ManagerInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="RdSupervisorName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VpSupervisorName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyAnswers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TimeEffort" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActivityOwner" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ActivityPerformed" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Technology" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Category_Id" Type="int" Nullable="false" />
+          <Property Name="UserInfo_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PropertyType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PropertyName" Type="nvarchar(max)" />
+          <Property Name="AssociationsNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MarketName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UnitsTotal" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AdminInfo_inherits_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminInfo" Type="Self.AdminInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminInfo">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategorySurvey">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="SurveyAnswers" Type="Self.SurveyAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurveyAnswers">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerInfo_inherits_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManagerInfo" Type="Self.ManagerInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManagerInfo">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfoSurvey">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="SurveyAnswers" Type="Self.SurveyAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurveyAnswers">
+              <PropertyRef Name="UserInfo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NpsSurveyModelStoreContainer">
+          <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagerInfo" EntityType="Self.ManagerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyAnswers" EntityType="Self.SurveyAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdminInfo_inherits_UserInfo" Association="Self.FK_AdminInfo_inherits_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="AdminInfo" EntitySet="AdminInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategorySurvey" Association="Self.FK_CategorySurvey">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="SurveyAnswers" EntitySet="SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerInfo_inherits_UserInfo" Association="Self.FK_ManagerInfo_inherits_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ManagerInfo" EntitySet="ManagerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfoSurvey" Association="Self.FK_UserInfoSurvey">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="SurveyAnswers" EntitySet="SurveyAnswers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SurveyDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminInfo" BaseType="SurveyDataModel.UserInfo">
+          <Property Name="OfficeLocation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManagersNumber" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManagerInfo" BaseType="SurveyDataModel.UserInfo">
+          <Property Name="RdSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VpSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyAnswers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeEffort" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActivityOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ActivityPerformed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Technology" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category_Id" Type="Int32" Nullable="false" />
+          <Property Name="UserInfo_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserInfoSurvey" FromRole="SurveyAnswers" ToRole="UserInfo" />
+          <NavigationProperty Name="Category" Relationship="SurveyDataModel.FK_CategorySurvey" FromRole="SurveyAnswers" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PropertyType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PropertyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AssociationsNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MarketName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitsTotal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SurveyAnswers" Relationship="Self.FK_UserInfoSurvey" FromRole="UserInfo" ToRole="SurveyAnswers" />
+        </EntityType>
+        <Association Name="FK_UserInfoSurvey">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="SurveyAnswers" Type="Self.SurveyAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurveyAnswers">
+              <PropertyRef Name="UserInfo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SurveyDbContext" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="SurveyAnswers" EntityType="Self.SurveyAnswers" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK_UserInfoSurvey" Association="Self.FK_UserInfoSurvey">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="SurveyAnswers" EntitySet="SurveyAnswers" />
+          </AssociationSet>
+          <EntitySet Name="Category" EntityType="SurveyDataModel.Category" />
+          <AssociationSet Name="FK_CategorySurvey" Association="SurveyDataModel.FK_CategorySurvey">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="SurveyAnswers" EntitySet="SurveyAnswers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobActivity" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DefinedByUser" Type="Int32" />
+          <NavigationProperty Name="SurveyAnswers" Relationship="SurveyDataModel.FK_CategorySurvey" FromRole="Category" ToRole="SurveyAnswers" />
+        </EntityType>
+        <Association Name="FK_CategorySurvey">
+          <End Type="SurveyDataModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="SurveyDataModel.SurveyAnswers" Role="SurveyAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurveyAnswers">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NpsSurveyModelStoreContainer" CdmEntityContainer="SurveyDbContext">
+          <EntitySetMapping Name="SurveyAnswers">
+            <EntityTypeMapping TypeName="SurveyDataModel.SurveyAnswers">
+              <MappingFragment StoreEntitySet="SurveyAnswers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TimeEffort" ColumnName="TimeEffort" />
+                <ScalarProperty Name="ActivityOwner" ColumnName="ActivityOwner" />
+                <ScalarProperty Name="ActivityPerformed" ColumnName="ActivityPerformed" />
+                <ScalarProperty Name="Technology" ColumnName="Technology" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="UserInfo_Id" ColumnName="UserInfo_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.UserInfo)">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UnitsTotal" ColumnName="UnitsTotal" />
+                <ScalarProperty Name="MarketName" ColumnName="MarketName" />
+                <ScalarProperty Name="AssociationsNumber" ColumnName="AssociationsNumber" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.AdminInfo)">
+              <MappingFragment StoreEntitySet="AdminInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ManagersNumber" ColumnName="ManagersNumber" />
+                <ScalarProperty Name="OfficeLocation" ColumnName="OfficeLocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.ManagerInfo)">
+              <MappingFragment StoreEntitySet="ManagerInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VpSupervisorName" ColumnName="VpSupervisorName" />
+                <ScalarProperty Name="RdSupervisorName" ColumnName="RdSupervisorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="SurveyDataModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="DefinedByUser" ColumnName="DefinedByUser" />
+                <ScalarProperty Name="JobActivity" ColumnName="JobActivity" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

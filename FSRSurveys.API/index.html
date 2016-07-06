@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+        function display_c() {
+            var refresh = 1000;
+            mytime = setTimeout('display_ct()', refresh)
+        }
+
+        function display_ct() {
+            var strcount
+            var x = new Date()
+            var x1 = x.toLocaleDateString() + " "+ x.toLocaleTimeString();
+            document.getElementById('ct').innerHTML = x1;
+            tt = display_c();
+        }
+    </script>
+</head>
+<body onload=display_ct();>
+    <div style="text-align:center; position: fixed; top:calc(50% - 30px); left: calc(50% - 150px); background-color: #58585B">
+        <div style="font-size: 20px; color: #fff; padding-bottom: 10px">FSR Survey WEB API is running!!!</div>       
+        <div id='ct' style="font-size: 18px; margin-top: 10px; color: #fff"></div>
+    </div>
+</body>
+</html>

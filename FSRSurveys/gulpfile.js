@@ -12,10 +12,10 @@ var config = {
         'assets/scripts/jquery.backstretch.js',
         'assets/scripts/retina-1.1.0.js',
         'assets/scripts/base.js',
-         'app/survey.config.js',
-        'app/model/*.js',
-        'app/service/*.js',
-        'app/controller/*.js'
+        'app/build/survey.config.js',
+        'app/build/model/*.js',
+        'app/build/service/*.js',
+        'app/build/controller/*.js'
        
     ],
     libs: [
