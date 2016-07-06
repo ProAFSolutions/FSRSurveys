@@ -8639,11 +8639,26 @@ body {
       color: #0098D2; }
     body .form-box .f1-steps .f1-step .f1-step-icon {
       background-color: #58585B; }
-    body .form-box .wizard-pages fieldset {
-      display: block; }
-    body .form-box .wizard-pages button.btn-next,
-    body .form-box .wizard-pages button.btn-submit {
-      background-color: #0098D2; }
-    body .form-box .wizard-pages .page2 ul.categories {
-      text-align: left; }
+    body .form-box .wizard-pages {
+      margin-top: 20px; }
+      body .form-box .wizard-pages fieldset {
+        display: block; }
+      body .form-box .wizard-pages button.btn-next,
+      body .form-box .wizard-pages button.btn-submit {
+        background-color: #0098D2; }
+      body .form-box .wizard-pages .page1 fieldset label {
+        text-align: left; }
+      body .form-box .wizard-pages .page2 ul.categories {
+        text-align: left; }
+  body .btn-primary {
+    background-color: #0098D2 !important; }
+  body .dropdown-menu {
+    overflow: auto;
+    max-height: 200px; }
+    body .dropdown-menu li {
+      padding: 0 10px 0 10px;
+      cursor: pointer; }
+  body .btn-group.dropdown {
+    margin-bottom: 5px;
+    padding-left: 0; }
 

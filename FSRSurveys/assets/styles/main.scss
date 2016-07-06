@@ -72,6 +72,8 @@ body{
         }     
 
         .wizard-pages {
+            margin-top: 20px;
+
             fieldset{
                 display: block;
             }
@@ -83,7 +85,11 @@ body{
 
 
             .page1{
-
+                fieldset{
+                   label{
+                        text-align: left;                                    
+                    }
+                }
             }
 
             .page2{
@@ -96,6 +102,25 @@ body{
 
             }
         }
+    }
+
+    .btn-primary {
+        background-color: $color-blue !important;
+    }
+
+    .dropdown-menu{
+        overflow: auto;
+        max-height: 200px;
+
+        li{
+            padding: 0 10px 0 10px;
+            cursor: pointer;
+        }
+    }
+
+    .btn-group.dropdown{
+        margin-bottom: 5px;
+        padding-left: 0;
     }
 
 }

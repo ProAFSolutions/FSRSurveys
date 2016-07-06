@@ -4,26 +4,26 @@
     const STATES_REST_URL = "http://services.groupkt.com/state/get/usa/all";
 
     interface ISurveyService {
-        save(userInfo: UserInfo, category: Category): void;
+        save(userInfo: UserInfo, categories: Array<number>): void;
     }
-
+    
     export class SurveyService implements ISurveyService {
 
         static $inject = ["$resource"];
 
-        private $resource: any;
+        private $resource: ng.resource.IResourceService;
 
         constructor($resource: ng.resource.IResourceService) {
             this.$resource = $resource;
         }  
 
-        save(userInfo: UserInfo, category: Category): void
+        save(userInfo: UserInfo, categories: Array<number>): void
         {
 
         }
 
-        resolveMarketStates(): void {
-          
+        resolveMarketStates(): ng.resource.IResourceClass<ng.resource.IResource<any>> {
+            return this.$resource(STATES_REST_URL);
         }
     }
 

@@ -115,7 +115,7 @@
     <Content Include="assets\styles\bootstrap\mixins\_text-emphasis.scss" />
     <Content Include="assets\styles\bootstrap\mixins\_text-overflow.scss" />
     <Content Include="assets\styles\bootstrap\mixins\_vendor-prefixes.scss" />
-    <Content Include="assets\styles\colors.scss" />
+    <Content Include="assets\styles\_colors.scss" />
     <Content Include="assets\styles\_rzslider.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">

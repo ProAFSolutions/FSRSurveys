@@ -6,9 +6,10 @@ var survey;
         function SurveyService($resource) {
             this.$resource = $resource;
         }
-        SurveyService.prototype.save = function (userInfo, category) {
+        SurveyService.prototype.save = function (userInfo, categories) {
         };
         SurveyService.prototype.resolveMarketStates = function () {
+            return this.$resource(STATES_REST_URL);
         };
         SurveyService.$inject = ["$resource"];
         return SurveyService;
