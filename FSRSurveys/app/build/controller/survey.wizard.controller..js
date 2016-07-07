@@ -17,7 +17,7 @@ var survey;
             this.visibleNext = true;
             this.visiblePrev = false;
             this.visibleFinish = false;
-            this.porcentage = 0;
+            this.porcentage = 20;
         };
         //Events
         WizardController.prototype.nextClick = function () {
@@ -42,6 +42,32 @@ var survey;
             }
         };
         WizardController.prototype.finishClick = function () {
+        };
+        WizardController.prototype.stepClick = function (step) {
+            this.currentStep = step;
+            switch (step) {
+                case 1:
+                    {
+                        this.visibleNext = true;
+                        this.visiblePrev = false;
+                        this.visibleFinish = false;
+                    }
+                    break;
+                case 2:
+                    {
+                        this.visibleNext = true;
+                        this.visiblePrev = true;
+                        this.visibleFinish = false;
+                    }
+                    break;
+                case 3:
+                    {
+                        this.visibleNext = false;
+                        this.visiblePrev = true;
+                        this.visibleFinish = true;
+                    }
+                    break;
+            }
         };
         return WizardController;
     }(survey.AbstractController));

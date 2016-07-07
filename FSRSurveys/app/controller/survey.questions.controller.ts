@@ -36,6 +36,11 @@
                 this.categories.push(new Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
             }*/
         }
+
+        public addCategoryClick(): void
+        {
+            this.categories.push(new Category(22, "Other", "This is the job activity that we need to do"));
+        }
     }
 
     angular.module("survey")
