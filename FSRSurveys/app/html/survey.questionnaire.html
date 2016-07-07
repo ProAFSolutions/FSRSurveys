@@ -26,7 +26,14 @@
                 <div class="category-field col-lg-2"><b>{{questionnaireItem.category.name}}</b></div>
             </div>
             <div class="row">
-                <div class="category-field col-lg-3">{{questionnaireItem.category.jobActivity}}</div>
+                <div class="category-field col-lg-3">
+                    <div ng-if="questionnaireItem.category.id > 0">
+                       {{questionnaireItem.category.jobActivity}}
+                    </div>
+                    <div ng-if="questionnaireItem.category.id == 0">
+                        <textarea ng-model="questionnaireItem.category.jobActivity" placeholder="Type here..." class="no-border"></textarea>
+                    </div>
+                </div>
                 <div class="category-field col-lg-2">
                     <rzslider rz-slider-model="questionnaireItem.answer.timeEffort" rz-slider-options="vm.sliderOptions"></rzslider>
                 </div>
@@ -48,14 +55,14 @@
                 </div>
                 <div class="category-field col-lg-2">
                     <textarea ng-model="questionnaireItem.answer.technology"></textarea>
-                </div>                
+                </div>
             </div>
-            <i class="fa fa-times-circle" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>
+            <i class="fa fa-times-circle" title="Remove questionnaire item" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>
         </li>
         <li class="category-footer">
             <div class="row">
                 <div class="col-lg-1">
-                    <button uib-tooltip="TEst" type="button" class="btn btn-primary" ng-click="vm.addQuestionnaireItemClick()">
+                    <button type="button" class="btn btn-primary" ng-click="vm.addQuestionnaireItemClick()">
                         <span class="fa fa-plus-circle"></span> Add Other
                     </button>
                 </div>

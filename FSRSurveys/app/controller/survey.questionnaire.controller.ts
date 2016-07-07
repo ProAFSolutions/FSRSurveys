@@ -44,6 +44,11 @@
 
         public addQuestionnaireItemClick(): void {
             this.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
+
+            //TODO create Angular Directive for this
+            setTimeout(() => {
+                $("textarea.no-border:last").focus();
+            }, 500);
         }
 
         public closeOtherClick(index: number): void {

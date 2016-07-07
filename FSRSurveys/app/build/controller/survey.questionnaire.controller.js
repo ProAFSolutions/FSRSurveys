@@ -40,6 +40,10 @@ var survey;
         };
         QuestionnaireController.prototype.addQuestionnaireItemClick = function () {
             this.questionnaireData.push(new survey.QuestionnaireItem(new survey.Category(0, "Other", ""), new survey.Answer()));
+            //TODO create Angular Directive for this
+            setTimeout(function () {
+                $("textarea.no-border:last").focus();
+            }, 500);
         };
         QuestionnaireController.prototype.closeOtherClick = function (index) {
             this.questionnaireData.splice(index, 1);
