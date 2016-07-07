@@ -11,7 +11,14 @@ body{
 
     ul{
         list-style-type: none;
+    }
 
+    small{
+        font-size: 10px !important;
+    }
+
+    .btn-default{
+        color: $color-fields;
     }
 
     .navbar{
@@ -88,6 +95,9 @@ body{
                    label{
                         text-align: left;                                    
                     }
+                   .dropdown-container{                     
+                       padding: 0 0 5px 0;
+                   }
                 }
             }
 
@@ -110,9 +120,12 @@ body{
                             font-weight: bold;                          
                            
                             .fa{
+                                float: left; 
+                                margin-top: 2px;
+                                margin-right: 5px;    
                                 color:#000;
                                 font-size: 24px;
-                                cursor: pointer;                               
+                                cursor: pointer;                                                           
                             }
 
                             .tooltip .tooltip-inner{
@@ -130,8 +143,11 @@ body{
                         border-bottom: solid 1px $color-lines;
 
                         .category-field{                            
-                             &.dropdown{
-                                 padding-top: 15px;
+                             .ui-select-container{                                 
+                                                               
+                             }                             
+                             textarea{
+                                margin-top: -12px;
                              }                
                         }
                     }

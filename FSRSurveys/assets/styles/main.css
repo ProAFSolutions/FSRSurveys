@@ -8020,7 +8020,7 @@ textarea.form-control {
   background: #fff;
   border: 1px solid #ddd;
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 300;
   line-height: 44px;
   color: #888;
@@ -8041,10 +8041,10 @@ input[type="number"] {
 
 textarea,
 textarea.form-control {
-  height: 90px;
+  height: 60px;
   padding-top: 8px;
   padding-bottom: 8px;
-  line-height: 30px; }
+  line-height: 14px; }
 
 input[type="text"]:focus,
 input[type="number"]:focus,
@@ -8369,7 +8369,7 @@ body > .ui-select-bootstrap.open {
   display: inline-block;
   width: 100%;
   height: 4px;
-  margin: 35px 0 15px 0;
+  margin: 15px 0 15px 0;
   vertical-align: middle;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -8843,6 +8843,10 @@ body {
   font-size: 14px; }
   body ul {
     list-style-type: none; }
+  body small {
+    font-size: 10px !important; }
+  body .btn-default {
+    color: #888; }
   body .navbar .navbar-header .navbar-brand {
     margin-left: 95px !important; }
   body .form-box {
@@ -8875,6 +8879,8 @@ body {
         background-color: #0098D2; }
       body .form-box .wizard-pages .page1 fieldset label {
         text-align: left; }
+      body .form-box .wizard-pages .page1 fieldset .dropdown-container {
+        padding: 0 0 5px 0; }
       body .form-box .wizard-pages .page2 {
         font-size: 12px; }
         body .form-box .wizard-pages .page2 ul.categories {
@@ -8889,6 +8895,9 @@ body {
               text-align: left;
               font-weight: bold; }
               body .form-box .wizard-pages .page2 ul.categories .category-header .row > div .fa {
+                float: left;
+                margin-top: 2px;
+                margin-right: 5px;
                 color: #000;
                 font-size: 24px;
                 cursor: pointer; }
@@ -8899,8 +8908,8 @@ body {
             line-height: 1.5;
             padding: 10px 0 10px 0;
             border-bottom: solid 1px #ddd; }
-            body .form-box .wizard-pages .page2 ul.categories .category .category-field.dropdown {
-              padding-top: 15px; }
+            body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea {
+              margin-top: -12px; }
   body .btn-primary {
     background-color: #0098D2 !important; }
   body .dropdown-menu {

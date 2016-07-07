@@ -10,7 +10,7 @@
 </head>
 <body ng-app="survey">
 
-    <div ui-view="top-menu"></div>
+    <div ui-view="menu"></div>
     <div ui-view="container"></div>
 
     <!-- inject:js -->
@@ -28,9 +28,14 @@
     <script src="/app/build/survey.config.js"></script>
     <script src="/app/build/model/survey.answer.js"></script>
     <script src="/app/build/model/survey.category.js"></script>
+    <script src="/app/build/model/survey.question.js"></script>
     <script src="/app/build/model/survey.userInfo.js"></script>
     <script src="/app/build/service/survey.service.js"></script>
-    <script src="/app/build/controller/survey.controller.js"></script>
+    <script src="/app/build/controller/survey.abstract.controller.js"></script>
+    <script src="/app/build/controller/survey.menu.controller.js"></script>
+    <script src="/app/build/controller/survey.questions.controller.js"></script>
+    <script src="/app/build/controller/survey.user.controller.js"></script>
+    <script src="/app/build/controller/survey.wizard.controller..js"></script>
     <!-- endinject -->
 </body>
 </html>

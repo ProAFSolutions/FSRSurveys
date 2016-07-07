@@ -1,0 +1,61 @@
+﻿<div ng-controller="UserController as vm">
+    <fieldset class="row">
+        <ul class="col-lg-12 col-md-12 col-sm-12">
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Manager Name</label>
+                <input placeholder="Ex: John Smith" class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-model="vm.userInfo.name" type="text" />
+            </li>
+
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Manager Email</label>
+                <input placeholder="Ex: john.smith@fsresidential.com" class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-model="vm.userInfo.email" type="text" />
+            </li>
+
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Property Type(s) Managed</label>
+                <div class="dropdown-container col-lg-4 col-md-6 col-sm-6 col-xs-6">
+                    <ui-select ng-model="vm.userInfo.propertyType" theme="bootstrap">
+                        <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}}</ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="typeItem in vm.propertyTypeOptions | filter: $select.search">
+                            <div ng-bind-html="typeItem | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </li>
+
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Property Name:</label>
+                <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" />
+            </li>
+
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Market:</label>
+                <div class="dropdown-container col-lg-4 col-md-6 col-sm-6 col-xs-6">
+                    <ui-select ng-model="vm.userInfo.marketName" theme="bootstrap">
+                        <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="marketItem in vm.marketOptions | filter: $select.search">
+                            <div ng-bind-html="marketItem.name | highlight: $select.search"></div>
+                            <small ng-bind-html="marketItem.abbr | highlight: $select.search"></small>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </li>
+
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Managers Supported:</label>
+                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" type="number" />
+            </li>
+
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Associations Supported:</label>
+                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" type="number" />
+            </li>
+
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Units Supported:</label>
+                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" type="number" />
+            </li>
+        </ul>
+
+    </fieldset>
+</div>

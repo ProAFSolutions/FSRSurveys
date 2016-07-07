@@ -1,0 +1,60 @@
+﻿<div ng-controller="WizardController as vm">
+    <div class="top-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 form-box">
+                    <div class="completed">
+                        <div>{{vm.porcentage}}% Completed</div>
+                    </div>
+                    <form role="form" action="" method="post" class="f1">
+                        <p class="info">
+                            In an effort to <b>"Improve It"</b>, FirstService Residential is embarking on a company-wide initiative to identify improvements and new technologies to impact the efficiency of our Property Managers and the quality of service we provide to our clients.
+                            Please respond to the questions below with accuracy.
+                        </p>
+                        <div class="f1-steps">
+                            <div class="f1-progress">
+                                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+                            </div>
+                            <div class="f1-step" ng-class="{active: vm.currentStep == 1}">
+                                <div class="f1-step-icon"><i class="fa fa-user"></i></div>
+                                <p>User Info</p>
+                            </div>
+                            <div class="f1-step" ng-class="{active: vm.currentStep == 2}">
+                                <div class="f1-step-icon"><i class="fa fa-database "></i></div>
+                                <p>Collecting Data</p>
+                            </div>
+                            <div class="f1-step" ng-class="{active: vm.currentStep == 3}">
+                                <div class="f1-step-icon"><i class="fa fa-cloud-upload "></i></div>
+                                <p>Uploading Results</p>
+                            </div>
+                        </div>
+
+                        <div class="wizard-pages">
+
+                            <div class="page1" ng-show="vm.currentStep == 1">
+                                <div ng-include="'app/html/survey.user.html'"></div>
+                            </div>
+
+                            <div class="page2" ng-show="vm.currentStep == 2">
+                                <div ng-include="'app/html/survey.questions.html'"></div>
+                            </div>
+
+                            <div class="page3" ng-show="vm.currentStep == 3">
+
+                            </div>
+
+                            <div class="f1-buttons">
+                                <button type="button" ng-show="vm.visiblePrev" ng-click="vm.prevClick()" class="btn btn-previous">Previous</button>
+                                <button type="button" ng-show="vm.visibleNext" ng-click="vm.nextClick()" class="btn btn-next">Next</button>
+                                <button type="submit" ng-show="vm.visibleFinish" ng-click="vm.finishClick()" class="btn btn-submit">Finish</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+

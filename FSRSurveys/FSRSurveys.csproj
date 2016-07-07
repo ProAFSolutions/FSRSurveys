@@ -22,9 +22,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\components\top-menu.html" />
-    <Content Include="app\components\main-content.html" />
-    <Content Include="app\components\user-info.html" />
+    <Content Include="app\html\survey.questions.html" />
+    <Content Include="app\html\survey.menu.html" />
+    <Content Include="app\html\survey.wizard.html" />
+    <Content Include="app\html\survey.user.html" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\scripts\base.js" />
@@ -155,7 +156,12 @@
     <Folder Include="app\directives\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\controller\survey.controller.ts" />
+    <TypeScriptCompile Include="app\controller\survey.questions.controller.ts" />
+    <TypeScriptCompile Include="app\controller\survey.menu.controller.ts" />
+    <TypeScriptCompile Include="app\controller\survey.abstract.controller.ts" />
+    <TypeScriptCompile Include="app\controller\survey.user.controller.ts" />
+    <TypeScriptCompile Include="app\controller\survey.wizard.controller..ts" />
+    <TypeScriptCompile Include="app\model\survey.question.ts" />
     <TypeScriptCompile Include="app\model\survey.category.ts" />
     <TypeScriptCompile Include="app\model\survey.answer.ts" />
     <TypeScriptCompile Include="app\model\survey.userInfo.ts" />
@@ -204,7 +210,7 @@
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
-    <TypeScriptOutDir>E:\Work\FSR\Projects\FSRSurveys\FSRSurveys\app\build</TypeScriptOutDir>
+    <TypeScriptOutDir>app/build</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot />

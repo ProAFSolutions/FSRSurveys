@@ -10,7 +10,7 @@ textarea.form-control {
     background: #fff;
     border: 1px solid #ddd;
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
     line-height: 44px;
     color: #888;
@@ -26,10 +26,10 @@ input[type="number"]
 
 textarea, 
 textarea.form-control {
-	height: 90px;
+	height: 60px;
 	padding-top: 8px;
 	padding-bottom: 8px;
-	line-height: 30px;
+	line-height: 14px;
 }
 
 input[type="text"]:focus,

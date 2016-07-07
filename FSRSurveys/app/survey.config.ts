@@ -13,17 +13,22 @@ namespace survey {
             .state("root", {
                 url: '',
                 views: {
-                    "top-menu": {
-                        templateUrl: 'app/components/top-menu.html'
+                    "menu": {
+                        templateUrl: 'app/html/survey.menu.html'
                     },
                     "container": {
-                        templateUrl: 'app/components/main-content.html',
-                        controller: "SurveyController as vm"
+                        templateUrl: 'app/html/survey.wizard.html'                       
                     }
                 }
             });
     }; 
 
-    angular.module("survey", ["ui.bootstrap", "ngResource", "ui.router", "rzModule"])
-           .config(init);
+    angular.module("survey", [
+        "ui.bootstrap",
+        "ngResource",
+        "ui.router",
+        "rzModule",
+        'ngSanitize',
+        'ui.select'
+    ]).config(init);
 }
