@@ -38,7 +38,7 @@
         }
 
         public resolveCategories(): ng.IPromise<Array<Category>> {
-            return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
+            return null; // return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
         }
 
         public resolveMarketStates(): ng.IPromise<any> {

@@ -204,7 +204,7 @@
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
-    <TypeScriptOutDir>C:\Alex\Projects\FSRSurveys\FSRSurveys\app\build</TypeScriptOutDir>
+    <TypeScriptOutDir>E:\Work\FSR\Projects\FSRSurveys\FSRSurveys\app\build</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot />

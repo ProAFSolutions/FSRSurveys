@@ -13,7 +13,8 @@
         public visibleFinish: boolean;
         public porcentage: number;
         public sliderOptions: any;
-
+        
+        //Dropdown options
         public marketOptions: Array<string>;
         public propertyTypeOptions: Array<string>;
 
@@ -35,7 +36,13 @@
             this.visiblePrev = false;
             this.visibleFinish = false;
             this.porcentage = 0;
-            this.sliderOptions = { floor: 0, ceil: 25 };
+            this.sliderOptions = {
+                floor: 0,
+                ceil: 25,
+                translate: function (value) {
+                    return value + " %";
+                }
+            };
 
             this.populateMarketOptions();
             this.populateCategories();            
@@ -54,12 +61,18 @@
         }
 
         populateCategories(): void {
-            let controller = this;
+            /*let controller = this;
             this.surveyService.resolveCategories().then(response => {
                 controller.categories = response;
-            });
+            });*/
+            this.categories = new Array<Category>();
+            for (var i = 1; i < 20; i++) {
+                this.categories.push(new Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
+            }            
         }
 
+
+        //Events
         nextClick(): void {
             ++this.currentStep;
             if (this.currentStep > 1) {

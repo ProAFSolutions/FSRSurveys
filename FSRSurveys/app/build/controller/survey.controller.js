@@ -12,7 +12,13 @@ var survey;
             this.visiblePrev = false;
             this.visibleFinish = false;
             this.porcentage = 0;
-            this.sliderOptions = { floor: 0, ceil: 25 };
+            this.sliderOptions = {
+                floor: 0,
+                ceil: 25,
+                translate: function (value) {
+                    return value + " %";
+                }
+            };
             this.populateMarketOptions();
             this.populateCategories();
             this.propertyTypeOptions = new Array();
@@ -26,11 +32,16 @@ var survey;
             });
         };
         SurveyController.prototype.populateCategories = function () {
-            var controller = this;
-            this.surveyService.resolveCategories().then(function (response) {
+            /*let controller = this;
+            this.surveyService.resolveCategories().then(response => {
                 controller.categories = response;
-            });
+            });*/
+            this.categories = new Array();
+            for (var i = 1; i < 20; i++) {
+                this.categories.push(new survey.Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
+            }
         };
+        //Events
         SurveyController.prototype.nextClick = function () {
             ++this.currentStep;
             if (this.currentStep > 1) {

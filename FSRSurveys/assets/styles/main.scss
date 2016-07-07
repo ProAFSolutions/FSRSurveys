@@ -41,9 +41,8 @@ body{
 
         p.info{
             font-size: 12px;
-            font-style: italic;
             line-height: 1.5;
-            text-align: left;
+            text-align: justify;
             width: calc(100% - 65px);
         }
 
@@ -100,13 +99,40 @@ body{
                     padding-left: 0;
                     text-align: left;
 
+                    .category-header{
+                        border-bottom: solid 1px $color-lines;
+                        border-top: solid 1px $color-lines;
+
+                        .row > div{
+                            padding-left: 10px;
+                            padding-right: 0;
+                            text-align: left;
+                            font-weight: bold;                          
+                           
+                            .fa{
+                                color:#000;
+                                font-size: 24px;
+                                cursor: pointer;                               
+                            }
+
+                            .tooltip .tooltip-inner{
+                                text-align: left;
+                                padding: 10px;
+                            }
+                        }
+
+                        
+                    }
+
                     .category{
                         line-height: 1.5;
                         padding: 10px 0 10px 0;
                         border-bottom: solid 1px $color-lines;
 
                         .category-field{                            
-                                                 
+                             &.dropdown{
+                                 padding-top: 15px;
+                             }                
                         }
                     }
                 }
