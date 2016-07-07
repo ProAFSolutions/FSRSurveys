@@ -7,6 +7,7 @@
                         <uib-progressbar max="100" value="vm.porcentage"><span class="progress-text">{{vm.porcentage}} % Completed</span></uib-progressbar>                        
                     </div>
                     <form role="form" action="" method="post" class="f1">
+                        <img class="fs-logo" src="/assets/img/logo.png" />
                         <p class="info">
                             In an effort to <b>"Improve It"</b>, FirstService Residential is embarking on a company-wide initiative to identify improvements and new technologies to impact the efficiency of our Property Managers and the quality of service we provide to our clients.
                             Please respond to the questions below with accuracy.
@@ -20,12 +21,12 @@
                                 <p>User Info</p>
                             </div>
                             <div class="f1-step" ng-class="{active: vm.currentStep == 2}">
-                                <div class="f1-step-icon" ng-click="vm.stepClick(2)"><i class="fa fa-database "></i></div>
-                                <p>Collecting Data</p>
+                                <div class="f1-step-icon" ng-click="vm.stepClick(2)"><i class="fa fa-check"></i></div>
+                                <p>Questionnaire</p>
                             </div>
                             <div class="f1-step" ng-class="{active: vm.currentStep == 3}">
                                 <div class="f1-step-icon" ng-click="vm.stepClick(3)"><i class="fa fa-cloud-upload "></i></div>
-                                <p>Uploading Results</p>
+                                <p>Uploading Data</p>
                             </div>
                         </div>
 
@@ -36,7 +37,7 @@
                             </div>
 
                             <div class="page2" ng-show="vm.currentStep == 2">
-                                <div ng-include="'app/html/survey.questions.html'"></div>
+                                <div ng-include="'app/html/survey.questionnaire.html'"></div>
                             </div>
 
                             <div class="page3" ng-show="vm.currentStep == 3">

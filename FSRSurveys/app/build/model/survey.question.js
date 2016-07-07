@@ -1,7 +1,9 @@
 var survey;
 (function (survey) {
     var Question = (function () {
-        function Question() {
+        function Question(category, answer) {
+            this.category = category;
+            this.answer = answer;
         }
         return Question;
     }());

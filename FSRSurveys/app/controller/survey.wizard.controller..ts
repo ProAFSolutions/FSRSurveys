@@ -25,6 +25,7 @@
             this.porcentage = 20;                 
         } 
 
+
         //Events
         public nextClick(): void {
             ++this.currentStep;

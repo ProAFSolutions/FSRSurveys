@@ -60,6 +60,11 @@ body{
                  
         }
 
+        .fs-logo{
+            float: left;
+            margin-right: 20px
+        }
+
         p.info{
             font-size: 12px;
             line-height: 1.5;
@@ -68,7 +73,9 @@ body{
             margin-top: 20px;
         }
 
-        .f1-steps{            
+        .f1-steps{ 
+            clear: both;
+                       
             .f1-progress{                 
                  .f1-progress-line {
                      background-color: $color-blue;
@@ -143,7 +150,7 @@ body{
                                 float: left; 
                                 margin-top: 2px;
                                 margin-right: 5px;    
-                                color:#000;
+                                color:$color-gray;
                                 font-size: 24px;
                                 cursor: pointer;                                                           
                             }
@@ -151,10 +158,9 @@ body{
                             .tooltip .tooltip-inner{
                                 text-align: left;
                                 padding: 10px;
+                                background-color: #000;                                                  
                             }
-                        }
-
-                        
+                        }                        
                     }
 
                     .category{
@@ -181,7 +187,7 @@ body{
                         .fa-times-circle{
                             font-size: 30px;
                             position: absolute;
-                            top: -2px;
+                            top: 0;
                             right: -7px;
                             cursor: pointer; 
                             color: $color-gray;

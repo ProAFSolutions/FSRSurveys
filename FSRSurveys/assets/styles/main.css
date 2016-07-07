@@ -8866,23 +8866,28 @@ body {
         color: #ccc;
         white-space: nowrap;
         padding-left: 60px; }
+    body .form-box .fs-logo {
+      float: left;
+      margin-right: 20px; }
     body .form-box p.info {
       font-size: 12px;
       line-height: 1.5;
       text-align: justify;
       width: calc(100% - 65px);
       margin-top: 20px; }
-    body .form-box .f1-steps .f1-progress .f1-progress-line {
-      background-color: #0098D2; }
-    body .form-box .f1-steps .f1-step.active .f1-step-icon {
-      background-color: #0098D2; }
-    body .form-box .f1-steps .f1-step.active p {
-      color: #0098D2; }
-    body .form-box .f1-steps .f1-step .f1-step-icon {
-      background-color: #58585B;
-      cursor: pointer; }
-      body .form-box .f1-steps .f1-step .f1-step-icon:hover {
-        background-color: #ccc; }
+    body .form-box .f1-steps {
+      clear: both; }
+      body .form-box .f1-steps .f1-progress .f1-progress-line {
+        background-color: #0098D2; }
+      body .form-box .f1-steps .f1-step.active .f1-step-icon {
+        background-color: #0098D2; }
+      body .form-box .f1-steps .f1-step.active p {
+        color: #0098D2; }
+      body .form-box .f1-steps .f1-step .f1-step-icon {
+        background-color: #58585B;
+        cursor: pointer; }
+        body .form-box .f1-steps .f1-step .f1-step-icon:hover {
+          background-color: #ccc; }
     body .form-box .wizard-pages {
       margin-top: 20px; }
       body .form-box .wizard-pages fieldset {
@@ -8911,12 +8916,13 @@ body {
                 float: left;
                 margin-top: 2px;
                 margin-right: 5px;
-                color: #000;
+                color: #58585B;
                 font-size: 24px;
                 cursor: pointer; }
               body .form-box .wizard-pages .page2 ul.categories .category-header .row > div .tooltip .tooltip-inner {
                 text-align: left;
-                padding: 10px; }
+                padding: 10px;
+                background-color: #000; }
           body .form-box .wizard-pages .page2 ul.categories .category {
             position: relative;
             line-height: 1.5;
@@ -8929,7 +8935,7 @@ body {
             body .form-box .wizard-pages .page2 ul.categories .category .fa-times-circle {
               font-size: 30px;
               position: absolute;
-              top: -2px;
+              top: 0;
               right: -7px;
               cursor: pointer;
               color: #58585B; }

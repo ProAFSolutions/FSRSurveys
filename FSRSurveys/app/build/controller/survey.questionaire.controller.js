@@ -5,13 +5,13 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var survey;
 (function (survey) {
-    var QuestionsController = (function (_super) {
-        __extends(QuestionsController, _super);
-        function QuestionsController($scope, surveyService) {
+    var QuestionaireController = (function (_super) {
+        __extends(QuestionaireController, _super);
+        function QuestionaireController($scope, surveyService) {
             _super.call(this, $scope, surveyService);
             this.init();
         }
-        QuestionsController.prototype.init = function () {
+        QuestionaireController.prototype.init = function () {
             this.sliderOptions = {
                 floor: 0,
                 ceil: 25,
@@ -23,7 +23,7 @@ var survey;
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
             this.populateCategories();
         };
-        QuestionsController.prototype.populateCategories = function () {
+        QuestionaireController.prototype.populateCategories = function () {
             var controller = this;
             this.surveyService.resolveCategories().then(function (response) {
                 controller.categories = response;
@@ -33,15 +33,15 @@ var survey;
                 this.categories.push(new Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
             }*/
         };
-        QuestionsController.prototype.addCategoryClick = function () {
+        QuestionaireController.prototype.addCategoryClick = function () {
             this.categories.push(new survey.Category(0, "Other", "This is the job activity that we need to do"));
         };
-        QuestionsController.prototype.closeOtherClick = function (index) {
+        QuestionaireController.prototype.closeOtherClick = function (index) {
             this.categories.splice(index, 1);
         };
-        return QuestionsController;
+        return QuestionaireController;
     }(survey.AbstractController));
     angular.module("survey")
-        .controller("QuestionsController", QuestionsController);
+        .controller("QuestionaireController", QuestionaireController);
 })(survey || (survey = {}));
-//# sourceMappingURL=survey.questions.controller.js.map
+//# sourceMappingURL=survey.questionaire.controller.js.map

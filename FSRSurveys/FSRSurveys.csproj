@@ -22,7 +22,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\html\survey.questions.html" />
+    <Content Include="app\html\survey.questionnaire.html" />
     <Content Include="app\html\survey.menu.html" />
     <Content Include="app\html\survey.wizard.html" />
     <Content Include="app\html\survey.user.html" />
@@ -156,16 +156,15 @@
     <Folder Include="app\directives\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\controller\survey.questions.controller.ts" />
+    <TypeScriptCompile Include="app\controller\survey.questionnaire.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.menu.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.abstract.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.user.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.wizard.controller..ts" />
-    <TypeScriptCompile Include="app\model\survey.question.ts" />
+    <TypeScriptCompile Include="app\model\survey.questionnaire-item.ts" />
     <TypeScriptCompile Include="app\model\survey.category.ts" />
     <TypeScriptCompile Include="app\model\survey.answer.ts" />
     <TypeScriptCompile Include="app\model\survey.userInfo.ts" />
-    <TypeScriptCompile Include="app\presentation\survey.categoryPresentation.ts" />
     <TypeScriptCompile Include="app\survey.config.ts" />
     <TypeScriptCompile Include="app\service\survey.service.ts" />
   </ItemGroup>

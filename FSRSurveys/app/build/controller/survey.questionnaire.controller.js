@@ -5,13 +5,13 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var survey;
 (function (survey) {
-    var QuestionsController = (function (_super) {
-        __extends(QuestionsController, _super);
-        function QuestionsController($scope, surveyService) {
+    var QuestionnaireController = (function (_super) {
+        __extends(QuestionnaireController, _super);
+        function QuestionnaireController($scope, surveyService) {
             _super.call(this, $scope, surveyService);
             this.init();
         }
-        QuestionsController.prototype.init = function () {
+        QuestionnaireController.prototype.init = function () {
             this.sliderOptions = {
                 floor: 0,
                 ceil: 25,
@@ -21,27 +21,32 @@ var survey;
             };
             this.activityOwnerOptions = ['Manager', 'Admin', 'Other', 'N/A'];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
-            this.populateCategories();
+            this.populateQuestionnaire();
         };
-        QuestionsController.prototype.populateCategories = function () {
+        QuestionnaireController.prototype.populateQuestionnaire = function () {
             var controller = this;
+            controller.questionnaireData = new Array();
             this.surveyService.resolveCategories().then(function (response) {
-                controller.categories = response;
+                var categories = response;
+                for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
+                    var category = categories_1[_i];
+                    controller.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
+                }
             });
             /*this.categories = new Array<Category>();
             for (var i = 1; i < 20; i++) {
                 this.categories.push(new Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
             }*/
         };
-        QuestionsController.prototype.addCategoryClick = function () {
-            this.categories.push(new survey.Category(0, "Other", "This is the job activity that we need to do"));
+        QuestionnaireController.prototype.addQuestionnaireItemClick = function () {
+            this.questionnaireData.push(new survey.QuestionnaireItem(new survey.Category(0, "Other", ""), new survey.Answer()));
         };
-        QuestionsController.prototype.closeOtherClick = function (index) {
-            this.categories.splice(index, 1);
+        QuestionnaireController.prototype.closeOtherClick = function (index) {
+            this.questionnaireData.splice(index, 1);
         };
-        return QuestionsController;
+        return QuestionnaireController;
     }(survey.AbstractController));
     angular.module("survey")
-        .controller("QuestionsController", QuestionsController);
+        .controller("QuestionnaireController", QuestionnaireController);
 })(survey || (survey = {}));
-//# sourceMappingURL=survey.questions.controller.js.map
+//# sourceMappingURL=survey.questionnaire.controller.js.map

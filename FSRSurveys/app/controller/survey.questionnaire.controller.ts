@@ -1,9 +1,9 @@
 ﻿namespace survey {
 
-    class QuestionsController extends AbstractController { 
+    class QuestionnaireController extends AbstractController { 
        
         public sliderOptions: any;
-        public categories: Array<Category>; 
+        public questionnaireData: Array<QuestionnaireItem>;       
         public activityOwnerOptions: Array<string>; 
         public activityPerformedOptions: Array<string>; 
 
@@ -23,13 +23,18 @@
             };
             this.activityOwnerOptions = ['Manager', 'Admin', 'Other', 'N/A'];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
-            this.populateCategories();
+
+            this.populateQuestionnaire();
         }        
 
-        private populateCategories(): void {
+        private populateQuestionnaire(): void {
             let controller = this;
+            controller.questionnaireData = new Array<QuestionnaireItem>();
             this.surveyService.resolveCategories().then(response => {
-                controller.categories = response;
+                let categories = response;
+                for (var category of categories) {
+                    controller.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
+                }
             });
             /*this.categories = new Array<Category>();
             for (var i = 1; i < 20; i++) {
@@ -37,12 +42,15 @@
             }*/
         }
 
-        public addCategoryClick(): void
-        {
-            this.categories.push(new Category(22, "Other", "This is the job activity that we need to do"));
+        public addQuestionnaireItemClick(): void {
+            this.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
+        }
+
+        public closeOtherClick(index: number): void {
+            this.questionnaireData.splice(index, 1);
         }
     }
 
     angular.module("survey")
-           .controller("QuestionsController", QuestionsController);
+           .controller("QuestionnaireController", QuestionnaireController);
 }

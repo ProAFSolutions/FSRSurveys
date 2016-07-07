@@ -1,4 +1,4 @@
-﻿<div ng-controller="QuestionsController as vm">
+﻿<div ng-controller="QuestionnaireController as vm">
     <ul class="categories">
         <li class="category-header">
             <div class="row">
@@ -21,17 +21,17 @@
                 </div>
             </div>
         </li>
-        <li class="category" ng-repeat="categoryItem in vm.categories">
+        <li class="category" ng-repeat="questionnaireItem in vm.questionnaireData">
             <div class="row">
-                <div class="category-field col-lg-2"><b>{{categoryItem.name}}</b></div>
+                <div class="category-field col-lg-2"><b>{{questionnaireItem.category.name}}</b></div>
             </div>
             <div class="row">
-                <div class="category-field col-lg-3">{{categoryItem.jobActivity}}</div>
+                <div class="category-field col-lg-3">{{questionnaireItem.category.jobActivity}}</div>
                 <div class="category-field col-lg-2">
-                    <rzslider rz-slider-model="0" rz-slider-options="vm.sliderOptions"></rzslider>
+                    <rzslider rz-slider-model="questionnaireItem.answer.timeEffort" rz-slider-options="vm.sliderOptions"></rzslider>
                 </div>
                 <div class="category-field col-lg-2">
-                    <ui-select ng-model="" theme="bootstrap">
+                    <ui-select ng-model="questionnaireItem.answer.activityOwner" theme="bootstrap">
                         <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}}</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="activityOwnerItem in vm.activityOwnerOptions | filter: $select.search">
                             <div ng-bind-html="activityOwnerItem | highlight: $select.search"></div>
@@ -39,7 +39,7 @@
                     </ui-select>
                 </div>
                 <div class="category-field col-lg-2">
-                    <ui-select ng-model="" theme="bootstrap">
+                    <ui-select ng-model="questionnaireItem.answer.activityPerformed" theme="bootstrap">
                         <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}}</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="activityPerformedItem in vm.activityPerformedOptions | filter: $select.search">
                             <div ng-bind-html="activityPerformedItem | highlight: $select.search"></div>
@@ -47,15 +47,15 @@
                     </ui-select>
                 </div>
                 <div class="category-field col-lg-2">
-                    <textarea></textarea>
+                    <textarea ng-model="questionnaireItem.answer.technology"></textarea>
                 </div>                
             </div>
-            <i class="fa fa-times-circle"></i>
+            <i class="fa fa-times-circle" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>
         </li>
         <li class="category-footer">
             <div class="row">
                 <div class="col-lg-1">
-                    <button uib-tooltip="TEst" type="button" class="btn btn-primary" ng-click="vm.addCategoryClick()">
+                    <button uib-tooltip="TEst" type="button" class="btn btn-primary" ng-click="vm.addQuestionnaireItemClick()">
                         <span class="fa fa-plus-circle"></span> Add Other
                     </button>
                 </div>
