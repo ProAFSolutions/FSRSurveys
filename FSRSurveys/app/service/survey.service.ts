@@ -1,13 +1,12 @@
 ﻿namespace survey { 
 
-    const SURVEY_API_BASE_URL = "http://localhost:23611/api/survey";
-    const STATES_REST_URL = "http://services.groupkt.com/state/get/usa/all";
+    const SURVEY_API_BASE_URL = "http://rolesurvey.fsresidential.com/api/api/survey";    
 
     interface ISurveyService {
 
-         resolveMarketStates(): ng.IPromise<any>;
+        resolveMarkets(): ng.IPromise<Array<Market>>;
 
-        resolveCategories(): ng.IPromise<any>;
+        resolveCategories(): ng.IPromise<Array<Category>>;
 
         saveManagerSurvey(userInfo: ManagerInfo, categories: Array<Category>): void;
 
@@ -36,12 +35,12 @@
         }
 
         public resolveCategories(): ng.IPromise<Array<Category>> {
-            return null;//this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
+            return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
         }
 
-        public resolveMarketStates(): ng.IPromise<any> {
-            return this.$http.get(STATES_REST_URL).then(response => response.data);                      
-        }
+        public resolveMarkets(): ng.IPromise<Array<Market>> {
+            return this.$http.get(SURVEY_API_BASE_URL + "/markets").then(response => response.data);
+        }      
     }
 
     angular.module("survey").service("SurveyService", SurveyService);

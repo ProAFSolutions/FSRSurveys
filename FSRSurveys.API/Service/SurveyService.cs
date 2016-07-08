@@ -13,6 +13,7 @@ namespace FSRSurveys.API.Service
 
         List<Category> GetCategories();
 
+        List<Market> GetMarkets();
     }
  
     public class SurveyService : ISurveyService
@@ -23,6 +24,17 @@ namespace FSRSurveys.API.Service
             using (var UoW = new SurveyDbContext())
             {
                 result =  UoW.Category.ToList();
+            }
+            return result;
+        }
+
+
+        public List<Market> GetMarkets()
+        {
+            List<Market> result = null;
+            using (var UoW = new MarketDbContext())
+            {
+                result = UoW.Market.Where(M => !M.isDebug).ToList();
             }
             return result;
         }

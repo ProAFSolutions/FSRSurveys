@@ -31,6 +31,18 @@ namespace FSRSurveys.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("markets")]
+        public IHttpActionResult RequestMarkets()
+        {
+            var result = _surveyService.GetMarkets().Select(M => new
+            {
+                name = M.marketName
+            });
+
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("save")]
         public void Save([FromBody]string value)

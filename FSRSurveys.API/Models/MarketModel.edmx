@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PublicServicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MarketInstanceMapping">
+          <Key>
+            <PropertyRef Name="marketInstanceMappingID" />
+          </Key>
+          <Property Name="marketInstanceMappingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marketName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="c4Uid" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="applicationInstanceAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="netTcpPort" Type="int" Nullable="false" />
+          <Property Name="notes" Type="varchar" MaxLength="250" />
+          <Property Name="createdOn" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="createdBy" Type="varchar" MaxLength="50" />
+          <Property Name="isDebug" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PublicServicesModelStoreContainer">
+          <EntitySet Name="MarketInstanceMapping" EntityType="Self.MarketInstanceMapping" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MarketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Market">
+          <Key>
+            <PropertyRef Name="marketInstanceMappingID" />
+          </Key>
+          <Property Name="marketInstanceMappingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marketName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="c4Uid" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="applicationInstanceAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="netTcpPort" Type="Int32" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="createdOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="createdBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isDebug" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MarketDbContext" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Market" EntityType="MarketModel.Market" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PublicServicesModelStoreContainer" CdmEntityContainer="MarketDbContext">
+          <EntitySetMapping Name="Market">
+            <EntityTypeMapping TypeName="MarketModel.Market">
+              <MappingFragment StoreEntitySet="MarketInstanceMapping">
+                <ScalarProperty Name="marketInstanceMappingID" ColumnName="marketInstanceMappingID" />
+                <ScalarProperty Name="marketName" ColumnName="marketName" />
+                <ScalarProperty Name="c4Uid" ColumnName="c4Uid" />
+                <ScalarProperty Name="applicationInstanceAddress" ColumnName="applicationInstanceAddress" />
+                <ScalarProperty Name="netTcpPort" ColumnName="netTcpPort" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="isDebug" ColumnName="isDebug" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

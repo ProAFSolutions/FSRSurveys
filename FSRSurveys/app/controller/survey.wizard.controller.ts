@@ -4,9 +4,10 @@
                 
         public currentStep: number;
         public visibleNext: boolean;
+        public visibleSubmit: boolean;
         public visiblePrev: boolean;
         public visibleFinish: boolean;
-        public porcentage: number; 
+       
                
 
         constructor($scope: ng.IScope, surveyService: SurveyService) {
@@ -16,43 +17,32 @@
                                                            
         private init(): void
         {
-            this.$scope.surveyType = 1;
-
             this.currentStep = 1;
             this.visibleNext = true;
+            this.visibleSubmit = false;
             this.visiblePrev = false;
-            this.visibleFinish = false;
-            this.porcentage = 20;                 
+            this.visibleFinish = false;                          
         } 
 
 
         //Events
         public nextClick(): void {
-            ++this.currentStep;
-            if (this.currentStep > 1) {
-                this.visiblePrev = true;
-                if (this.currentStep == 3) {
-                    this.visibleNext = false;
-                    this.visibleFinish = true;
-                }
-            }
+            this.stepClick(++this.currentStep);           
         }
 
         public prevClick(): void {
-            --this.currentStep;
-            if (this.currentStep < 3) {
-                this.visibleNext = true;
-                this.visibleFinish = false;
-
-                if (this.currentStep == 1) {
-                    this.visibleNext = true;
-                    this.visiblePrev = false;
-                }
-            }            
+            this.stepClick(--this.currentStep);               
         }
 
-        public finishClick(): void {
-           
+        public submitClick(): void {
+
+            //sumbit here!!!
+
+            this.stepClick(++this.currentStep);  
+        }
+
+        public closeClick(): void {
+
         }
 
         public stepClick(step: number): void {
@@ -62,18 +52,21 @@
             switch (step) {
                 case 1: {
                     this.visibleNext = true;
+                    this.visibleSubmit = false;
                     this.visiblePrev = false;
                     this.visibleFinish = false;
                 } break;
 
                 case 2: {
-                    this.visibleNext = true;
+                    this.visibleNext = false;
+                    this.visibleSubmit = true;
                     this.visiblePrev = true;
                     this.visibleFinish = false;
                 } break;
 
                 case 3: {
                     this.visibleNext = false;
+                    this.visibleSubmit = false;
                     this.visiblePrev = true;
                     this.visibleFinish = true;
                 } break;

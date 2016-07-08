@@ -8850,24 +8850,33 @@ body {
     font-size: 10px !important; }
   body .btn-default {
     color: #888; }
+  body .btn-primary {
+    background-color: #0098D2 !important; }
+  body .btn-group .btn-primary {
+    background-color: #58585B !important;
+    border-color: #ccc !important;
+    color: #ccc; }
+    body .btn-group .btn-primary.active {
+      color: #fff;
+      background-color: #0098D2 !important; }
+    body .btn-group .btn-primary:hover {
+      color: #fff;
+      background-color: #ccc !important; }
+  body .ui-select-bootstrap .ui-select-choices-row.active > a {
+    background-color: #0098D2 !important; }
+  body .dropdown-menu {
+    overflow: auto;
+    max-height: 200px; }
+    body .dropdown-menu li {
+      padding: 0 10px 0 10px;
+      cursor: pointer; }
+  body .btn-group.dropdown {
+    margin-bottom: 5px;
+    padding-left: 0; }
   body .navbar .navbar-header .navbar-brand {
     margin-left: 95px !important; }
   body .form-box {
     padding-top: 0; }
-    body .form-box .completed {
-      width: 200px;
-      position: absolute;
-      left: calc(50% - 100px);
-      top: 0;
-      font-size: 12px;
-      color: #0098D2;
-      margin-top: 5px; }
-      body .form-box .completed .progress-bar {
-        background-color: #0098D2; }
-      body .form-box .completed .progress-text {
-        color: #ccc;
-        white-space: nowrap;
-        padding-left: 60px; }
     body .form-box .fs-logo {
       float: left;
       margin-right: 20px; }
@@ -8882,13 +8891,16 @@ body {
       body .form-box .f1-steps .f1-progress .f1-progress-line {
         background-color: #0098D2; }
       body .form-box .f1-steps .f1-step.active .f1-step-icon {
-        background-color: #0098D2; }
+        background-color: #0098D2;
+        color: #fff; }
       body .form-box .f1-steps .f1-step.active p {
         color: #0098D2; }
       body .form-box .f1-steps .f1-step .f1-step-icon {
         background-color: #58585B;
+        color: #ccc;
         cursor: pointer; }
         body .form-box .f1-steps .f1-step .f1-step-icon:hover {
+          color: #fff;
           background-color: #ccc; }
     body .form-box .wizard-pages {
       margin-top: 20px; }
@@ -8960,15 +8972,18 @@ body {
                 color: #ccc; }
           body .form-box .wizard-pages .page2 ul.categories .category-footer {
             margin-top: 10px; }
-  body .btn-primary {
-    background-color: #0098D2 !important; }
-  body .dropdown-menu {
-    overflow: auto;
-    max-height: 200px; }
-    body .dropdown-menu li {
-      padding: 0 10px 0 10px;
-      cursor: pointer; }
-  body .btn-group.dropdown {
-    margin-bottom: 5px;
-    padding-left: 0; }
+            body .form-box .wizard-pages .page2 ul.categories .category-footer .completed {
+              width: 100%;
+              font-size: 12px;
+              color: #0098D2; }
+              body .form-box .wizard-pages .page2 ul.categories .category-footer .completed .progress-bar {
+                background-color: #0098D2; }
+              body .form-box .wizard-pages .page2 ul.categories .category-footer .completed .progress-text {
+                color: #58585B;
+                white-space: nowrap;
+                margin-left: 50px; }
+            body .form-box .wizard-pages .page2 ul.categories .category-footer .counter {
+              text-align: center; }
+      body .form-box .wizard-pages .page3 .well {
+        font-size: 24px; }
 

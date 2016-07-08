@@ -21,6 +21,51 @@ body{
         color: $color-fields;
     }
 
+    .btn-primary {
+        background-color: $color-blue !important;
+    }
+
+    .btn-group{
+        .btn-primary {
+            background-color: $color-gray !important;
+            border-color: $color-light-gray !important;
+            color: $color-light-gray;
+
+            &.active{
+                color: #fff;
+                background-color: $color-blue !important;
+            }
+
+            &:hover{
+                 color: #fff;
+                 background-color: $color-light-gray !important;
+            }
+        }        
+    }
+    
+    .ui-select-bootstrap {
+         .ui-select-choices-row{
+             &.active > a{
+                background-color: $color-blue !important;
+             }
+         }
+    }
+
+    .dropdown-menu{
+        overflow: auto;
+        max-height: 200px;
+
+        li{
+            padding: 0 10px 0 10px;
+            cursor: pointer;
+        }
+    }
+
+    .btn-group.dropdown{
+        margin-bottom: 5px;
+        padding-left: 0;
+    }
+
     .navbar{
         .navbar-header{
              .navbar-brand {
@@ -36,29 +81,7 @@ body{
     }
 
     .form-box{
-        padding-top: 0;
-
-        .completed{
-            width: 200px;
-            position: absolute;
-            left: calc(50% - 100px);
-            top: 0;
-            font-size: 12px;
-            color: #0098D2;
-            margin-top: 5px;  
-            
-            .progress-bar{
-                background-color: $color-blue;
-            }
-
-            .progress-text{
-                color:$color-light-gray; 
-                white-space:nowrap;
-                padding-left:60px
-            }   
-            
-                 
-        }
+        padding-top: 0;        
 
         .fs-logo{
             float: left;
@@ -87,6 +110,7 @@ body{
                 &.active {                
                     .f1-step-icon {
                        background-color: $color-blue;
+                       color: #fff;
                     }
                     p{
                         color: $color-blue;
@@ -95,9 +119,11 @@ body{
 
                 .f1-step-icon{
                      background-color: $color-gray;
+                     color: $color-light-gray;
                      cursor: pointer;
 
                       &:hover{
+                          color: #fff;
                           background-color: $color-light-gray;
                       }
                 }
@@ -223,33 +249,40 @@ body{
 
                     .category-footer{
                         margin-top: 10px;
+
+                        .completed{
+                            width: 100%;                           
+                            
+                            font-size: 12px;
+                            color: #0098D2;                          
+            
+                            .progress-bar{
+                                background-color: $color-blue;
+                            }
+
+                            .progress-text{
+                                color:$color-gray; 
+                                white-space:nowrap;  
+                                margin-left: 50px;                             
+                            }           
+                        }
+
+                        .counter{
+                            text-align: center;
+                        }
                     }
                 }
             }
 
             .page3{
-
+                
+                .well{
+                     font-size: 24px
+                }
             }
         }
     }
 
-    .btn-primary {
-        background-color: $color-blue !important;
-    }
-
-    .dropdown-menu{
-        overflow: auto;
-        max-height: 200px;
-
-        li{
-            padding: 0 10px 0 10px;
-            cursor: pointer;
-        }
-    }
-
-    .btn-group.dropdown{
-        margin-bottom: 5px;
-        padding-left: 0;
-    }
+    
 
 }

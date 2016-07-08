@@ -2,17 +2,27 @@
     <fieldset class="row">
         <ul class="col-lg-12 col-md-12 col-sm-12">
             <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Manager Name</label>
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"><b>Associate Type:</b></label>
+                <div class="btn-group">
+                    <label class="btn btn-primary" ng-model="vm.associateType" uib-btn-radio="'Manager'">Manager</label>
+                    <label class="btn btn-primary" ng-model="vm.associateType" uib-btn-radio="'Administrator'">Administrator</label>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="col-lg-12 col-md-12 col-sm-12" ng-show="vm.associateType != ''">
+            <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Manager Name" : "Admin Support Name:"}}</label>
                 <input placeholder="Ex: John Smith" class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-model="vm.userInfo.name" type="text" />
             </li>
 
             <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Manager Email</label>
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Manager Email" : "Admin Support Email:"}}</label>
                 <input placeholder="Ex: john.smith@fsresidential.com" class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-model="vm.userInfo.email" type="text" />
             </li>
 
             <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Property Type(s) Managed</label>
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Property Type(s) Managed" : "Office Location"}}</label>
                 <div class="dropdown-container col-lg-4 col-md-6 col-sm-6 col-xs-6">
                     <ui-select ng-model="vm.userInfo.propertyType" theme="bootstrap">
                         <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}}</ui-select-match>
@@ -23,7 +33,7 @@
                 </div>
             </li>
 
-            <li class="row">
+            <li class="row" ng-show="vm.userInfo.propertyType == 'Sited'">
                 <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Property Name:</label>
                 <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" />
             </li>
@@ -42,19 +52,31 @@
             </li>
 
             <li class="row">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Total # of Units:" : "# of Units Supported:"}}</label>
+                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" />
+            </li>
+
+            <li class="row" ng-show="vm.associateType === 'Manager'">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">RD Supervisor Name:</label>
+                <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" />
+            </li>
+
+            <li class="row" ng-show="vm.associateType === 'Manager'">
+                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">VP Supervisor Name:</label>
+                <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" />
+            </li>
+
+            <li class="row" ng-show="vm.associateType === 'Administrator'">
                 <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Managers Supported:</label>
-                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" type="number" />
+                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" />
             </li>
 
-            <li class="row">
+            <li class="row" ng-show="vm.associateType === 'Administrator'">
                 <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Associations Supported:</label>
-                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" type="number" />
+                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" />
             </li>
 
-            <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Units Supported:</label>
-                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" type="number" />
-            </li>
+
         </ul>
 
     </fieldset>

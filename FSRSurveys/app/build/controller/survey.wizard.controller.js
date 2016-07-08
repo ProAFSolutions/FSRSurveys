@@ -65,4 +65,4 @@ var survey;
     angular.module("survey")
         .controller("WizardController", WizardController);
 })(survey || (survey = {}));
-//# sourceMappingURL=survey.wizard.controller..js.map
+//# sourceMappingURL=survey.wizard.controller.js.map

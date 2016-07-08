@@ -165,6 +165,16 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="Models\MarketModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MarketModel.edmx</DependentUpon>
+      <LastGenOutput>MarketModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MarketModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MarketModel.edmx</DependentUpon>
+      <LastGenOutput>MarketModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\SurveyDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SurveyDataModel.edmx</DependentUpon>
@@ -180,7 +190,6 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\SurveyAPIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -193,6 +202,24 @@
     </Compile>
     <Compile Include="Models\ManagerInfo.cs">
       <DependentUpon>SurveyDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Market.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MarketModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarketModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MarketModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MarketModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarketModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SurveyAnswers.cs">
       <DependentUpon>SurveyDataModel.tt</DependentUpon>
@@ -230,6 +257,14 @@
     <Content Include="Models\SurveyDataModel.edmx.diagram">
       <DependentUpon>SurveyDataModel.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\MarketModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MarketModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MarketModel.edmx.diagram">
+      <DependentUpon>MarketModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\QA - Server.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

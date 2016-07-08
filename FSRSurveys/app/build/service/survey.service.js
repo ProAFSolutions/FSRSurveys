@@ -1,7 +1,6 @@
 var survey;
 (function (survey) {
-    var SURVEY_API_BASE_URL = "http://localhost:23611/api/survey";
-    var STATES_REST_URL = "http://services.groupkt.com/state/get/usa/all";
+    var SURVEY_API_BASE_URL = "http://rolesurvey.fsresidential.com/api/api/survey";
     var SurveyService = (function () {
         function SurveyService($q, $httpService) {
             this.$q = $q;
@@ -12,10 +11,10 @@ var survey;
         SurveyService.prototype.saveAdminSurvey = function (userInfo, categories) {
         };
         SurveyService.prototype.resolveCategories = function () {
-            return null; //this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
+            return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(function (response) { return response.data; });
         };
-        SurveyService.prototype.resolveMarketStates = function () {
-            return this.$http.get(STATES_REST_URL).then(function (response) { return response.data; });
+        SurveyService.prototype.resolveMarkets = function () {
+            return this.$http.get(SURVEY_API_BASE_URL + "/markets").then(function (response) { return response.data; });
         };
         SurveyService.$inject = ["$q", "$http"];
         return SurveyService;

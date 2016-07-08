@@ -14,12 +14,13 @@ var survey;
         UserController.prototype.init = function () {
             this.userInfo = this.$scope.surveyType == 1 ? new survey.ManagerInfo() : new survey.AdminInfo();
             this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mixed Sited and Non-Sited'];
+            this.associateType = "Manager";
             this.populateMarketOptions();
         };
         UserController.prototype.populateMarketOptions = function () {
             var controller = this;
-            this.surveyService.resolveMarketStates().then(function (response) {
-                controller.marketOptions = response.RestResponse.result;
+            this.surveyService.resolveMarkets().then(function (response) {
+                controller.marketOptions = response;
             });
         };
         return UserController;

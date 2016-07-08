@@ -22,11 +22,13 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\html\survey.blank.html" />
     <Content Include="app\html\survey.questionnaire.html" />
     <Content Include="app\html\survey.menu.html" />
     <Content Include="app\html\survey.wizard.html" />
     <Content Include="app\html\survey.user.html" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\img\favicon.ico" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\scripts\base.js" />
     <Content Include="assets\img\background-image.jpg" />
@@ -38,6 +40,8 @@
     <Content Include="assets\styles\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
+    <Content Include="dist\app.min.js" />
+    <Content Include="dist\libs.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
@@ -144,6 +148,7 @@
     <Content Include="assets\styles\_forms.scss" />
     <Content Include="assets\styles\_base.scss" />
     <Content Include="packages.config" />
+    <None Include="QA-Server.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -160,7 +165,8 @@
     <TypeScriptCompile Include="app\controller\survey.menu.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.abstract.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.user.controller.ts" />
-    <TypeScriptCompile Include="app\controller\survey.wizard.controller..ts" />
+    <TypeScriptCompile Include="app\controller\survey.wizard.controller.ts" />
+    <TypeScriptCompile Include="app\model\survey.market.ts" />
     <TypeScriptCompile Include="app\model\survey.questionnaire-item.ts" />
     <TypeScriptCompile Include="app\model\survey.category.ts" />
     <TypeScriptCompile Include="app\model\survey.answer.ts" />
