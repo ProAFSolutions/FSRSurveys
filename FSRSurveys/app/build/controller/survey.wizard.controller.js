@@ -27,6 +27,7 @@ var survey;
         };
         WizardController.prototype.submitClick = function () {
             //sumbit here!!!
+            this.$scope.percentage = 55;
             this.stepClick(++this.currentStep);
         };
         WizardController.prototype.closeClick = function () {

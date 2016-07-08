@@ -12,7 +12,7 @@ var survey;
             this.init();
         }
         QuestionnaireController.prototype.init = function () {
-            this.porcentage = 20;
+            this.$scope.percentage = 35;
             this.sliderOptions = {
                 floor: 0,
                 ceil: 25,
@@ -24,17 +24,11 @@ var survey;
             this.activityOwnerOptions = ['Manager', 'Admin', 'Other', 'N/A'];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
             this.populateQuestionnaire();
+            this.setupWatchers();
         };
         QuestionnaireController.prototype.populateQuestionnaire = function () {
             var controller = this;
             controller.questionnaireData = new Array();
-            /*var categories = new Array<Category>();
-             for (var i = 1; i < 20; i++) {
-                  categories.push(new Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
-             }
-             for (var category of categories) {
-                 controller.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
-             }*/
             this.surveyService.resolveCategories().then(function (response) {
                 var categories = response;
                 for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
@@ -43,9 +37,20 @@ var survey;
                 }
             });
         };
+        QuestionnaireController.prototype.setupWatchers = function () {
+            var _this = this;
+            this.$scope.$watch(function () { return _this.$scope.percentage; }, function (newValue, oldValue) {
+                _this.updatePercentage(newValue, oldValue);
+            }, true);
+        };
+        QuestionnaireController.prototype.updatePercentage = function (oldValue, newValue) {
+            if (oldValue !== newValue) {
+                console.log("This is the new value " + newValue);
+            }
+        };
         QuestionnaireController.prototype.addQuestionnaireItemClick = function () {
             this.questionnaireData.push(new survey.QuestionnaireItem(new survey.Category(0, "Other", ""), new survey.Answer()));
-            //TODO create Angular Directive for this
+            //TODO create an Angular Directive for this
             setTimeout(function () {
                 $("textarea.no-border:last").focus();
             }, 500);
