@@ -29,6 +29,7 @@ namespace survey {
         "ui.router",
         "rzModule",
         'ngSanitize',
-        'ui.select'
+        'ui.select',
+        'ngMessages'
     ]).config(init);
 }

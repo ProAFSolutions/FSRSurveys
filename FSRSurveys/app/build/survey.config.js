@@ -27,7 +27,8 @@ var survey;
         "ui.router",
         "rzModule",
         'ngSanitize',
-        'ui.select'
+        'ui.select',
+        'ngMessages'
     ]).config(init);
 })(survey || (survey = {}));
 //# sourceMappingURL=survey.config.js.map

@@ -29,16 +29,14 @@
 
         public saveManagerSurvey(userInfo: ManagerInfo, categories: Array<Category>): void
         {
-
         }
 
         public saveAdminSurvey(userInfo: AdminInfo, categories: Array<Category>): void
         {
-
         }
 
         public resolveCategories(): ng.IPromise<Array<Category>> {
-            return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
+            return null;//this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
         }
 
         public resolveMarketStates(): ng.IPromise<any> {

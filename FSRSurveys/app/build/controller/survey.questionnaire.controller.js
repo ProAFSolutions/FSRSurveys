@@ -15,6 +15,7 @@ var survey;
             this.sliderOptions = {
                 floor: 0,
                 ceil: 25,
+                step: 1,
                 translate: function (value) {
                     return value + " %";
                 }
@@ -26,17 +27,20 @@ var survey;
         QuestionnaireController.prototype.populateQuestionnaire = function () {
             var controller = this;
             controller.questionnaireData = new Array();
-            this.surveyService.resolveCategories().then(function (response) {
-                var categories = response;
-                for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
-                    var category = categories_1[_i];
-                    controller.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
-                }
-            });
-            /*this.categories = new Array<Category>();
+            var categories = new Array();
             for (var i = 1; i < 20; i++) {
-                this.categories.push(new Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
-            }*/
+                categories.push(new survey.Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
+            }
+            for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
+                var category = categories_1[_i];
+                controller.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
+            }
+            /*this.surveyService.resolveCategories().then(response => {
+                let categories = response;
+                for (var category of categories) {
+                    controller.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
+                }
+            });*/
         };
         QuestionnaireController.prototype.addQuestionnaireItemClick = function () {
             this.questionnaireData.push(new survey.QuestionnaireItem(new survey.Category(0, "Other", ""), new survey.Answer()));

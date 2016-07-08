@@ -7,7 +7,6 @@
         protected $scope: any;
         protected surveyService: SurveyService;      
       
-
         constructor($scope: ng.IScope, surveyService: SurveyService) {
             this.$scope = $scope;            
             this.surveyService = surveyService;

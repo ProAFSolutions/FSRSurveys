@@ -17,6 +17,7 @@
             this.sliderOptions = {
                 floor: 0,
                 ceil: 25,
+                step: 1,
                 translate: function (value) {
                     return value + " %";
                 }
@@ -30,16 +31,21 @@
         private populateQuestionnaire(): void {
             let controller = this;
             controller.questionnaireData = new Array<QuestionnaireItem>();
-            this.surveyService.resolveCategories().then(response => {
+            
+            var categories = new Array<Category>();
+            for (var i = 1; i < 20; i++) {
+                 categories.push(new Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
+            }
+            for (var category of categories) {
+                controller.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
+            }
+
+            /*this.surveyService.resolveCategories().then(response => {
                 let categories = response;
                 for (var category of categories) {
                     controller.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
                 }
-            });
-            /*this.categories = new Array<Category>();
-            for (var i = 1; i < 20; i++) {
-                this.categories.push(new Category(i, "Activity Name not Required " + i, "This is the job activity that we need to do" + i));
-            }*/
+            });*/
         }
 
         public addQuestionnaireItemClick(): void {

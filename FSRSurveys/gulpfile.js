@@ -1,11 +1,10 @@
-
 var gulp = require('gulp');
 var inject = require('gulp-inject');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var del = require('del');
 var runSequence = require('run-sequence');
-var amdOptimize = require("amd-optimize") 
+var amdOptimize = require("amd-optimize");
 
 var config = {
     //Include all js files but exclude any min.js files
@@ -24,6 +23,7 @@ var config = {
         'node_modules/angular/angular.js',
         'node_modules/angular-resource/angular-resource.js',
         'node_modules/angular-sanitize/angular-sanitize.js',
+        'node_modules/angular-messages/angular-messages.js',
         'node_modules/angular-ui-router/release/angular-ui-router.js',     
         'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
         'node_modules/angularjs-slider/dist/rzslider.js',
@@ -55,17 +55,17 @@ gulp.task('clean',function () {
 
 gulp.task('scripts:app', function () {
     if (process.env.NODE_ENV && process.env.NODE_ENV === 'Release') {
-        return gulp.src(config.src)
-         .pipe(concat('app.min.js'))
-         .pipe(uglify())
+        return gulp.src(config.src)         
+         .pipe(concat('app.min.js'))         
+         .pipe(uglify({ mangle: false }))
          .pipe(gulp.dest('dist/'));
     }
 });
 
 gulp.task('scripts:libs', function () {
     if (process.env.NODE_ENV && process.env.NODE_ENV === 'Release') {
-        return gulp.src(config.libs)
-          .pipe(concat('libs.min.js'))
+        return gulp.src(config.libs)         
+          .pipe(concat('libs.min.js'))         
           .pipe(uglify())
           .pipe(gulp.dest('dist/'));
     }

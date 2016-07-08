@@ -114,7 +114,7 @@ body{
             button.btn-next,
             button.btn-submit{
                  background-color: $color-blue;
-            }           
+            }          
 
 
             .page1{
@@ -200,6 +200,10 @@ body{
                                  .rz-pointer{
                                      background-color: $color-blue;
                                  }
+
+                                  .rz-ceil, .rz-floor{
+                                      display: none !important;
+                                  }
                              }                                   
                         }
 
