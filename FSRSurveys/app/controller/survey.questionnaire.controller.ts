@@ -5,7 +5,8 @@
         public sliderOptions: any;
         public questionnaireData: Array<QuestionnaireItem>;       
         public activityOwnerOptions: Array<string>; 
-        public activityPerformedOptions: Array<string>; 
+        public activityPerformedOptions: Array<string>;
+        public percentageTimeEffortOptions: Array<number>;
 
         public percentageTimeEffort: number;
         public totalActivityOwner: number;
@@ -29,6 +30,7 @@
                     return value + " %";
                 }
             };
+            this.percentageTimeEffortOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 50];
             this.activityOwnerOptions = ['Manager', 'Admin', 'Other', 'N/A'];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
 

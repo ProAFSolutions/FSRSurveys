@@ -21,6 +21,7 @@ var survey;
                     return value + " %";
                 }
             };
+            this.percentageTimeEffortOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 50];
             this.activityOwnerOptions = ['Manager', 'Admin', 'Other', 'N/A'];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
             this.populateQuestionnaire();

@@ -2,43 +2,65 @@
     <ul class="categories">
         <li class="category-header">
             <div class="row">
-                <div class="col-lg-4">Category & Job Activity</div>
+                <!--<div class="col-lg-4"><b>Job Activity</b></div>
                 <div class="col-lg-2">
                     <i class="fa fa-info-circle" uib-tooltip="What percentage (%) of your time and effort is spent performing the following responsibilities in a typical month (Must sum to 100%)"></i>
-                    % Time & Effort
+                     <b>% Time & Effort </b>                   
                 </div>
                 <div class="col-lg-2">
                     <i class="fa fa-info-circle" uib-tooltip="The role of the Administative Support Person is typical to support a Manager or team of Managers. Please identify which tasks are typically performed by the Manager versus the Administrative Support Person"></i>
-                    Activity Owner
+                    <b>Activity Owner </b>                   
                 </div>
                 <div class="col-lg-2">
                     <i class="fa fa-info-circle" uib-tooltip="Rate whether this activity is performed manually or electronically via the use of technology (excluding email)"></i>
-                    Manual vs Elect.
+                    <b>Manual vs Elect.</b>                  
                 </div>
                 <div class="col-lg-2">
                     <i class="fa fa-info-circle" uib-tooltip="Where technology is being used to manage and perform the work, provide the name of the technology vendor/system application"></i>
-                    Technology Used
+                    <b>Technology Used </b>                   
+                </div>-->
+
+                <div class="col-lg-4">Job Activity</div>
+                <div class="col-lg-2">
+                    <!--<i class="fa fa-info-circle" uib-tooltip="% Time & Effort"></i>-->                  
+                    What percentage (%) of your time and effort is spent performing the following responsibilities in a typical month (Must sum to 100%)
+                </div>
+                <div class="col-lg-2">
+                    <!--<i class="fa fa-info-circle" uib-tooltip="Activity Owner"></i>-->                   
+                    Please identify which tasks are typically performed by the Manager versus the Administrative Support Person
+                </div>
+                <div class="col-lg-2">
+                    <!--<i class="fa fa-info-circle" uib-tooltip="Manual vs Electronic"></i>-->                   
+                    Rate whether this activity is performed manually or electronically via the use of technology (excluding email)
+                </div>
+                <div class="col-lg-2">
+                    <!--<i class="fa fa-info-circle" uib-tooltip="Technology Used"></i>-->                    
+                    Where technology is being used to manage and perform the work, provide the name of the technology vendor/system application
                 </div>
             </div>
         </li>
         <li class="category" ng-repeat="questionnaireItem in vm.questionnaireData">
-            <div class="row">
-                <div class="category-field col-lg-2"><b>{{questionnaireItem.category.name}}</b></div>
-            </div>
+          
             <div class="row">
                 <div class="category-field col-lg-4">
                     <div ng-if="questionnaireItem.category.id > 0">
-                        {{questionnaireItem.category.jobActivity}}
+                        <b>{{questionnaireItem.category.name}}: </b>{{questionnaireItem.category.jobActivity}}
                     </div>
                     <div ng-if="questionnaireItem.category.id == 0">
-                        <textarea ng-model="questionnaireItem.category.jobActivity" placeholder="Type here..." class="no-border"></textarea>
+                        <b class="left">{{questionnaireItem.category.name}}: </b><textarea ng-model="questionnaireItem.category.jobActivity" placeholder="Type description here..." class="no-border"></textarea>
                     </div>
                 </div>
                 <div class="category-field col-lg-2">
                     <div style="display: none" ng-class="{ 'warning-message': (vm.percentageTimeEffort > 100 && questionnaireItem.answer.timeEffort > 0) }">
                         <uib-alert type="danger">Total time effort exceeds 100%</uib-alert>
                     </div>
-                    <rzslider rz-slider-model="questionnaireItem.answer.timeEffort" rz-slider-options="vm.sliderOptions"></rzslider>
+                    <ui-select ng-model="questionnaireItem.answer.timeEffort" theme="bootstrap">
+                        <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}} %</ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="percentageTimeEffortItem in vm.percentageTimeEffortOptions">
+                            <div ng-bind-html="percentageTimeEffortItem + ' %'"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <!--<rzslider rz-slider-model="questionnaireItem.answer.timeEffort" rz-slider-options="vm.sliderOptions"></rzslider>-->
                 </div>
                 <div class="category-field col-lg-2">
                     <ui-select ng-model="questionnaireItem.answer.activityOwner" theme="bootstrap">
@@ -57,7 +79,7 @@
                     </ui-select>
                 </div>
                 <div class="category-field col-lg-2">
-                    <textarea ng-model="questionnaireItem.answer.technology"></textarea>
+                    <input type="text" ng-model="questionnaireItem.answer.technology" />
                 </div>
             </div>
             <!--<i class="fa fa-times-circle" title="Remove questionnaire item" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>-->

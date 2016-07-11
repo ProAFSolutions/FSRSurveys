@@ -8924,13 +8924,14 @@ body {
               padding-left: 10px;
               padding-right: 0;
               text-align: left;
-              font-weight: bold; }
+              font-size: 10px;
+              line-height: 15px; }
               body .form-box .wizard-pages .page2 ul.categories .category-header .row > div .fa {
                 float: left;
                 margin-top: 2px;
                 margin-right: 5px;
                 color: #58585B;
-                font-size: 24px;
+                font-size: 16px;
                 cursor: pointer; }
               body .form-box .wizard-pages .page2 ul.categories .category-header .row > div .tooltip .tooltip-inner {
                 text-align: left;
@@ -8943,22 +8944,28 @@ body {
             border-bottom: solid 1px #ddd; }
             body .form-box .wizard-pages .page2 ul.categories .category .category-field {
               position: relative; }
-              body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea {
-                width: 100%;
-                margin-top: -18px; }
-                body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea.no-border {
-                  width: 100%;
-                  border: none;
-                  font-size: 12px;
-                  padding-top: 2px;
-                  padding-left: 0;
-                  margin-top: 1px;
-                  overflow: hidden; }
-                  body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea.no-border:focus {
-                    padding-left: 8px;
-                    padding-top: 8px;
-                    border: dashed 0.5px #ddd;
-                    overflow: auto; }
+              body .form-box .wizard-pages .page2 ul.categories .category .category-field input[type="text"], body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea {
+                width: 100%; }
+              body .form-box .wizard-pages .page2 ul.categories .category .category-field input[type="text"] {
+                padding: 15px 10px 15px 10px; }
+              body .form-box .wizard-pages .page2 ul.categories .category .category-field .left {
+                float: left; }
+              body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea.no-border {
+                width: calc(100% - 50px);
+                border: none;
+                font-size: 12px;
+                padding-top: 2px;
+                padding-left: 0;
+                margin-top: 1px;
+                margin-left: 5px;
+                height: 40px;
+                overflow: hidden; }
+                body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea.no-border:focus {
+                  padding-left: 8px;
+                  padding-top: 8px;
+                  border: dashed 0.5px #ddd;
+                  overflow: auto;
+                  height: 60px; }
               body .form-box .wizard-pages .page2 ul.categories .category .category-field .warning-message {
                 display: block !important;
                 position: absolute;
