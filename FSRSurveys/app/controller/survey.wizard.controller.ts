@@ -10,8 +10,8 @@
        
                
 
-        constructor($scope: ng.IScope, surveyService: SurveyService) {
-            super($scope, surveyService);
+        constructor($scope: ng.IScope, cache: SurveyCache, surveyService: SurveyService) {
+            super($scope, cache, surveyService);
             this.init();
         }
                                                            
@@ -74,6 +74,8 @@
                 } break;
             }
         }
+
+       
     }
 
     angular.module("survey")

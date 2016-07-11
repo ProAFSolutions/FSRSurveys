@@ -7,8 +7,8 @@ var survey;
 (function (survey) {
     var WizardController = (function (_super) {
         __extends(WizardController, _super);
-        function WizardController($scope, surveyService) {
-            _super.call(this, $scope, surveyService);
+        function WizardController($scope, cache, surveyService) {
+            _super.call(this, $scope, cache, surveyService);
             this.init();
         }
         WizardController.prototype.init = function () {

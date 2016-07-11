@@ -7,8 +7,8 @@ var survey;
 (function (survey) {
     var QuestionnaireController = (function (_super) {
         __extends(QuestionnaireController, _super);
-        function QuestionnaireController($scope, surveyService) {
-            _super.call(this, $scope, surveyService);
+        function QuestionnaireController($scope, cache, surveyService) {
+            _super.call(this, $scope, cache, surveyService);
             this.init();
         }
         QuestionnaireController.prototype.init = function () {
@@ -33,47 +33,55 @@ var survey;
             this.totalTechnology = 0;
         };
         QuestionnaireController.prototype.populateQuestionnaire = function () {
-            var controller = this;
-            controller.questionnaireData = new Array();
+            var _this = this;
+            this.questionnaireData = new Array();
             this.surveyService.resolveCategories().then(function (response) {
                 var categories = response;
                 for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
                     var category = categories_1[_i];
-                    controller.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
+                    _this.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
                 }
+                _this.questionnaireData.push(new survey.QuestionnaireItem(new survey.Category(0, "Other", ""), new survey.Answer()));
             });
         };
         QuestionnaireController.prototype.calculateTotals = function () {
             var _this = this;
-            var overflowedIndex = -1;
-            var prevOverflowedValue = 0;
+            var currentController = this;
             this.$scope.$watch(function () { return _this.questionnaireData; }, function (newValue, oldValue) {
-                _this.initTotals();
-                for (var i = 0; i < newValue.length; i++) {
-                    var questionnaireItem = newValue[i];
-                    if ((_this.percentageTimeEffort + questionnaireItem.answer.timeEffort) <= 100) {
-                        _this.percentageTimeEffort += questionnaireItem.answer.timeEffort;
-                    }
-                    else {
-                        overflowedIndex = i;
-                        prevOverflowedValue = oldValue[overflowedIndex].answer.timeEffort;
-                        break;
-                    }
+                currentController.initTotals();
+                for (var _i = 0, newValue_1 = newValue; _i < newValue_1.length; _i++) {
+                    var questionnaireItem = newValue_1[_i];
+                    currentController.percentageTimeEffort += questionnaireItem.answer.timeEffort;
                     if (questionnaireItem.answer.activityOwner) {
-                        _this.totalActivityOwner++;
+                        currentController.totalActivityOwner++;
                     }
                     if (questionnaireItem.answer.activityPerformed) {
-                        _this.totalActivityPerformed++;
+                        currentController.totalActivityPerformed++;
                     }
                     if (questionnaireItem.answer.technology) {
-                        _this.totalTechnology++;
+                        currentController.totalTechnology++;
                     }
                 }
             }, true);
-            if (overflowedIndex > -1) {
-                alert("Time effort exceeds 100%. Please, adjust the answers with the proper values");
-                this.questionnaireData[overflowedIndex].answer.timeEffort = prevOverflowedValue;
-            }
+            this.$scope.$watch(function () { return _this.percentageTimeEffort; }, function (newValue, oldValue) {
+                currentController.validateQuestionnaire();
+            });
+            this.$scope.$watch(function () { return _this.totalActivityOwner; }, function (newValue, oldValue) {
+                currentController.validateQuestionnaire();
+            });
+            this.$scope.$watch(function () { return _this.totalActivityPerformed; }, function (newValue, oldValue) {
+                currentController.validateQuestionnaire();
+            });
+            this.$scope.$watch(function () { return _this.totalTechnology; }, function (newValue, oldValue) {
+                currentController.validateQuestionnaire();
+            });
+        };
+        QuestionnaireController.prototype.validateQuestionnaire = function () {
+            var totalItems = this.questionnaireData.length;
+            this.cache.sumbitBtnDisabled = this.percentageTimeEffort == 100 &&
+                this.totalActivityOwner == totalItems &&
+                this.totalActivityPerformed == totalItems &&
+                this.totalTechnology == totalItems;
         };
         QuestionnaireController.prototype.addQuestionnaireItemClick = function () {
             this.questionnaireData.push(new survey.QuestionnaireItem(new survey.Category(0, "Other", ""), new survey.Answer()));

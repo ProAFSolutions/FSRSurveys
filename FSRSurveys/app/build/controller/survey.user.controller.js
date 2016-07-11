@@ -7,8 +7,8 @@ var survey;
 (function (survey) {
     var UserController = (function (_super) {
         __extends(UserController, _super);
-        function UserController($scope, surveyService) {
-            _super.call(this, $scope, surveyService);
+        function UserController($scope, cache, surveyService) {
+            _super.call(this, $scope, cache, surveyService);
             this.init();
         }
         UserController.prototype.init = function () {

@@ -7,6 +7,7 @@
 
 
 body{
+    background-color: #0076A2;
     font-size: 14px;
 
     ul{
@@ -195,33 +196,46 @@ body{
                         padding: 10px 0 10px 0;
                         border-bottom: solid 1px $color-lines;
 
-                        .category-field{                            
+                        .category-field{   
                             
-                            textarea.no-border{
-                                width: 100%;
-                                border: none;
-                                font-size: 12px;
-                                padding-top: 2px;
-                                padding-left: 0;
-                                margin-top: 1px;
-                                overflow: hidden;
+                            position: relative;                         
+                            
+                            textarea{
+                               width: 100%;
+                               margin-top: -18px;
+
+                                &.no-border{
+                                    width: 100%;
+                                    border: none;
+                                    font-size: 12px;
+                                    padding-top: 2px;
+                                    padding-left: 0;
+                                    margin-top: 1px;
+                                    overflow: hidden;
                                
-                                &:focus{
-                                    padding-left: 8px;
-                                    padding-top: 8px;
-                                    border: dashed 0.5px $color-lines;
-                                    overflow: auto;
+                                    &:focus{
+                                        padding-left: 8px;
+                                        padding-top: 8px;
+                                        border: dashed 0.5px $color-lines;
+                                        overflow: auto;
+                                    }                                                                
                                 } 
-                                                               
-                            } 
+                            }                           
                             
                             .ui-select-container{                                 
                                                                
                              }                             
-                             textarea{
-                                margin-top: -12px;
-                             }  
+                              
                              
+                             .warning-message{
+                                display: block !important;
+                                position: absolute;
+                                top: -8px;
+                                left: 178px;
+                                width: 200px;
+                                z-index: 999;
+                             }
+
                              .rzslider{
                                  .rz-pointer{
                                      background-color: $color-blue;
@@ -254,17 +268,35 @@ body{
                             width: 100%;                           
                             margin-top: 5px;
                             font-size: 12px;
-                            color: #0098D2;                          
-            
-                            .progress-bar{
-                                background-color: $color-blue;
-                            }
+                           
+                            
+                            .progress{
+                                
+                                position: relative;
 
-                            .progress-text{
-                                color:$color-gray; 
-                                white-space:nowrap;  
-                                margin-left: 50px;                             
-                            }           
+                                &.red {
+                                    .progress-bar{
+                                        background-color: red;
+                                        .progress-text{
+                                            color: #fff !important;  
+                                        }                                                              
+                                    }
+                                }
+
+                                .progress-bar{
+                                     background-color: $color-blue;  
+                                     
+                                     .progress-text{
+                                        color:#000; 
+                                        white-space:nowrap;  
+                                        left: calc(50% - 12px);
+                                        position: absolute;                           
+                                    }                                                                   
+                                }
+                                
+                            }                          
+            
+                                     
                         }
 
                         .counter{
@@ -283,6 +315,9 @@ body{
         }
     }
 
+
     
 
 }
+
+@import "screens";

@@ -1,11 +1,12 @@
 var survey;
 (function (survey) {
     var AbstractController = (function () {
-        function AbstractController($scope, surveyService) {
+        function AbstractController($scope, cache, surveyService) {
             this.$scope = $scope;
+            this.cache = cache;
             this.surveyService = surveyService;
         }
-        AbstractController.$inject = ["$scope", "SurveyService"];
+        AbstractController.$inject = ["$scope", "SurveyCache", "SurveyService"];
         return AbstractController;
     }());
     survey.AbstractController = AbstractController;

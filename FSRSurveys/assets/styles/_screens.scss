@@ -1,0 +1,35 @@
+﻿
+
+    /* Smartphones (portrait and landscape) ----------- */
+    @media only screen 
+    and (min-device-width : 320px) 
+    and (max-device-width : 480px) {    
+
+    }
+
+    /*Tablets*/
+    @media only screen 
+    and (min-device-width : 768px) 
+    and (max-device-width : 1024px) {        
+        .container {
+            width: 900px;
+        }
+    }
+
+    /*Desktops & laptops*/
+    @media only screen 
+    and (min-width : 1224px) {   
+        .container {
+            width: 1400px;
+        }
+    }
+
+    /*Large Screens*/
+    @media only screen 
+    and (min-width : 1824px) {       
+        .container {
+            width: 1400px;
+        }
+    }
+
+    

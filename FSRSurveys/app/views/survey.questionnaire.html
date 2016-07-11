@@ -2,7 +2,7 @@
     <ul class="categories">
         <li class="category-header">
             <div class="row">
-                <div class="col-lg-3">Category & Job Activity</div>
+                <div class="col-lg-4">Category & Job Activity</div>
                 <div class="col-lg-2">
                     <i class="fa fa-info-circle" uib-tooltip="What percentage (%) of your time and effort is spent performing the following responsibilities in a typical month (Must sum to 100%)"></i>
                     % Time & Effort
@@ -15,7 +15,7 @@
                     <i class="fa fa-info-circle" uib-tooltip="Rate whether this activity is performed manually or electronically via the use of technology (excluding email)"></i>
                     Manual vs Elect.
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <i class="fa fa-info-circle" uib-tooltip="Where technology is being used to manage and perform the work, provide the name of the technology vendor/system application"></i>
                     Technology Used
                 </div>
@@ -26,15 +26,18 @@
                 <div class="category-field col-lg-2"><b>{{questionnaireItem.category.name}}</b></div>
             </div>
             <div class="row">
-                <div class="category-field col-lg-3">
+                <div class="category-field col-lg-4">
                     <div ng-if="questionnaireItem.category.id > 0">
-                       {{questionnaireItem.category.jobActivity}}
+                        {{questionnaireItem.category.jobActivity}}
                     </div>
                     <div ng-if="questionnaireItem.category.id == 0">
                         <textarea ng-model="questionnaireItem.category.jobActivity" placeholder="Type here..." class="no-border"></textarea>
                     </div>
                 </div>
                 <div class="category-field col-lg-2">
+                    <div style="display: none" ng-class="{ 'warning-message': (vm.percentageTimeEffort > 100 && questionnaireItem.answer.timeEffort > 0) }">
+                        <uib-alert type="danger">Total time effort exceeds 100%</uib-alert>
+                    </div>
                     <rzslider rz-slider-model="questionnaireItem.answer.timeEffort" rz-slider-options="vm.sliderOptions"></rzslider>
                 </div>
                 <div class="category-field col-lg-2">
@@ -53,22 +56,23 @@
                         </ui-select-choices>
                     </ui-select>
                 </div>
-                <div class="category-field col-lg-3">
+                <div class="category-field col-lg-2">
                     <textarea ng-model="questionnaireItem.answer.technology"></textarea>
                 </div>
             </div>
-            <i class="fa fa-times-circle" title="Remove questionnaire item" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>
+            <!--<i class="fa fa-times-circle" title="Remove questionnaire item" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>-->
         </li>
         <li class="category-footer">
             <div class="row">
-                <div class="col-lg-3">
-                    <button type="button" class="btn btn-primary" ng-click="vm.addQuestionnaireItemClick()">
+                <div class="col-lg-4">
+                    <div>TOTALS:</div>
+                    <!--<button type="button" class="btn btn-primary" ng-click="vm.addQuestionnaireItemClick()">
                         <span class="fa fa-plus-circle"></span> Add Other
-                    </button>
+                    </button>-->
                 </div>
                 <div class="col-lg-2">
                     <div class="completed">
-                        <uib-progressbar max="100" value="vm.percentageTimeEffort"><span class="progress-text">{{vm.percentageTimeEffort}} %</span></uib-progressbar>
+                        <uib-progressbar ng-class="{red: vm.percentageTimeEffort > 100 }" max="100" value="vm.percentageTimeEffort"><span class="progress-text">{{vm.percentageTimeEffort}} %</span></uib-progressbar>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -77,7 +81,7 @@
                 <div class="col-lg-2">
                     <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.questionnaireData.length}}</b></div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.questionnaireData.length}}</b></div>
                 </div>
             </div>

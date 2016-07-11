@@ -8,8 +8,8 @@
         public propertyTypeOptions: Array<string>;
         public associateType: string;
 
-        constructor($scope: ng.IScope, surveyService: SurveyService) {
-            super($scope, surveyService);
+        constructor($scope: ng.IScope, cache: SurveyCache, surveyService: SurveyService) {
+            super($scope, cache, surveyService);
             this.init();
         }
 

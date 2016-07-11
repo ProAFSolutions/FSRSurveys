@@ -120,6 +120,7 @@
     <Content Include="assets\styles\bootstrap\mixins\_vendor-prefixes.scss" />
     <Content Include="assets\styles\_colors.scss" />
     <Content Include="assets\styles\_rzslider.scss" />
+    <Content Include="assets\styles\_screens.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -170,9 +171,9 @@
     <TypeScriptCompile Include="app\model\survey.category.ts" />
     <TypeScriptCompile Include="app\model\survey.answer.ts" />
     <TypeScriptCompile Include="app\model\survey.userInfo.ts" />
-    <TypeScriptCompile Include="app\service\survey.sharedData.service.ts" />
+    <TypeScriptCompile Include="app\service\survey.cache.ts" />
     <TypeScriptCompile Include="app\survey.config.ts" />
-    <TypeScriptCompile Include="app\service\survey.appService.ts" />
+    <TypeScriptCompile Include="app\service\survey.service.ts" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

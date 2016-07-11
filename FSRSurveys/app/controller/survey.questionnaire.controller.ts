@@ -11,9 +11,9 @@
         public totalActivityOwner: number;
         public totalActivityPerformed: number;
         public totalTechnology: number;
-       
-        constructor($scope: ng.IScope, surveyService: SurveyService) {
-            super($scope, surveyService);
+
+        constructor($scope: ng.IScope, cache: SurveyCache, surveyService: SurveyService) {
+            super($scope, cache, surveyService);
             this.init();
         }
 
@@ -45,56 +45,68 @@
         } 
 
         private populateQuestionnaire(): void {
-            let controller = this;
-            controller.questionnaireData = new Array<QuestionnaireItem>();   
+
+            this.questionnaireData = new Array<QuestionnaireItem>();   
 
             this.surveyService.resolveCategories().then(response => {
                 let categories = response;
                 for (var category of categories) {
-                    controller.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
+                    this.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
                 }
+                this.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
             });
         }
 
         private calculateTotals(): void
         {
-            var overflowedIndex = -1;
-            var prevOverflowedValue = 0;
+
+            var currentController = this;
+
             this.$scope.$watch(() => this.questionnaireData, (newValue: Array<QuestionnaireItem>, oldValue: Array<QuestionnaireItem>) => {
 
-                this.initTotals();               
-                
-                for (var i = 0; i < newValue.length; i++) {
+                currentController.initTotals();     
 
-                    var questionnaireItem = newValue[i];                    
-
-                    if ((this.percentageTimeEffort + questionnaireItem.answer.timeEffort) <= 100) {
-                        this.percentageTimeEffort += questionnaireItem.answer.timeEffort;
-                    } else {                        
-                        overflowedIndex = i;
-                        prevOverflowedValue = oldValue[overflowedIndex].answer.timeEffort;
-                        break;                      
-                    }             
+                for (var questionnaireItem of newValue) {
+                    currentController.percentageTimeEffort += questionnaireItem.answer.timeEffort;
 
                     if (questionnaireItem.answer.activityOwner) {
-                        this.totalActivityOwner++;
+                        currentController.totalActivityOwner++;
                     }
                     if (questionnaireItem.answer.activityPerformed) {
-                        this.totalActivityPerformed++;
+                        currentController.totalActivityPerformed++;
                     }
                     if (questionnaireItem.answer.technology) {
-                        this.totalTechnology++;
+                        currentController.totalTechnology++;
                     }
-                }           
-
+                } 
             }, true);
 
-            if (overflowedIndex > -1) {
-                alert("Time effort exceeds 100%. Please, adjust the answers with the proper values");
-                this.questionnaireData[overflowedIndex].answer.timeEffort = prevOverflowedValue;
-            }  
-        }      
 
+            this.$scope.$watch(() => this.percentageTimeEffort, (newValue: number, oldValue: number) => {
+                currentController.validateQuestionnaire();
+            });
+
+            this.$scope.$watch(() => this.totalActivityOwner, (newValue: number, oldValue: number) => {
+                currentController.validateQuestionnaire();
+            });
+
+            this.$scope.$watch(() => this.totalActivityPerformed, (newValue: number, oldValue: number) => {
+                currentController.validateQuestionnaire();
+            });
+
+            this.$scope.$watch(() => this.totalTechnology, (newValue: number, oldValue: number) => {
+                currentController.validateQuestionnaire();
+            });
+        } 
+
+        private validateQuestionnaire(): void {
+            var totalItems = this.questionnaireData.length;
+            this.cache.sumbitBtnDisabled = this.percentageTimeEffort == 100 &&
+            this.totalActivityOwner == totalItems &&
+            this.totalActivityPerformed == totalItems &&
+            this.totalTechnology == totalItems;
+        }
+       
         public addQuestionnaireItemClick(): void {           
             this.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
 
