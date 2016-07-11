@@ -12,7 +12,7 @@ var survey;
             this.init();
         }
         QuestionnaireController.prototype.init = function () {
-            this.$scope.percentage = 35;
+            this.initTotals();
             this.sliderOptions = {
                 floor: 0,
                 ceil: 25,
@@ -24,7 +24,13 @@ var survey;
             this.activityOwnerOptions = ['Manager', 'Admin', 'Other', 'N/A'];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
             this.populateQuestionnaire();
-            this.setupWatchers();
+            this.calculateTotals();
+        };
+        QuestionnaireController.prototype.initTotals = function () {
+            this.percentageTimeEffort = 0;
+            this.totalActivityOwner = 0;
+            this.totalActivityPerformed = 0;
+            this.totalTechnology = 0;
         };
         QuestionnaireController.prototype.populateQuestionnaire = function () {
             var controller = this;
@@ -37,15 +43,36 @@ var survey;
                 }
             });
         };
-        QuestionnaireController.prototype.setupWatchers = function () {
+        QuestionnaireController.prototype.calculateTotals = function () {
             var _this = this;
-            this.$scope.$watch(function () { return _this.$scope.percentage; }, function (newValue, oldValue) {
-                _this.updatePercentage(newValue, oldValue);
+            var overflowedIndex = -1;
+            var prevOverflowedValue = 0;
+            this.$scope.$watch(function () { return _this.questionnaireData; }, function (newValue, oldValue) {
+                _this.initTotals();
+                for (var i = 0; i < newValue.length; i++) {
+                    var questionnaireItem = newValue[i];
+                    if ((_this.percentageTimeEffort + questionnaireItem.answer.timeEffort) <= 100) {
+                        _this.percentageTimeEffort += questionnaireItem.answer.timeEffort;
+                    }
+                    else {
+                        overflowedIndex = i;
+                        prevOverflowedValue = oldValue[overflowedIndex].answer.timeEffort;
+                        break;
+                    }
+                    if (questionnaireItem.answer.activityOwner) {
+                        _this.totalActivityOwner++;
+                    }
+                    if (questionnaireItem.answer.activityPerformed) {
+                        _this.totalActivityPerformed++;
+                    }
+                    if (questionnaireItem.answer.technology) {
+                        _this.totalTechnology++;
+                    }
+                }
             }, true);
-        };
-        QuestionnaireController.prototype.updatePercentage = function (oldValue, newValue) {
-            if (oldValue !== newValue) {
-                console.log("This is the new value " + newValue);
+            if (overflowedIndex > -1) {
+                alert("Time effort exceeds 100%. Please, adjust the answers with the proper values");
+                this.questionnaireData[overflowedIndex].answer.timeEffort = prevOverflowedValue;
             }
         };
         QuestionnaireController.prototype.addQuestionnaireItemClick = function () {
@@ -60,6 +87,11 @@ var survey;
         };
         return QuestionnaireController;
     }(survey.AbstractController));
+    var WarnDialogController = (function () {
+        function WarnDialogController() {
+        }
+        return WarnDialogController;
+    }());
     angular.module("survey")
         .controller("QuestionnaireController", QuestionnaireController);
 })(survey || (survey = {}));

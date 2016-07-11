@@ -68,17 +68,17 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="completed">
-                        <uib-progressbar max="100" value="percentage"><span class="progress-text">{{percentage}} %</span></uib-progressbar>
+                        <uib-progressbar max="100" value="vm.percentageTimeEffort"><span class="progress-text">{{vm.percentageTimeEffort}} %</span></uib-progressbar>
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="counter"><b>0</b> out of <b>20</b></div>
+                    <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.questionnaireData.length}}</b></div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="counter"><b>0</b> out of <b>20</b></div>
+                    <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.questionnaireData.length}}</b></div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="counter"><b>0</b> out of <b>20</b></div>
+                    <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.questionnaireData.length}}</b></div>
                 </div>
             </div>
         </li>

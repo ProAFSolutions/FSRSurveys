@@ -9,7 +9,7 @@
         constructor(category: Category, answer: Answer) {
             this.category = category;
             this.answer = answer;
-        }
+        }        
     }
 
 

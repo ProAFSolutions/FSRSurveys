@@ -6,15 +6,20 @@
         public questionnaireData: Array<QuestionnaireItem>;       
         public activityOwnerOptions: Array<string>; 
         public activityPerformedOptions: Array<string>; 
+
+        public percentageTimeEffort: number;
+        public totalActivityOwner: number;
+        public totalActivityPerformed: number;
+        public totalTechnology: number;
        
         constructor($scope: ng.IScope, surveyService: SurveyService) {
             super($scope, surveyService);
             this.init();
         }
 
-        private init(): void {
+        private init(): void {            
 
-            this.$scope.percentage = 35;
+            this.initTotals();
 
             this.sliderOptions = {
                 floor: 0,
@@ -29,8 +34,15 @@
 
             this.populateQuestionnaire();    
 
-            this.setupWatchers();
-        }        
+            this.calculateTotals();
+        }   
+
+        private initTotals(): void {
+            this.percentageTimeEffort = 0;
+            this.totalActivityOwner = 0;
+            this.totalActivityPerformed = 0;
+            this.totalTechnology = 0;
+        } 
 
         private populateQuestionnaire(): void {
             let controller = this;
@@ -44,20 +56,46 @@
             });
         }
 
-        private setupWatchers(): void
+        private calculateTotals(): void
         {
-            this.$scope.$watch(() => this.$scope.percentage, (newValue: number, oldValue: number) => {
-                this.updatePercentage(newValue, oldValue);
+            var overflowedIndex = -1;
+            var prevOverflowedValue = 0;
+            this.$scope.$watch(() => this.questionnaireData, (newValue: Array<QuestionnaireItem>, oldValue: Array<QuestionnaireItem>) => {
+
+                this.initTotals();               
+                
+                for (var i = 0; i < newValue.length; i++) {
+
+                    var questionnaireItem = newValue[i];                    
+
+                    if ((this.percentageTimeEffort + questionnaireItem.answer.timeEffort) <= 100) {
+                        this.percentageTimeEffort += questionnaireItem.answer.timeEffort;
+                    } else {                        
+                        overflowedIndex = i;
+                        prevOverflowedValue = oldValue[overflowedIndex].answer.timeEffort;
+                        break;                      
+                    }             
+
+                    if (questionnaireItem.answer.activityOwner) {
+                        this.totalActivityOwner++;
+                    }
+                    if (questionnaireItem.answer.activityPerformed) {
+                        this.totalActivityPerformed++;
+                    }
+                    if (questionnaireItem.answer.technology) {
+                        this.totalTechnology++;
+                    }
+                }           
+
             }, true);
-        }
 
-        private updatePercentage(oldValue: number, newValue: number) {
-            if (oldValue !== newValue) {
-                console.log("This is the new value " + newValue);
-            }
-        }
+            if (overflowedIndex > -1) {
+                alert("Time effort exceeds 100%. Please, adjust the answers with the proper values");
+                this.questionnaireData[overflowedIndex].answer.timeEffort = prevOverflowedValue;
+            }  
+        }      
 
-        public addQuestionnaireItemClick(): void {
+        public addQuestionnaireItemClick(): void {           
             this.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
 
             //TODO create an Angular Directive for this
@@ -69,6 +107,10 @@
         public closeOtherClick(index: number): void {
             this.questionnaireData.splice(index, 1);
         }
+    }
+
+    class WarnDialogController {
+
     }
 
     angular.module("survey")

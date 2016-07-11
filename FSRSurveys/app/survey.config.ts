@@ -14,10 +14,10 @@ namespace survey {
                 url: '',
                 views: {
                     "menu": {
-                        templateUrl: 'app/html/survey.menu.html'
+                        templateUrl: 'app/views/survey.menu.html'
                     },
                     "container": {
-                        templateUrl: 'app/html/survey.wizard.html'                       
+                        templateUrl: 'app/views/survey.wizard.html'                       
                     }
                 }
             });

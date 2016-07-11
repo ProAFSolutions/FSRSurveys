@@ -22,11 +22,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\html\survey.blank.html" />
-    <Content Include="app\html\survey.questionnaire.html" />
-    <Content Include="app\html\survey.menu.html" />
-    <Content Include="app\html\survey.wizard.html" />
-    <Content Include="app\html\survey.user.html" />
+    <Content Include="app\views\survey.blank.html" />
+    <Content Include="app\views\survey.questionnaire.html" />
+    <Content Include="app\views\survey.menu.html" />
+    <Content Include="app\views\survey.wizard.html" />
+    <Content Include="app\views\survey.user.html" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\img\favicon.ico" />
     <Content Include="assets\img\logo.png" />
@@ -40,8 +40,6 @@
     <Content Include="assets\styles\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
-    <Content Include="dist\app.min.js" />
-    <Content Include="dist\libs.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
@@ -159,6 +157,7 @@
   <ItemGroup>
     <Folder Include="app\build\" />
     <Folder Include="app\directives\" />
+    <Folder Include="dist\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\controller\survey.questionnaire.controller.ts" />
@@ -167,12 +166,13 @@
     <TypeScriptCompile Include="app\controller\survey.user.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.wizard.controller.ts" />
     <TypeScriptCompile Include="app\model\survey.market.ts" />
-    <TypeScriptCompile Include="app\model\survey.questionnaire-item.ts" />
+    <TypeScriptCompile Include="app\model\survey.questionnaireItem.ts" />
     <TypeScriptCompile Include="app\model\survey.category.ts" />
     <TypeScriptCompile Include="app\model\survey.answer.ts" />
     <TypeScriptCompile Include="app\model\survey.userInfo.ts" />
+    <TypeScriptCompile Include="app\service\survey.sharedData.service.ts" />
     <TypeScriptCompile Include="app\survey.config.ts" />
-    <TypeScriptCompile Include="app\service\survey.service.ts" />
+    <TypeScriptCompile Include="app\service\survey.appService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
