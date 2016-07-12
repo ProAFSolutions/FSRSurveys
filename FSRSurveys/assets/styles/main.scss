@@ -172,7 +172,14 @@ body{
                             padding-right: 0;
                             text-align: left;  
                             font-size: 10px;
-                            line-height: 15px;                                                 
+                            line-height: 15px;    
+                            
+                            &:first-child{
+                                font-size: 12px;
+                                line-height: 50px;
+                                text-align: center;
+                                font-weight: bold;
+                            }                                             
                            
                             .fa{
                                 float: left; 

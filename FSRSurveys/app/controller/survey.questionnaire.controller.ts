@@ -3,7 +3,6 @@
     class QuestionnaireController extends AbstractController { 
        
         public sliderOptions: any;
-        public questionnaireData: Array<QuestionnaireItem>;       
         public activityOwnerOptions: Array<string>; 
         public activityPerformedOptions: Array<string>;
         public percentageTimeEffortOptions: Array<number>;
@@ -48,14 +47,14 @@
 
         private populateQuestionnaire(): void {
 
-            this.questionnaireData = new Array<QuestionnaireItem>();   
+            this.cache.questionnaireData = new Array<QuestionnaireItem>();   
 
             this.surveyService.resolveCategories().then(response => {
                 let categories = response;
                 for (var category of categories) {
-                    this.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
+                    this.cache.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
                 }
-                this.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
+                this.cache.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
             });
         }
 
@@ -64,7 +63,7 @@
 
             var currentController = this;
 
-            this.$scope.$watch(() => this.questionnaireData, (newValue: Array<QuestionnaireItem>, oldValue: Array<QuestionnaireItem>) => {
+            this.$scope.$watch(() => this.cache.questionnaireData, (newValue: Array<QuestionnaireItem>, oldValue: Array<QuestionnaireItem>) => {
 
                 currentController.initTotals();     
 
@@ -85,46 +84,46 @@
 
 
             this.$scope.$watch(() => this.percentageTimeEffort, (newValue: number, oldValue: number) => {
-                currentController.validateQuestionnaire();
+                if (newValue != oldValue)
+                   currentController.validateQuestionnaire();
             });
 
             this.$scope.$watch(() => this.totalActivityOwner, (newValue: number, oldValue: number) => {
-                currentController.validateQuestionnaire();
+                if (newValue != oldValue)
+                    currentController.validateQuestionnaire();
             });
 
             this.$scope.$watch(() => this.totalActivityPerformed, (newValue: number, oldValue: number) => {
-                currentController.validateQuestionnaire();
+                if (newValue != oldValue)
+                    currentController.validateQuestionnaire();
             });
 
             this.$scope.$watch(() => this.totalTechnology, (newValue: number, oldValue: number) => {
-                currentController.validateQuestionnaire();
+                if (newValue != oldValue)
+                    currentController.validateQuestionnaire();
             });
         } 
 
         private validateQuestionnaire(): void {
-            var totalItems = this.questionnaireData.length;
-            this.cache.sumbitBtnDisabled = this.percentageTimeEffort == 100 &&
+            var totalItems = this.cache.questionnaireData.length;
+            this.cache.sumbitBtnDisabled = !(this.percentageTimeEffort == 100 &&
             this.totalActivityOwner == totalItems &&
             this.totalActivityPerformed == totalItems &&
-            this.totalTechnology == totalItems;
+            this.totalTechnology == totalItems);
         }
        
-        public addQuestionnaireItemClick(): void {           
+        /*public addQuestionnaireItemClick(): void {           
             this.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
 
             //TODO create an Angular Directive for this
             setTimeout(() => {
                 $("textarea.no-border:last").focus();
             }, 500);
-        }
+        }*/
 
         public closeOtherClick(index: number): void {
-            this.questionnaireData.splice(index, 1);
+            this.cache.questionnaireData.splice(index, 1);
         }
-    }
-
-    class WarnDialogController {
-
     }
 
     angular.module("survey")

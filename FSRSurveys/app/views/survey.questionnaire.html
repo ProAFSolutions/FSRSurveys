@@ -39,7 +39,7 @@
                 </div>
             </div>
         </li>
-        <li class="category" ng-repeat="questionnaireItem in vm.questionnaireData">
+        <li class="category" ng-repeat="questionnaireItem in vm.cache.questionnaireData">
           
             <div class="row">
                 <div class="category-field col-lg-4">
@@ -98,13 +98,13 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.questionnaireData.length}}</b></div>
+                    <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.cache.questionnaireData.length}}</b></div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.questionnaireData.length}}</b></div>
+                    <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.cache.questionnaireData.length}}</b></div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.questionnaireData.length}}</b></div>
+                    <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.cache.questionnaireData.length}}</b></div>
                 </div>
             </div>
         </li>

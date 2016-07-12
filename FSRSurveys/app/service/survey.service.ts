@@ -33,7 +33,7 @@
 
         public saveAdminSurvey(userInfo: AdminInfo, categories: Array<Category>): void
         {
-
+            
         }
 
         public resolveCategories(): ng.IPromise<Array<Category>> {

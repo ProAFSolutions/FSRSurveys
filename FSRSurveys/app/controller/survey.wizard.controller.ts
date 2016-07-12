@@ -6,10 +6,8 @@
         public visibleNext: boolean;
         public visibleSubmit: boolean;
         public visiblePrev: boolean;
-        public visibleFinish: boolean;
-       
+        public visibleFinish: boolean;      
                
-
         constructor($scope: ng.IScope, cache: SurveyCache, surveyService: SurveyService) {
             super($scope, cache, surveyService);
             this.init();
@@ -36,10 +34,8 @@
 
         public submitClick(): void {
 
-            //sumbit here!!!
-
-            this.$scope.percentage = 55;
-
+            console.log(this.cache.questionnaireData);
+            
             this.stepClick(++this.currentStep);  
         }
 
