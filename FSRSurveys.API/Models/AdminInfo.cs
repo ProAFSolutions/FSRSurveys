@@ -14,7 +14,6 @@ namespace FSRSurveys.API.Models
     
     public partial class AdminInfo : UserInfo
     {
-        public int OfficeLocation { get; set; }
         public int ManagersNumber { get; set; }
     }
 }

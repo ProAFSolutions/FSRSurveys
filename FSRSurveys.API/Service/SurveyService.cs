@@ -14,10 +14,25 @@ namespace FSRSurveys.API.Service
         List<Category> GetCategories();
 
         List<Market> GetMarkets();
+
+        UserInfo GetUserInfo(string userEmail);
+
+        bool CheckIfUserExists(string userEmail);
     }
  
     public class SurveyService : ISurveyService
     {
+        public bool CheckIfUserExists(string userEmail)
+        {
+            UserInfo user = null;
+            using (var UoW = new SurveyDbContext())
+            {
+                user = UoW.UserInfo.SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));
+            }
+
+            return user != null;
+        }
+
         public List<Category> GetCategories()
         {
             List<Category> result = null;
@@ -39,13 +54,21 @@ namespace FSRSurveys.API.Service
             return result;
         }
 
-        public void SaveSurvey(UserInfo userInfo, List<Category> categories)
-        {           
-
+        public UserInfo GetUserInfo(string userEmail)
+        {
+            UserInfo result = null;
             using (var UoW = new SurveyDbContext())
             {
-
+                UoW.Configuration.LazyLoadingEnabled = true;
+                result = UoW.UserInfo.SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));                
             }
+
+            return result;
+        }
+
+        public void SaveSurvey(UserInfo userInfo, List<Category> categories)
+        {
+            
         }
     }
 }

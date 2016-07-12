@@ -194,6 +194,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Json\AnswerJson.cs" />
+    <Compile Include="Json\CategoryJson.cs" />
+    <Compile Include="Json\QuestionnaireDataJson.cs" />
+    <Compile Include="Json\UserInfoJson.cs" />
     <Compile Include="Models\AdminInfo.cs">
       <DependentUpon>SurveyDataModel.tt</DependentUpon>
     </Compile>

@@ -9,7 +9,6 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="OfficeLocation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ManagersNumber" Type="int" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
         </EntityType>
@@ -53,7 +52,7 @@
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PropertyType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PropertyName" Type="nvarchar(max)" />
-          <Property Name="AssociationsNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AssociationsNumber" Type="int" Nullable="false" />
           <Property Name="MarketName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UnitsTotal" Type="int" Nullable="false" />
         </EntityType>
@@ -137,7 +136,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SurveyDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AdminInfo" BaseType="SurveyDataModel.UserInfo">
-          <Property Name="OfficeLocation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ManagersNumber" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ManagerInfo" BaseType="SurveyDataModel.UserInfo">
@@ -169,7 +167,7 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PropertyType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PropertyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AssociationsNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssociationsNumber" Type="Int32" Nullable="false" />
           <Property Name="MarketName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UnitsTotal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SurveyAnswers" Relationship="Self.FK_UserInfoSurvey" FromRole="UserInfo" ToRole="SurveyAnswers" />
@@ -259,7 +257,6 @@
               <MappingFragment StoreEntitySet="AdminInfo">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ManagersNumber" ColumnName="ManagersNumber" />
-                <ScalarProperty Name="OfficeLocation" ColumnName="OfficeLocation" />
               </MappingFragment>
             </EntityTypeMapping>
             <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.ManagerInfo)">

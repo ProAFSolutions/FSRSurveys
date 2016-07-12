@@ -1,4 +1,6 @@
-﻿using FSRSurveys.API.Service;
+﻿using FSRSurveys.API.Json;
+using FSRSurveys.API.Models;
+using FSRSurveys.API.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,13 +45,76 @@ namespace FSRSurveys.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        [Route("save")]
-        public void Save([FromBody]string value)
+        [HttpGet]
+        [Route("user-info")]
+        public IHttpActionResult RequestUserInfo(string email)
         {
-           
+            var userData = _surveyService.GetUserInfo(email);
+
+            if (userData != null)
+            {
+                UserInfoJson userInfo = null;
+
+                if (userData is ManagerInfo)
+                {
+                    userInfo = new ManagerInfoJson
+                    {
+                        rdSupervisorName = (userData as ManagerInfo).RdSupervisorName,
+                        vpSupervisorName = (userData as ManagerInfo).VpSupervisorName
+                    };
+                }
+                else {
+                    userInfo = new AdminInfoJson
+                    {
+                        managersNumber = (userData as AdminInfo).ManagersNumber                        
+                    };
+                }
+
+                userInfo.name = userData.Name;
+                userInfo.email = userData.Email;
+                userInfo.marketName = userData.MarketName;
+                userInfo.propertyName = userData.PropertyName;
+                userInfo.propertyType = userData.PropertyType;
+                userInfo.unitsTotal = userData.UnitsTotal;
+                userInfo.associationsNumber = userData.AssociationsNumber;
+
+                var questionnaireData = new QuestionnaireDataJson
+                {
+                    userInfo = userInfo,
+                    items = userData.SurveyAnswers.Select(A => new QuestionnaireItemJson
+                    {
+                        category = new CategoryJson {
+                            id = A.Category.Id,
+                            name = A.Category.Name,
+                            jobActivity = A.Category.JobActivity
+                        },
+
+                        answer = new AnswerJson {
+                            timeEffort = (int) A.TimeEffort,
+                            activityOwner = A.ActivityOwner,
+                            activityPerformed = A.ActivityPerformed,
+                            technology = A.Technology 
+                        }
+
+                    }).ToList()
+                };
+
+                return Ok(new { data = questionnaireData });
+            }
+
+            return Ok(false);
         }
 
-       
+        [HttpPost]
+        [Route("save")]
+        public IHttpActionResult Save([FromBody] QuestionnaireDataJson data)
+        {
+            if (_surveyService.CheckIfUserExists(data.userInfo.email))
+            {
+
+            }
+
+            return Ok();
+        }       
     }
 }
