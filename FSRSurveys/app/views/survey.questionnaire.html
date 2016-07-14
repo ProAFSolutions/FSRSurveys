@@ -23,23 +23,23 @@
                 <div class="col-lg-4">Job Activity</div>
                 <div class="col-lg-2">
                     <!--<i class="fa fa-info-circle" uib-tooltip="% Time & Effort"></i>-->                  
-                    What percentage (%) of your time and effort is spent performing the following responsibilities in a typical month (Must sum to 100%)
+                    % of time spent performing the following activities:
                 </div>
                 <div class="col-lg-2">
                     <!--<i class="fa fa-info-circle" uib-tooltip="Activity Owner"></i>-->                   
-                    Please identify which tasks are typically performed by the Manager versus the Administrative Support Person
+                    Who is primarily responsible for performing each activity:
                 </div>
                 <div class="col-lg-2">
                     <!--<i class="fa fa-info-circle" uib-tooltip="Manual vs Electronic"></i>-->                   
-                    Rate whether this activity is performed manually or electronically via the use of technology (excluding email)
+                    Is this activity performed manually or using technology:
                 </div>
                 <div class="col-lg-2">
                     <!--<i class="fa fa-info-circle" uib-tooltip="Technology Used"></i>-->                    
-                    Where technology is being used to manage and perform the work, provide the name of the technology vendor/system application
+                    If technology is being used, name of the vendor/program:
                 </div>
             </div>
         </li>
-        <li class="category" ng-repeat="questionnaireItem in vm.cache.questionnaireData">
+        <li class="category" ng-repeat="questionnaireItem in vm.dataContext.questionnaireData">
           
             <div class="row">
                 <div class="category-field col-lg-4">
@@ -98,13 +98,13 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.cache.questionnaireData.length}}</b></div>
+                    <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.cache.questionnaireData.length}}</b></div>
+                    <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.cache.questionnaireData.length}}</b></div>
+                    <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
             </div>
         </li>

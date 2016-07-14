@@ -12,8 +12,8 @@
         public totalActivityPerformed: number;
         public totalTechnology: number;
 
-        constructor($scope: ng.IScope, cache: SurveyCache, surveyService: SurveyService) {
-            super($scope, cache, surveyService);
+        constructor($scope: ng.IScope, dataContext: DataContext, surveyService: SurveyService) {
+            super($scope, dataContext, surveyService);
             this.init();
         }
 
@@ -30,7 +30,7 @@
                 }
             };
             this.percentageTimeEffortOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 50];
-            this.activityOwnerOptions = ['Manager', 'Admin', 'Other', 'N/A'];
+            this.activityOwnerOptions = ['Manager', 'Admin', 'Accounting', 'Other', 'N/A'];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
 
             this.populateQuestionnaire();    
@@ -47,14 +47,14 @@
 
         private populateQuestionnaire(): void {
 
-            this.cache.questionnaireData = new Array<QuestionnaireItem>();   
+            this.dataContext.questionnaireData = new Array<QuestionnaireItem>();   
 
             this.surveyService.resolveCategories().then(response => {
                 let categories = response;
                 for (var category of categories) {
-                    this.cache.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
+                    this.dataContext.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
                 }
-                this.cache.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
+                this.dataContext.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
             });
         }
 
@@ -63,7 +63,7 @@
 
             var currentController = this;
 
-            this.$scope.$watch(() => this.cache.questionnaireData, (newValue: Array<QuestionnaireItem>, oldValue: Array<QuestionnaireItem>) => {
+            this.$scope.$watch(() => this.dataContext.questionnaireData, (newValue: Array<QuestionnaireItem>, oldValue: Array<QuestionnaireItem>) => {
 
                 currentController.initTotals();     
 
@@ -105,15 +105,15 @@
         } 
 
         private validateQuestionnaire(): void {
-            var totalItems = this.cache.questionnaireData.length;
-            this.cache.sumbitBtnDisabled = !(this.percentageTimeEffort == 100 &&
+            var totalItems = this.dataContext.questionnaireData.length;
+            this.dataContext.sumbitBtnDisabled = !(this.percentageTimeEffort == 100 &&
             this.totalActivityOwner == totalItems &&
             this.totalActivityPerformed == totalItems &&
             this.totalTechnology == totalItems);
         }
        
         /*public addQuestionnaireItemClick(): void {           
-            this.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
+            this.dataContext.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
 
             //TODO create an Angular Directive for this
             setTimeout(() => {
@@ -122,7 +122,7 @@
         }*/
 
         public closeOtherClick(index: number): void {
-            this.cache.questionnaireData.splice(index, 1);
+            this.dataContext.questionnaireData.splice(index, 1);
         }
     }
 

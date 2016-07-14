@@ -9,7 +9,7 @@ namespace FSRSurveys.API.Service
 
     public interface ISurveyService {
 
-        void SaveSurvey(UserInfo userInfo, List<Category> categories);
+        void SaveSurvey(UserInfo userInfo);
 
         List<Category> GetCategories();
 
@@ -62,13 +62,32 @@ namespace FSRSurveys.API.Service
                 UoW.Configuration.LazyLoadingEnabled = true;
                 result = UoW.UserInfo.SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));                
             }
-
             return result;
         }
 
-        public void SaveSurvey(UserInfo userInfo, List<Category> categories)
+        public void SaveSurvey(UserInfo userInfo)
         {
-            
+            if (userInfo != null)
+            {
+                using (var UoW = new SurveyDbContext())
+                {
+                    var dbUser = UoW.UserInfo.SingleOrDefault(U => U.Email.ToLower().Equals(userInfo.Email.ToLower()));
+                    if (dbUser == null)
+                    {                        
+                        UoW.UserInfo.Add(userInfo);                                        
+                    }
+                    else {
+                        dbUser.Name = userInfo.Name;                       
+                        dbUser.MarketName = userInfo.MarketName;
+                        dbUser.PropertyName = userInfo.PropertyName;
+                        dbUser.PropertyType = userInfo.PropertyType;
+                        dbUser.UnitsTotal = userInfo.UnitsTotal;
+                        dbUser.AssociationsNumber = userInfo.AssociationsNumber;
+                        dbUser.SurveyAnswers = userInfo.SurveyAnswers;
+                    }
+                    UoW.SaveChanges();
+                }
+            }
         }
     }
 }

@@ -8,8 +8,8 @@
         public visiblePrev: boolean;
         public visibleFinish: boolean;      
                
-        constructor($scope: ng.IScope, cache: SurveyCache, surveyService: SurveyService) {
-            super($scope, cache, surveyService);
+        constructor($scope: ng.IScope, dataContext: DataContext, surveyService: SurveyService) {
+            super($scope, dataContext, surveyService);
             this.init();
         }
                                                            
@@ -34,9 +34,14 @@
 
         public submitClick(): void {
 
-            console.log(this.cache.questionnaireData);
-            
-            this.stepClick(++this.currentStep);  
+            this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(response => {
+                if (response && response === 'OK') {
+                    console.log('Hitting the server');
+                   this.stepClick(++this.currentStep);
+                }
+            });
+
+              
         }
 
         public closeClick(): void {

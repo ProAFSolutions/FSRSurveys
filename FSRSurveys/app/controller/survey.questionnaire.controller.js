@@ -88,14 +88,6 @@ var survey;
                 this.totalActivityPerformed == totalItems &&
                 this.totalTechnology == totalItems);
         };
-        /*public addQuestionnaireItemClick(): void {
-            this.dataContext.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
-
-            //TODO create an Angular Directive for this
-            setTimeout(() => {
-                $("textarea.no-border:last").focus();
-            }, 500);
-        }*/
         QuestionnaireController.prototype.closeOtherClick = function (index) {
             this.dataContext.questionnaireData.splice(index, 1);
         };
@@ -104,4 +96,3 @@ var survey;
     angular.module("survey")
         .controller("QuestionnaireController", QuestionnaireController);
 })(survey || (survey = {}));
-//# sourceMappingURL=survey.questionnaire.controller.js.map

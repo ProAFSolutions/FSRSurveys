@@ -1,9 +1,10 @@
 ﻿namespace survey {    
     
-    export class SurveyCache {             
+    export class DataContext {             
         public sumbitBtnDisabled = true;
+        public userInfo: any; 
         public questionnaireData: Array<QuestionnaireItem>;      
     }
 
-    angular.module("survey").service("SurveyCache", SurveyCache);
+    angular.module("survey").service("DataContext", DataContext);
 }

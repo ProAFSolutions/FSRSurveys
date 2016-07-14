@@ -40,6 +40,8 @@
     <Content Include="assets\styles\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
+    <Content Include="dist\app.min.js" />
+    <Content Include="dist\libs.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
@@ -158,7 +160,6 @@
   <ItemGroup>
     <Folder Include="app\build\" />
     <Folder Include="app\directives\" />
-    <Folder Include="dist\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\controller\survey.questionnaire.controller.ts" />
@@ -171,7 +172,7 @@
     <TypeScriptCompile Include="app\model\survey.category.ts" />
     <TypeScriptCompile Include="app\model\survey.answer.ts" />
     <TypeScriptCompile Include="app\model\survey.userInfo.ts" />
-    <TypeScriptCompile Include="app\service\survey.cache.ts" />
+    <TypeScriptCompile Include="app\service\survey.data-context.ts" />
     <TypeScriptCompile Include="app\survey.config.ts" />
     <TypeScriptCompile Include="app\service\survey.service.ts" />
   </ItemGroup>

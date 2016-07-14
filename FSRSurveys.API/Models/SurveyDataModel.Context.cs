@@ -26,7 +26,7 @@ namespace FSRSurveys.API.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<SurveyAnswers> SurveyAnswers { get; set; }
+        public virtual DbSet<SurveyAnswer> SurveyAnswers { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<Category> Category { get; set; }
     }

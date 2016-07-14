@@ -14,8 +14,7 @@
     }
 
     export class AdminInfo extends UserInfo
-    {
-        public officeLocation: string;
+    {       
         public managersNumber: number;
 
         constructor() {

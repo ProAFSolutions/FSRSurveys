@@ -2,15 +2,15 @@
 
     export abstract class AbstractController {       
 
-        static $inject = ["$scope", "SurveyCache", "SurveyService"];
+        static $inject = ["$scope", "DataContext", "SurveyService"];
 
         protected $scope: any;
-        public cache: SurveyCache;
+        public dataContext: DataContext;
         protected surveyService: SurveyService;      
       
-        constructor($scope: ng.IScope, cache: SurveyCache, surveyService: SurveyService) {
+        constructor($scope: ng.IScope, dataContext: DataContext, surveyService: SurveyService) {
             this.$scope = $scope;
-            this.cache = cache;         
+            this.dataContext = dataContext;         
             this.surveyService = surveyService;
         }        
     }    

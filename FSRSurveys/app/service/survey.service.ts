@@ -1,6 +1,7 @@
 ﻿namespace survey { 
 
-    const SURVEY_API_BASE_URL = "http://rolesurvey.fsresidential.com/api/api/survey";    
+    const SURVEY_API_BASE_URL = "http://localhost:23611/api/survey";  
+    //const SURVEY_API_BASE_URL = "http://rolesurvey.fsresidential.com/api/api/survey";    
 
     interface ISurveyService {
 
@@ -8,35 +9,37 @@
 
         resolveCategories(): ng.IPromise<Array<Category>>;
 
-        saveManagerSurvey(userInfo: ManagerInfo, categories: Array<Category>): void;
-
-        saveAdminSurvey(userInfo: AdminInfo, categories: Array<Category>): void
+        saveSurvey(userInfo: any, items: Array<QuestionnaireItem>): ng.IPromise<any>;      
     }
     
     export class SurveyService implements ISurveyService {
 
-        static $inject = ["$q", "$http"];
+        static $inject = ["$http"];
 
-        private $http: ng.IHttpService;
-        private $q: ng.IQService;
+        private $http: ng.IHttpService;       
 
-        constructor($q: ng.IQService, $httpService: ng.IHttpService)
-        {
-            this.$q = $q;
+        constructor($httpService: ng.IHttpService)
+        {           
             this.$http = $httpService;
         }  
 
-        public saveManagerSurvey(userInfo: ManagerInfo, categories: Array<Category>): void
+        public saveSurvey(userInfo: any, items: Array<QuestionnaireItem>): ng.IPromise<any>
         {
+            //return this.$http.post(SURVEY_API_BASE_URL + "/save", { userInfo: userInfo, items: items }).then(response => response.data);
 
-        }
+            return this.$http({
+                url: SURVEY_API_BASE_URL + "/save",
+                method: 'POST',
+                data: { userInfo: userInfo, items: items },
+                withCredentials: false,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => response.data);
+        }       
 
-        public saveAdminSurvey(userInfo: AdminInfo, categories: Array<Category>): void
+        public resolveCategories(): ng.IPromise<Array<Category>>
         {
-            
-        }
-
-        public resolveCategories(): ng.IPromise<Array<Category>> {
             return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
         }
 

@@ -50,7 +50,7 @@ gulp.task('index', function () {
 });
 
 gulp.task('clean',function () {
-    return del(['dist/*.js']);
+    return del(['dist/*.js', 'app/*.js']);
 });
 
 gulp.task('scripts:app', function () {

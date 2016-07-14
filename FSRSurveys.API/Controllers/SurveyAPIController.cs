@@ -102,19 +102,57 @@ namespace FSRSurveys.API.Controllers
                 return Ok(new { data = questionnaireData });
             }
 
-            return Ok(false);
+            return Ok("error");
         }
 
-        [HttpPost]
+        [HttpOptions, HttpPost]
         [Route("save")]
-        public IHttpActionResult Save([FromBody] QuestionnaireDataJson data)
+        public IHttpActionResult Save(QuestionnaireDataJson data)
         {
-            if (_surveyService.CheckIfUserExists(data.userInfo.email))
+            if (data.userInfo != null && string.IsNullOrEmpty(data.userInfo.email))
             {
+                UserInfo userInfo;
+                if (data.userInfo is ManagerInfoJson)
+                {
+                    userInfo = new ManagerInfo
+                    {
+                        RdSupervisorName = (data.userInfo as ManagerInfoJson).rdSupervisorName,
+                        VpSupervisorName = (data.userInfo as ManagerInfoJson).vpSupervisorName
+                    };
+                }
+                else {
+                    userInfo = new AdminInfo
+                    {
+                        ManagersNumber = (data.userInfo as AdminInfoJson).managersNumber                        
+                    };
+                }
 
+                userInfo.Email = data.userInfo.email;
+                userInfo.Name = data.userInfo.name;
+                userInfo.MarketName = data.userInfo.marketName;
+                userInfo.PropertyName = data.userInfo.propertyName;
+                userInfo.PropertyType = data.userInfo.propertyType;
+                userInfo.AssociationsNumber = data.userInfo.associationsNumber;
+                userInfo.UnitsTotal = data.userInfo.unitsTotal;
+
+                data.items.ForEach(I => {
+                    userInfo.SurveyAnswers.Add(new SurveyAnswer
+                    {
+                        Date = DateTime.Now,
+                        TimeEffort = I.answer.timeEffort,
+                        ActivityOwner = I.answer.activityOwner,
+                        ActivityPerformed = I.answer.activityPerformed,
+                        Technology = I.answer.technology,                        
+                        Category_Id = I.category.id
+                    });
+                });
+
+                _surveyService.SaveSurvey(userInfo);
+
+                return Ok("success");
             }
 
-            return Ok();
+            return Ok("OK");
         }       
     }
 }

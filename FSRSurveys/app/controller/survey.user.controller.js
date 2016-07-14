@@ -28,4 +28,3 @@ var survey;
     angular.module("survey")
         .controller("UserController", UserController);
 })(survey || (survey = {}));
-//# sourceMappingURL=survey.user.controller.js.map

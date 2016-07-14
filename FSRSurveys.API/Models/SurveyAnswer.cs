@@ -12,7 +12,7 @@ namespace FSRSurveys.API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SurveyAnswers
+    public partial class SurveyAnswer
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }

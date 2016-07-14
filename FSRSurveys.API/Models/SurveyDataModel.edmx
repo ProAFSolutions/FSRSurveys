@@ -48,7 +48,6 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PropertyType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PropertyName" Type="nvarchar(max)" />
@@ -142,7 +141,7 @@
           <Property Name="RdSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VpSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="SurveyAnswers">
+        <EntityType Name="SurveyAnswer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -163,7 +162,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PropertyType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PropertyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -174,7 +172,7 @@
         </EntityType>
         <Association Name="FK_UserInfoSurvey">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
-          <End Role="SurveyAnswers" Type="Self.SurveyAnswers" Multiplicity="*" />
+          <End Role="SurveyAnswers" Type="SurveyDataModel.SurveyAnswer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserInfo">
               <PropertyRef Name="Id" />
@@ -185,7 +183,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SurveyDbContext" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="SurveyAnswers" EntityType="Self.SurveyAnswers" />
+          <EntitySet Name="SurveyAnswers" EntityType="SurveyDataModel.SurveyAnswer" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
           <AssociationSet Name="FK_UserInfoSurvey" Association="Self.FK_UserInfoSurvey">
             <End Role="UserInfo" EntitySet="UserInfo" />
@@ -209,7 +207,7 @@
         </EntityType>
         <Association Name="FK_CategorySurvey">
           <End Type="SurveyDataModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="SurveyDataModel.SurveyAnswers" Role="SurveyAnswers" Multiplicity="*" />
+          <End Type="SurveyDataModel.SurveyAnswer" Role="SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="Id" />
@@ -226,7 +224,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NpsSurveyModelStoreContainer" CdmEntityContainer="SurveyDbContext">
           <EntitySetMapping Name="SurveyAnswers">
-            <EntityTypeMapping TypeName="SurveyDataModel.SurveyAnswers">
+            <EntityTypeMapping TypeName="SurveyDataModel.SurveyAnswer">
               <MappingFragment StoreEntitySet="SurveyAnswers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -249,7 +247,6 @@
                 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
                 <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>

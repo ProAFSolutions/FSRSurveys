@@ -185,7 +185,9 @@
       <DependentUpon>SurveyDataModel.edmx</DependentUpon>
       <LastGenOutput>SurveyDataModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -225,7 +227,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MarketModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\SurveyAnswers.cs">
+    <Compile Include="Models\SurveyAnswer.cs">
       <DependentUpon>SurveyDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SurveyDataModel.Context.cs">

@@ -17,7 +17,7 @@ namespace FSRSurveys.API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.SurveyAnswers = new HashSet<SurveyAnswers>();
+            this.SurveyAnswers = new HashSet<SurveyAnswer>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace FSRSurveys.API.Models
         public Nullable<int> DefinedByUser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SurveyAnswers> SurveyAnswers { get; set; }
+        public virtual ICollection<SurveyAnswer> SurveyAnswers { get; set; }
     }
 }

@@ -18,7 +18,6 @@ var survey;
             this.visiblePrev = false;
             this.visibleFinish = false;
         };
-        //Events
         WizardController.prototype.nextClick = function () {
             this.stepClick(++this.currentStep);
         };
@@ -26,13 +25,7 @@ var survey;
             this.stepClick(--this.currentStep);
         };
         WizardController.prototype.submitClick = function () {
-            var _this = this;
-            this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(function (response) {
-                if (response && response === 'OK') {
-                    console.log('Hitting the server');
-                    _this.stepClick(++_this.currentStep);
-                }
-            });
+            this.stepClick(++this.currentStep);
         };
         WizardController.prototype.closeClick = function () {
         };
@@ -70,4 +63,3 @@ var survey;
     angular.module("survey")
         .controller("WizardController", WizardController);
 })(survey || (survey = {}));
-//# sourceMappingURL=survey.wizard.controller.js.map
