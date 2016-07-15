@@ -6,7 +6,8 @@
         public visibleNext: boolean;
         public visibleSubmit: boolean;
         public visiblePrev: boolean;
-        public visibleFinish: boolean;      
+        public visibleFinish: boolean;  
+        public isUserInfoValid: boolean;    
                
         constructor($scope: ng.IScope, dataContext: DataContext, surveyService: SurveyService) {
             super($scope, dataContext, surveyService);
@@ -19,7 +20,8 @@
             this.visibleNext = true;
             this.visibleSubmit = false;
             this.visiblePrev = false;
-            this.visibleFinish = false;                          
+            this.visibleFinish = false;
+            this.checkIfUserDirty();                      
         } 
 
 
@@ -76,6 +78,14 @@
             }
         }
 
+        public checkIfUserDirty(): void {
+            var currentController = this;
+            this.$scope.$watch(() => this.dataContext.userInfo, (newValue: any, oldValue: any) => {
+                if (newValue != oldValue) {
+                    currentController.isUserInfoValid = newValue.validate();
+                }               
+            }, true);
+        }
        
     }
 

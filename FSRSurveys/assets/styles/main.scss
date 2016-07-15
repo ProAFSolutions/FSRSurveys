@@ -4,7 +4,7 @@
 @import "forms";
 @import "rzslider";
 @import "base";
-
+@import "screens";
 
 body{
     background-color: #0076A2;
@@ -25,6 +25,8 @@ body{
     .btn-primary {
         background-color: $color-blue !important;
     }
+
+   
 
     .btn-group{
         .btn-primary {
@@ -340,4 +342,3 @@ body{
 
 }
 
-@import "screens";

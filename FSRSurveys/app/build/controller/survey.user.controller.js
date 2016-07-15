@@ -12,15 +12,35 @@ var survey;
             this.init();
         }
         UserController.prototype.init = function () {
-            this.dataContext.userInfo = this.$scope.surveyType == 1 ? new survey.ManagerInfo() : new survey.AdminInfo();
             this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mixed Sited and Non-Sited'];
+            this.watchAssociateType();
             this.associateType = "Manager";
+            this.dataContext.userInfo = new survey.ManagerInfo();
+            this.watchAssociateType();
             this.populateMarketOptions();
         };
         UserController.prototype.populateMarketOptions = function () {
             var controller = this;
             this.surveyService.resolveMarkets().then(function (response) {
                 controller.marketOptions = response;
+            });
+        };
+        UserController.prototype.watchAssociateType = function () {
+            var _this = this;
+            var currentController = this;
+            this.$scope.$watch(function () { return _this.associateType; }, function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    if (newValue === 'Manager') {
+                        var managerInfo = new survey.ManagerInfo();
+                        managerInfo.copyFrom(_this.dataContext.userInfo);
+                        _this.dataContext.userInfo = managerInfo;
+                    }
+                    else {
+                        var adminInfo = new survey.AdminInfo();
+                        adminInfo.copyFrom(_this.dataContext.userInfo);
+                        _this.dataContext.userInfo = adminInfo;
+                    }
+                }
             });
         };
         return UserController;

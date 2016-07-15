@@ -8363,6 +8363,14 @@ body > .ui-select-bootstrap.open {
 .ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25); }
 
+.asterisk {
+  padding-left: 5px;
+  color: red; }
+
+.required {
+  background-color: #f2dede !important;
+  border-color: #ebccd1 !important; }
+
 /*! angularjs-slider - v5.1.0 - 
  (c) Rafal Zajac <rzajac@gmail.com>, Valentin Hervieu <valentin@hervieu.me>, Jussi Saarivirta <jusasi@gmail.com>, Angelin Sirbu <angelin.sirbu@gmail.com> - 
  https://github.com/angular-slider/angularjs-slider - 
@@ -8840,6 +8848,14 @@ ul.navbar-nav {
   .navbar-brand {
     /**background-image: url(../img/logo@2x.png) !important; background-repeat: no-repeat !important; background-size: 162px 36px !important;*/ } }
 
+@media only screen and (min-width: 992px) {
+  .container {
+    width: 900px; } }
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 1400px; } }
+
 body {
   background-color: #0076A2;
   font-size: 14px; }
@@ -9012,20 +9028,4 @@ body {
               text-align: center; }
       body .form-box .wizard-pages .page3 .well {
         font-size: 24px; }
-
-/* Smartphones (portrait and landscape) ----------- */
-/*Tablets*/
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  .container {
-    width: 900px; } }
-
-/*Desktops & laptops*/
-@media only screen and (min-width: 1224px) {
-  .container {
-    width: 1400px; } }
-
-/*Large Screens*/
-@media only screen and (min-width: 1824px) {
-  .container {
-    width: 1400px; } }
 

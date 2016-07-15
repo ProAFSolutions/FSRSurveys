@@ -17,6 +17,7 @@ var survey;
             this.visibleSubmit = false;
             this.visiblePrev = false;
             this.visibleFinish = false;
+            this.checkIfUserDirty();
         };
         //Events
         WizardController.prototype.nextClick = function () {
@@ -64,6 +65,15 @@ var survey;
                     }
                     break;
             }
+        };
+        WizardController.prototype.checkIfUserDirty = function () {
+            var _this = this;
+            var currentController = this;
+            this.$scope.$watch(function () { return _this.dataContext.userInfo; }, function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    currentController.isUserInfoValid = newValue.validate();
+                }
+            }, true);
         };
         return WizardController;
     }(survey.AbstractController));

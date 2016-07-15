@@ -1,8 +1,8 @@
 ﻿namespace survey {
 
-    class MenuController {       
+    class MenuController { 
 
-        
+
     }
 
     angular.module("survey")
