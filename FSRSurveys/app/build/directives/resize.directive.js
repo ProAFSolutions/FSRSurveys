@@ -3,18 +3,22 @@ var survey;
     var ResizeDirective = (function () {
         function ResizeDirective() {
             this.restrict = 'A';
+            this.scope = {
+                resizeMobile: '='
+            };
         }
         ResizeDirective.instance = function () {
             return new ResizeDirective;
         };
         ResizeDirective.prototype.link = function (scope, elements, attrs) {
-            $(window).bind("load resize", function () {
+            $(window).on("load resize", function () {
                 if (window.innerWidth < 992) {
-                    $("body").addClass("small-view");
+                    scope.resizeMobile = true;
                 }
                 else {
-                    $("body").removeClass("small-view");
+                    scope.resizeMobile = false;
                 }
+                scope.$apply();
             });
         };
         return ResizeDirective;

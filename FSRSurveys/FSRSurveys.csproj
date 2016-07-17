@@ -23,8 +23,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\survey.blank.html" />
-    <Content Include="app\views\survey.questionnaire.mobile.html" />
     <Content Include="app\views\survey.questionnaire.desktop.html" />
+    <Content Include="app\views\survey.questionnaire.mobile.html" />
     <Content Include="app\views\survey.menu.html" />
     <Content Include="app\views\survey.wizard.html" />
     <Content Include="app\views\survey.user.html" />
@@ -124,6 +124,7 @@
     <Content Include="assets\styles\_colors.scss" />
     <Content Include="assets\styles\_rzslider.scss" />
     <Content Include="assets\styles\_screens.scss" />
+    <Content Include="assets\styles\_mixins.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

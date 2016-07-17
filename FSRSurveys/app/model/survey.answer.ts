@@ -8,12 +8,7 @@
         public activityPerformed: string;
         public technology: string;
 
-        constructor() {
-            this.timeEffort = 0;
-            this.activityOwner = "";
-            this.activityPerformed = "";
-            this.technology = "";
-        }
+        constructor() { }
 
     }
 

@@ -358,4 +358,23 @@ body > .ui-select-bootstrap.open {
 }
 
 
+ .ui-select-placeholder{
+    @include placeholder();
+ }
+
+::-webkit-input-placeholder{
+    @include placeholder();
+}
+:-moz-placeholder {
+    @include placeholder();
+}
+::-moz-placeholder {
+    @include placeholder();
+}
+:-ms-input-placeholder {
+   @include placeholder();
+}
+
+ 
+
 

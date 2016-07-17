@@ -1,7 +1,5 @@
 ﻿    
-    @media only all{
-      
-       body{
+   body {
             background-color: #0076A2;
             font-size: 14px;
 
@@ -300,12 +298,33 @@
                 }
                }
             }
-    }
+
+  //X-Small & Small screens
+  .mobile{
+        .wizard-pages{                
+                .page2{
+                    .categories{
+                         .category{                                
+                                border-bottom: none;
+                                .category-field {   
+                                    margin-top: 5px;
+                                }
+                         }
+                         .category-footer{
+                             label{                                 
+                                 clear: left;
+                                 float: left;
+                                 width: 40%;
+                             }
+                         }
+                    }
+                }
+            } 
+    }   
 
    //Medium & Large
-    @media only screen and (min-width:992px){          
-        body{
-           .container{
+   .desktop{          
+        .container{
               width: 100%;
                
               .wizard-pages{
@@ -357,41 +376,9 @@
                   }
               }               
             }
-        }
-    } 
+    }
 
-   //X-Small & Small screens
-    @media only screen and (max-width:991px){
-        body.small-view{            
-            .wizard-pages{
-                .page2{
-                    .categories{
-                        .category-header{
-                            display: none;
-                        }
-
-                         .category{                                
-                                border-bottom: none;
-
-                                .category-field {   
-                                    margin-top: 5px;
-                                }
-
-                         }
-
-                         .category, .category-footer{
-                             label{
-                                 display: inline;
-                                 clear: left;
-                                 float: left;
-                                 width: 40%;
-                             }
-                         }
-                    }
-                }
-            } 
-        }
-    }   
+   
 
     
 

@@ -1,5 +1,5 @@
 ﻿<div ng-controller="WizardController as vm">
-    <div class="top-content">
+    <div class="top-content" resize resize-mobile="vm.isRunningMobile" ng-class="{ 'mobile': vm.isRunningMobile, 'desktop': !vm.isRunningMobile }">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 col-md-12 form-box">
@@ -33,8 +33,13 @@
                                 <div ng-include="'app/views/survey.user.html'"></div>
                             </div>
 
-                            <div class="page2" ng-show="vm.currentStep == 2">                                
-                                <div ng-include="'app/views/survey.questionnaire.html'"></div>                               
+                            <div class="page2" ng-show="vm.currentStep == 2">
+                                <div ng-if="vm.isRunningMobile">
+                                    <div ng-include="'app/views/survey.questionnaire.mobile.html'"></div>
+                                </div>
+                                <div ng-if="!vm.isRunningMobile">
+                                    <div ng-include="'app/views/survey.questionnaire.desktop.html'"></div>
+                                </div>                               
                             </div>
 
                             <div class="page3" ng-show="vm.currentStep == 3">
