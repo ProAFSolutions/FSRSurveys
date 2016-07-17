@@ -10,7 +10,10 @@
         public unitsTotal: number;     
         public marketName: string;
 
-        constructor() { } 
+        constructor() {
+            this.unitsTotal = 0;
+            this.associationsNumber = 0;
+        } 
 
         public isNullOrEmpty(value: string) {
             return value == null || value === '' || value.length === 0;
@@ -41,7 +44,8 @@
         public managersNumber: number;
 
         constructor() {
-            super();            
+            super();
+            this.managersNumber = 0;           
         }   
 
         public validate(): boolean {

@@ -7,6 +7,8 @@ var survey;
 (function (survey) {
     var UserInfo = (function () {
         function UserInfo() {
+            this.unitsTotal = 0;
+            this.associationsNumber = 0;
         }
         UserInfo.prototype.isNullOrEmpty = function (value) {
             return value == null || value === '' || value.length === 0;
@@ -35,6 +37,7 @@ var survey;
         __extends(AdminInfo, _super);
         function AdminInfo() {
             _super.call(this);
+            this.managersNumber = 0;
         }
         AdminInfo.prototype.validate = function () {
             return _super.prototype.validate.call(this) && this.managersNumber > 0;

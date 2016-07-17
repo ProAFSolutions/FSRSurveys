@@ -22,7 +22,11 @@ var survey;
         UserController.prototype.populateMarketOptions = function () {
             var controller = this;
             this.surveyService.resolveMarkets().then(function (response) {
-                controller.marketOptions = response;
+                controller.marketOptions = new Array();
+                for (var _i = 0, response_1 = response; _i < response_1.length; _i++) {
+                    var market = response_1[_i];
+                    controller.marketOptions.push(market.name);
+                }
             });
         };
         UserController.prototype.watchAssociateType = function () {

@@ -15,7 +15,8 @@ var config = {
         'app/build/survey.config.js',
         'app/build/model/*.js',
         'app/build/service/*.js',
-        'app/build/controller/*.js'
+        'app/build/controller/*.js',
+        'app/build/directives/*.js'
        
     ],
     libs: [

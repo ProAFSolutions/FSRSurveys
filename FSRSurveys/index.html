@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="/assets/styles/main.css">
     <!-- endinject -->
 </head>
-<body ng-app="survey">
+<body ng-app="survey" resize>
 
     <div ui-view="menu"></div>
-    <div ui-view="container"></div>
+    <div id="main-container" ui-view="container"></div>
+    
 
     <!-- inject:js -->
 
@@ -69,6 +70,8 @@
     <script src="/app/build/controller/survey.user.controller.js"></script>
 
     <script src="/app/build/controller/survey.wizard.controller.js"></script>
+
+    <script src="/app/build/directives/resize.directive.js"></script>
 
     <!-- endinject -->
 </body>

@@ -1,13 +1,14 @@
 ﻿namespace survey {
 
-    class WizardController extends AbstractController { 
+    export class WizardController extends AbstractController { 
                 
         public currentStep: number;
         public visibleNext: boolean;
         public visibleSubmit: boolean;
         public visiblePrev: boolean;
         public visibleFinish: boolean;  
-        public isUserInfoValid: boolean;    
+        public isUserInfoValid: boolean;
+        public isRunningMobile = false;
                
         constructor($scope: ng.IScope, dataContext: DataContext, surveyService: SurveyService) {
             super($scope, dataContext, surveyService);
@@ -16,11 +17,11 @@
                                                            
         private init(): void
         {
-            this.currentStep = 1;
+            this.currentStep = 2;           
             this.visibleNext = true;
             this.visibleSubmit = false;
             this.visiblePrev = false;
-            this.visibleFinish = false;
+            this.visibleFinish = false;            
             this.checkIfUserDirty();                      
         } 
 
@@ -51,6 +52,9 @@
         }
 
         public stepClick(step: number): void {
+
+            if (step > 1 && !this.dataContext.userInfo.validate())
+                return;
 
             this.currentStep = step;
 

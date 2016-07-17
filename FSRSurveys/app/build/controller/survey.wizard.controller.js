@@ -9,10 +9,11 @@ var survey;
         __extends(WizardController, _super);
         function WizardController($scope, dataContext, surveyService) {
             _super.call(this, $scope, dataContext, surveyService);
+            this.isRunningMobile = false;
             this.init();
         }
         WizardController.prototype.init = function () {
-            this.currentStep = 1;
+            this.currentStep = 2;
             this.visibleNext = true;
             this.visibleSubmit = false;
             this.visiblePrev = false;
@@ -38,6 +39,8 @@ var survey;
         WizardController.prototype.closeClick = function () {
         };
         WizardController.prototype.stepClick = function (step) {
+            if (step > 1 && !this.dataContext.userInfo.validate())
+                return;
             this.currentStep = step;
             switch (step) {
                 case 1:
@@ -77,6 +80,7 @@ var survey;
         };
         return WizardController;
     }(survey.AbstractController));
+    survey.WizardController = WizardController;
     angular.module("survey")
         .controller("WizardController", WizardController);
 })(survey || (survey = {}));

@@ -3,7 +3,7 @@
     class UserController extends AbstractController {  
 
         
-        public marketOptions: Array<Market>;
+        public marketOptions: Array<string>;
         public propertyTypeOptions: Array<string>;
         public associateType: string;
        
@@ -28,7 +28,10 @@
         private populateMarketOptions(): void {
             let controller = this;
             this.surveyService.resolveMarkets().then(response => {
-                controller.marketOptions = response;
+                controller.marketOptions = new Array<string>();
+                for (var market of response) {
+                    controller.marketOptions.push(market.name);
+                }
             });
         }   
 
