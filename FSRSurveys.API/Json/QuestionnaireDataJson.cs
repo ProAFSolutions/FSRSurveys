@@ -8,7 +8,10 @@ namespace FSRSurveys.API.Json
 
     public class QuestionnaireDataJson {
 
-        public UserInfoJson userInfo { get; set; }
+        public ManagerInfoJson managerInfo { get; set; }
+
+        public AdminInfoJson adminInfo { get; set; }
+
         private List<QuestionnaireItemJson> _items = new List<QuestionnaireItemJson>();
 
         public List<QuestionnaireItemJson> items
@@ -23,7 +26,7 @@ namespace FSRSurveys.API.Json
                 _items = value;
             }
         }
-    }
+    }   
 
     public class QuestionnaireItemJson
     {

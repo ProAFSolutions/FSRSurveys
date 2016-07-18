@@ -16,5 +16,6 @@ namespace FSRSurveys.API.Models
     {
         public string RdSupervisorName { get; set; }
         public string VpSupervisorName { get; set; }
+        public int TotalBoardMeetingsHeldPerYear { get; set; }
     }
 }

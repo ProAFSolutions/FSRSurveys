@@ -12,7 +12,7 @@ var survey;
             this.init();
         }
         UserController.prototype.init = function () {
-            this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mixed Sited and Non-Sited'];
+            this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mixed of Sited and Non-Sited'];
             this.watchAssociateType();
             this.associateType = "Manager";
             this.dataContext.userInfo = new survey.ManagerInfo();

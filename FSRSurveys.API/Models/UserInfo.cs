@@ -28,6 +28,7 @@ namespace FSRSurveys.API.Models
         public int AssociationsNumber { get; set; }
         public string MarketName { get; set; }
         public int UnitsTotal { get; set; }
+        public int PropertiesTotal { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SurveyAnswer> SurveyAnswers { get; set; }

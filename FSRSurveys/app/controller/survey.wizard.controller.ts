@@ -36,15 +36,11 @@
         }
 
         public submitClick(): void {
-
             this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(response => {
-                if (response && response === 'OK') {
-                    console.log('Hitting the server');
+                if (response && response === 'success') {                    
                    this.stepClick(++this.currentStep);
                 }
-            });
-
-              
+            });              
         }
 
         public closeClick(): void {

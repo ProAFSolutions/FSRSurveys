@@ -9,6 +9,7 @@ var survey;
         function UserInfo() {
             this.unitsTotal = 0;
             this.associationsNumber = 0;
+            this.totalProperties = 0;
         }
         UserInfo.prototype.isNullOrEmpty = function (value) {
             return value == null || value === '' || value.length === 0;
@@ -19,7 +20,8 @@ var survey;
                 !this.isNullOrEmpty(this.propertyType) &&
                 !this.isNullOrEmpty(this.marketName) &&
                 this.associationsNumber > 0 &&
-                this.unitsTotal > 0;
+                this.unitsTotal > 0 &&
+                this.totalProperties > 0;
         };
         UserInfo.prototype.copyFrom = function (updated) {
             this.name = updated.name;
@@ -29,6 +31,7 @@ var survey;
             this.propertyName = updated.propertyName;
             this.unitsTotal = updated.unitsTotal;
             this.associationsNumber = updated.associationsNumber;
+            this.totalProperties = updated.totalProperties;
         };
         return UserInfo;
     }());
@@ -49,9 +52,11 @@ var survey;
         __extends(ManagerInfo, _super);
         function ManagerInfo() {
             _super.call(this);
+            this.totalBoardMeetingsHeldPerYear = 0;
         }
         ManagerInfo.prototype.validate = function () {
-            return _super.prototype.validate.call(this) && !this.isNullOrEmpty(this.rdSupervisorName) && !this.isNullOrEmpty(this.vpSupervisorName);
+            return _super.prototype.validate.call(this) && !this.isNullOrEmpty(this.rdSupervisorName) && !this.isNullOrEmpty(this.vpSupervisorName) &&
+                this.totalBoardMeetingsHeldPerYear > 0;
         };
         return ManagerInfo;
     }(UserInfo));

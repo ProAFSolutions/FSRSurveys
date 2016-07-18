@@ -21,8 +21,8 @@ var survey;
                     return value + " %";
                 }
             };
-            this.percentageTimeEffortOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 50];
-            this.activityOwnerOptions = ['Manager', 'Admin', 'Accounting', 'Other', 'N/A'];
+            this.percentageTimeEffortOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100];
+            this.activityOwnerOptions = ['Manager', 'Admin', 'Accounting', 'Joint Manager & Admin', 'Joint Manager & Accounting', 'Other', 'N/A'];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
             this.populateQuestionnaire();
             this.calculateTotals();
@@ -52,7 +52,9 @@ var survey;
                 currentController.initTotals();
                 for (var _i = 0, newValue_1 = newValue; _i < newValue_1.length; _i++) {
                     var questionnaireItem = newValue_1[_i];
-                    currentController.percentageTimeEffort += questionnaireItem.answer.timeEffort;
+                    if (questionnaireItem.answer.timeEffort) {
+                        currentController.percentageTimeEffort += questionnaireItem.answer.timeEffort;
+                    }
                     if (questionnaireItem.answer.activityOwner) {
                         currentController.totalActivityOwner++;
                     }

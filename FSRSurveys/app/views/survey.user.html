@@ -1,91 +1,108 @@
 ﻿<div ng-controller="UserController as vm">
-    <fieldset class="row">
-        <ul class="col-lg-12 col-md-12 col-sm-12">
-            <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"><b>Select Associate Type:</b></label>
-                <div class="btn-group">
-                    <label class="btn btn-primary" ng-model="vm.associateType" uib-btn-radio="'Manager'">Manager</label>
-                    <label class="btn btn-primary" ng-model="vm.associateType" uib-btn-radio="'Administrator'">Administrator</label>
-                </div>
-            </li>
-        </ul>
+    <form name="userForm">
+        <fieldset class="row">
+            <ul class="col-lg-12 col-md-12 col-sm-12">
+                <li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"><b>Select Associate Type:</b></label>
+                    <div class="btn-group">
+                        <label class="btn btn-primary" ng-model="vm.associateType" uib-btn-radio="'Manager'">Property Manager</label>
+                        <label class="btn btn-primary" ng-model="vm.associateType" uib-btn-radio="'Administrator'">Property Administrator</label>
+                    </div>
+                </li>
+            </ul>
 
-        <ul class="col-lg-12 col-md-12 col-sm-12" ng-show="vm.associateType != ''">
-            <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Manager Name" : "Admin Support Name:"}}</label>
-                <input placeholder="Ex: John Smith" class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-model="vm.dataContext.userInfo.name" type="text" ng-class="{ 'required': !vm.dataContext.userInfo.name }" />
-                <b ng-show="!vm.dataContext.userInfo.name" class="asterisk">*</b>
-            </li>
+            <ul class="col-lg-12 col-md-12 col-sm-12" ng-show="vm.associateType != ''">
+                <li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Property Manager Name" : "Property Administrator Name:"}}</label>
+                    <input placeholder="Ex: John Smith" class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-model="vm.dataContext.userInfo.name" type="text" ng-class="{ 'required': !vm.dataContext.userInfo.name }" />
+                    <b ng-show="!vm.dataContext.userInfo.name" class="asterisk">*</b>
+                </li>
 
-            <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Manager Email" : "Admin Support Email:"}}</label>    
-                <input placeholder="Ex: john.smith@fsresidential.com" class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-model="vm.dataContext.userInfo.email" type="text" ng-class="{ 'required': !vm.dataContext.userInfo.email }" />
-                <b ng-show="!vm.dataContext.userInfo.email" class="asterisk">*</b>
-            </li>
+                <li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Property Manager Email" : "Property Administrator Email:"}}</label>
+                    <input placeholder="Ex: john.smith@fsresidential.com" class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-model="vm.dataContext.userInfo.email" type="text" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-class="{ 'required': !vm.dataContext.userInfo.email }" />
+                    <b ng-show="!vm.dataContext.userInfo.email" class="asterisk"><span ng-show="userForm.email.$error.pattern">Invalid</span>*</b>
+                    
+                </li>
 
-            <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Property Type(s) Managed" : "Office Location"}}</label>
-                <div class="dropdown-container col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-class="{ 'required': !vm.dataContext.userInfo.propertyType }">
-                    <ui-select ng-model="vm.dataContext.userInfo.propertyType" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices class="ui-select-choices" repeat="typeItem in vm.propertyTypeOptions | filter: $select.search">
-                            <div ng-bind-html="typeItem | highlight: $select.search"></div>
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-                <b ng-show="!vm.dataContext.userInfo.propertyType" class="asterisk">*</b>
-            </li>
+                <li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Property Type(s) Managed" : "Property Type(s) Supported"}}</label>
+                    <div class="dropdown-container col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-class="{ 'required': !vm.dataContext.userInfo.propertyType }">
+                        <ui-select ng-model="vm.dataContext.userInfo.propertyType" theme="bootstrap">
+                            <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}}</ui-select-match>
+                            <ui-select-choices class="ui-select-choices" repeat="typeItem in vm.propertyTypeOptions | filter: $select.search">
+                                <div ng-bind-html="typeItem | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <b ng-show="!vm.dataContext.userInfo.propertyType" class="asterisk">*</b>
+                </li>
 
-            <li class="row" ng-show="vm.dataContext.userInfo.propertyType == 'Sited'">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Property Name:</label>
-                <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" ng-model="vm.dataContext.userInfo.propertyName" ng-class="{ 'required': !vm.dataContext.userInfo.propertyName }" />
-                <b ng-show="!vm.dataContext.userInfo.propertyName" class="asterisk">*</b>
-            </li>
+                <li class="row" ng-show="vm.dataContext.userInfo.propertyType == 'Sited'">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Property Name:</label>
+                    <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" ng-model="vm.dataContext.userInfo.propertyName" ng-class="{ 'required': !vm.dataContext.userInfo.propertyName }" />
+                    <b ng-show="!vm.dataContext.userInfo.propertyName" class="asterisk">*</b>
+                </li>
 
-            <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Market:</label>
-                <div class="dropdown-container col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-class="{ 'required': !vm.dataContext.userInfo.marketName }">
-                    <ui-select ng-model="vm.dataContext.userInfo.marketName" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices class="ui-select-choices" repeat="marketItem in vm.marketOptions | filter: $select.search">
-                            <div ng-bind-html="marketItem | highlight: $select.search"></div>
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-                <b ng-show="!vm.dataContext.userInfo.marketName" class="asterisk">*</b>
-            </li>
+                <li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Market:</label>
+                    <div class="dropdown-container col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-class="{ 'required': !vm.dataContext.userInfo.marketName }">
+                        <ui-select ng-model="vm.dataContext.userInfo.marketName" theme="bootstrap">
+                            <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected}}</ui-select-match>
+                            <ui-select-choices class="ui-select-choices" repeat="marketItem in vm.marketOptions | filter: $select.search">
+                                <div ng-bind-html="marketItem | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <b ng-show="!vm.dataContext.userInfo.marketName" class="asterisk">*</b>
+                </li>
 
-            <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Associations:</label>
-                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" ng-class="{ 'required': vm.dataContext.userInfo.associationsNumber == 0 }" ng-model="vm.dataContext.userInfo.associationsNumber" />
-                <b ng-show="vm.dataContext.userInfo.associationsNumber == 0" class="asterisk">*</b>
-            </li>
+                <li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Associations:</label>
+                    <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" ng-class="{ 'required': vm.dataContext.userInfo.associationsNumber == 0 }" ng-model="vm.dataContext.userInfo.associationsNumber" />
+                    <b ng-show="vm.dataContext.userInfo.associationsNumber == 0" class="asterisk">*</b>
+                </li>
 
-            <li class="row">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Total # of Units:" : "# of Units Supported:"}}</label>
-                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" ng-model="vm.dataContext.userInfo.unitsTotal" ng-class="{ 'required': vm.dataContext.userInfo.unitsTotal == 0 }" />
-                <b ng-show="vm.dataContext.userInfo.unitsTotal == 0" class="asterisk">*</b>
-            </li>
+                <li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Total # of Units Managed" : "Total # of Units Supported:"}}</label>
+                    <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" ng-model="vm.dataContext.userInfo.unitsTotal" ng-class="{ 'required': vm.dataContext.userInfo.unitsTotal == 0 }" />
+                    <b ng-show="vm.dataContext.userInfo.unitsTotal == 0" class="asterisk">*</b>
+                </li>
 
-            <li class="row" ng-show="vm.associateType === 'Manager'">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">RD Supervisor Name:</label>
-                <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" ng-model="vm.dataContext.userInfo.rdSupervisorName" ng-class="{ 'required': !vm.dataContext.userInfo.rdSupervisorName }" />
-                <b ng-show="!vm.dataContext.userInfo.rdSupervisorName" class="asterisk">*</b>
-            </li>
+                <li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">{{vm.associateType === "Manager" ? "Total # of Properties Managed:" : "Total # of Properties Supported:"}}</label>
+                    <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="number" ng-model="vm.dataContext.userInfo.totalProperties" ng-class="{ 'required': vm.dataContext.userInfo.totalProperties == 0 }" />
+                    <b ng-show="vm.dataContext.userInfo.totalProperties == 0" class="asterisk">*</b>
+                </li>
 
-            <li class="row" ng-show="vm.associateType === 'Manager'">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">VP Supervisor Name:</label>
-                <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" ng-model="vm.dataContext.userInfo.vpSupervisorName" ng-class="{ 'required': !vm.dataContext.userInfo.vpSupervisorName }" />
-                <b ng-show="!vm.dataContext.userInfo.vpSupervisorName" class="asterisk">*</b>
-            </li>
 
-            <li class="row" ng-show="vm.associateType === 'Administrator'">
-                <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Managers Supported:</label>
-                <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" ng-model="vm.dataContext.userInfo.managersNumber" ng-class="{ 'required': vm.dataContext.userInfo.managersNumber == 0 }" />
-                <b ng-show="vm.dataContext.userInfo.managersNumber == 0" class="asterisk">*</b>
-            </li>
+                <li class="row" ng-show="vm.associateType === 'Manager'">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">Total # of Board Meetings Held per Year:</label>
+                    <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="number" ng-model="vm.dataContext.userInfo.totalBoardMeetingsHeldPerYear" ng-class="{ 'required': vm.dataContext.userInfo.totalBoardMeetingsHeldPerYear == 0 }" />
+                    <b ng-show="vm.dataContext.userInfo.totalBoardMeetingsHeldPerYear == 0" class="asterisk">*</b>
+                </li>
 
-        </ul>
+                <li class="row" ng-show="vm.associateType === 'Manager'">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">RD Supervisor Name:</label>
+                    <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" ng-model="vm.dataContext.userInfo.rdSupervisorName" ng-class="{ 'required': !vm.dataContext.userInfo.rdSupervisorName }" />
+                    <b ng-show="!vm.dataContext.userInfo.rdSupervisorName" class="asterisk">*</b>
+                </li>
 
-    </fieldset>
+                <li class="row" ng-show="vm.associateType === 'Manager'">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5">VP Supervisor Name:</label>
+                    <input class="col-lg-4 col-md-6 col-sm-6 col-xs-6" type="text" ng-model="vm.dataContext.userInfo.vpSupervisorName" ng-class="{ 'required': !vm.dataContext.userInfo.vpSupervisorName }" />
+                    <b ng-show="!vm.dataContext.userInfo.vpSupervisorName" class="asterisk">*</b>
+                </li>
+
+                <li class="row" ng-show="vm.associateType === 'Administrator'">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"># of Managers Supported:</label>
+                    <input class="col-lg-6 col-md-6 col-sm-6 col-xs-6" min="1" type="number" ng-model="vm.dataContext.userInfo.managersNumber" ng-class="{ 'required': vm.dataContext.userInfo.managersNumber == 0 }" />
+                    <b ng-show="vm.dataContext.userInfo.managersNumber == 0" class="asterisk">*</b>
+                </li>
+
+            </ul>
+
+        </fieldset>
+    </form>
+    
 </div>

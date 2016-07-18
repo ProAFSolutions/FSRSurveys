@@ -9,10 +9,12 @@
         public associationsNumber: number; 
         public unitsTotal: number;     
         public marketName: string;
+        public totalProperties: number; 
 
         constructor() {
             this.unitsTotal = 0;
             this.associationsNumber = 0;
+            this.totalProperties = 0;
         } 
 
         public isNullOrEmpty(value: string) {
@@ -25,7 +27,8 @@
                    !this.isNullOrEmpty(this.propertyType) &&
                    !this.isNullOrEmpty(this.marketName) &&
                    this.associationsNumber > 0 &&
-                   this.unitsTotal > 0;           
+                   this.unitsTotal > 0 &&
+                   this.totalProperties > 0;           
         }
 
         public copyFrom(updated: UserInfo) {
@@ -36,12 +39,13 @@
             this.propertyName = updated.propertyName;
             this.unitsTotal = updated.unitsTotal;
             this.associationsNumber = updated.associationsNumber;
+            this.totalProperties = updated.totalProperties;
         }
     }
 
     export class AdminInfo extends UserInfo
     {       
-        public managersNumber: number;
+        public managersNumber: number;              
 
         constructor() {
             super();
@@ -56,14 +60,17 @@
     export class ManagerInfo extends UserInfo {       
             
         public rdSupervisorName: string;
-        public vpSupervisorName: string;
+        public vpSupervisorName: string;        
+        public totalBoardMeetingsHeldPerYear : number;
 
         constructor() {
             super();
+            this.totalBoardMeetingsHeldPerYear = 0;
         }
 
         public validate(): boolean {
-            return super.validate() && !this.isNullOrEmpty(this.rdSupervisorName) && !this.isNullOrEmpty(this.vpSupervisorName);
+            return super.validate() && !this.isNullOrEmpty(this.rdSupervisorName) && !this.isNullOrEmpty(this.vpSupervisorName) &&
+                   this.totalBoardMeetingsHeldPerYear > 0;
         }
 
         

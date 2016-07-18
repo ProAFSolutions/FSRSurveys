@@ -14,7 +14,7 @@
         }
 
         private init(): void {            
-            this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mixed Sited and Non-Sited'];
+            this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mixed of Sited and Non-Sited'];
 
             this.watchAssociateType();
 

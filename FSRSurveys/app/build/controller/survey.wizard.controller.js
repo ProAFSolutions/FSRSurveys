@@ -30,8 +30,7 @@ var survey;
         WizardController.prototype.submitClick = function () {
             var _this = this;
             this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(function (response) {
-                if (response && response === 'OK') {
-                    console.log('Hitting the server');
+                if (response && response === 'success') {
                     _this.stepClick(++_this.currentStep);
                 }
             });

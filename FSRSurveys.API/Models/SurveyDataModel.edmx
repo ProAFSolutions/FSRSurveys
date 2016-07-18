@@ -28,6 +28,7 @@
           <Property Name="RdSupervisorName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="VpSupervisorName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TotalBoardMeetingsHeldPerYear" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyAnswers">
           <Key>
@@ -54,6 +55,7 @@
           <Property Name="AssociationsNumber" Type="int" Nullable="false" />
           <Property Name="MarketName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UnitsTotal" Type="int" Nullable="false" />
+          <Property Name="PropertiesTotal" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_AdminInfo_inherits_UserInfo">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1">
@@ -140,6 +142,7 @@
         <EntityType Name="ManagerInfo" BaseType="SurveyDataModel.UserInfo">
           <Property Name="RdSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VpSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalBoardMeetingsHeldPerYear" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyAnswer">
           <Key>
@@ -169,6 +172,7 @@
           <Property Name="MarketName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UnitsTotal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SurveyAnswers" Relationship="Self.FK_UserInfoSurvey" FromRole="UserInfo" ToRole="SurveyAnswers" />
+          <Property Name="PropertiesTotal" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_UserInfoSurvey">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
@@ -240,6 +244,7 @@
           <EntitySetMapping Name="UserInfo">
             <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.UserInfo)">
               <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="PropertiesTotal" ColumnName="PropertiesTotal" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UnitsTotal" ColumnName="UnitsTotal" />
                 <ScalarProperty Name="MarketName" ColumnName="MarketName" />
@@ -258,6 +263,7 @@
             </EntityTypeMapping>
             <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.ManagerInfo)">
               <MappingFragment StoreEntitySet="ManagerInfo">
+                <ScalarProperty Name="TotalBoardMeetingsHeldPerYear" ColumnName="TotalBoardMeetingsHeldPerYear" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="VpSupervisorName" ColumnName="VpSupervisorName" />
                 <ScalarProperty Name="RdSupervisorName" ColumnName="RdSupervisorName" />
