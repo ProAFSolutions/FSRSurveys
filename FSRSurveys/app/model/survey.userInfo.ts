@@ -9,12 +9,12 @@
         public associationsNumber: number; 
         public unitsTotal: number;     
         public marketName: string;
-        public totalProperties: number; 
+        public propertiesTotal: number; 
 
         constructor() {
             this.unitsTotal = 0;
             this.associationsNumber = 0;
-            this.totalProperties = 0;
+            this.propertiesTotal = 0;
         } 
 
         public isNullOrEmpty(value: string) {
@@ -28,7 +28,7 @@
                    !this.isNullOrEmpty(this.marketName) &&
                    this.associationsNumber > 0 &&
                    this.unitsTotal > 0 &&
-                   this.totalProperties > 0;           
+                   this.propertiesTotal > 0;           
         }
 
         public copyFrom(updated: UserInfo) {
@@ -39,21 +39,26 @@
             this.propertyName = updated.propertyName;
             this.unitsTotal = updated.unitsTotal;
             this.associationsNumber = updated.associationsNumber;
-            this.totalProperties = updated.totalProperties;
+            this.propertiesTotal = updated.propertiesTotal;
         }
     }
 
     export class AdminInfo extends UserInfo
     {       
-        public managersNumber: number;              
+        public managersNumber: number;         
+        public totalBoardMeetingsAttendedPerYear: number;   
+        public supervisorName: string;
 
         constructor() {
             super();
-            this.managersNumber = 0;           
+            this.managersNumber = 0;
+            this.totalBoardMeetingsAttendedPerYear = 0;        
         }   
 
         public validate(): boolean {
-            return super.validate() && this.managersNumber > 0;
+            return super.validate() && this.managersNumber > 0 &&
+                this.totalBoardMeetingsAttendedPerYear > 0 &&
+                !this.isNullOrEmpty(this.supervisorName);
         }       
     }
 

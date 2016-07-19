@@ -23,6 +23,7 @@ namespace FSRSurveys.API.Json
     {
         public string rdSupervisorName { get; set; }
         public string vpSupervisorName { get; set; }
+        public int totalBoardMeetingsHeldPerYear { get; set; }
 
         public ManagerInfo ToManagerInfo()
         {
@@ -38,7 +39,7 @@ namespace FSRSurveys.API.Json
                 PropertiesTotal = propertiesTotal,
                 RdSupervisorName = rdSupervisorName,
                 VpSupervisorName = vpSupervisorName,
-                TotalBoardMeetingsHeldPerYear = propertiesTotal
+                TotalBoardMeetingsHeldPerYear = totalBoardMeetingsHeldPerYear
             };
         }
     }
@@ -46,6 +47,11 @@ namespace FSRSurveys.API.Json
     public class AdminInfoJson : UserInfoJson
     {
         public int managersNumber { get; set; }
+
+        public string supervisorName { get; set; }
+
+        public int totalBoardMeetingsAttendedPerYear { get; set; }
+
 
         public AdminInfo ToAdminInfo()
         {
@@ -59,7 +65,9 @@ namespace FSRSurveys.API.Json
                 AssociationsNumber = associationsNumber,
                 UnitsTotal = unitsTotal,
                 PropertiesTotal = propertiesTotal,
-                ManagersNumber = managersNumber
+                ManagersNumber = managersNumber,
+                TotalBoardMeetingsAttendedPerYear = totalBoardMeetingsAttendedPerYear,
+                SupervisorName = supervisorName
             };
         }
     }

@@ -67,9 +67,15 @@ namespace FSRSurveys.API.Controllers
                         TimeEffort = I.answer.timeEffort,
                         ActivityOwner = I.answer.activityOwner,
                         ActivityPerformed = I.answer.activityPerformed,
-                        Technology = I.answer.technology,                        
-                        Category_Id = I.category.id
+                        Technology = I.answer.technology,
+                        Category = new Category
+                        {
+                            Id = I.category.id,
+                            Name = I.category.name,
+                            JobActivity = I.category.jobActivity
+                        }
                     });
+
                 });
 
                 _surveyService.SaveSurvey(userInfo);

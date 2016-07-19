@@ -1,6 +1,7 @@
 ﻿using FSRSurveys.API.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +18,8 @@ namespace FSRSurveys.API.Service
 
         UserInfo GetUserInfo(string userEmail);
 
+        List<UserInfo> GetAllUserData();
+
         bool CheckIfUserExists(string userEmail);
     }
  
@@ -31,6 +34,18 @@ namespace FSRSurveys.API.Service
             }
 
             return user != null;
+        }
+
+        public List<UserInfo> GetAllUserData()
+        {
+            List<UserInfo> result = null;
+            using (var UoW = new SurveyDbContext())
+            {
+                UoW.Configuration.LazyLoadingEnabled = true;
+                result = UoW.UserInfo.ToList();
+            }
+
+            return result;
         }
 
         public List<Category> GetCategories()
@@ -71,9 +86,28 @@ namespace FSRSurveys.API.Service
             {
                 using (var UoW = new SurveyDbContext())
                 {
-                    var dbUser = UoW.UserInfo.SingleOrDefault(U => U.Email.ToLower().Equals(userInfo.Email.ToLower()));
+                    UoW.Configuration.LazyLoadingEnabled = true;
+                    UserInfo dbUser = null;
+                    if (userInfo is ManagerInfo)
+                        dbUser = UoW.UserInfo.OfType<ManagerInfo>().SingleOrDefault(U => U.Email.ToLower().Equals(userInfo.Email.ToLower()));
+                    else
+                        dbUser = UoW.UserInfo.OfType<AdminInfo>().SingleOrDefault(U => U.Email.ToLower().Equals(userInfo.Email.ToLower()));
+
                     if (dbUser == null)
-                    {                        
+                    {
+                        var categories = UoW.Category.ToList();
+                        foreach (var SA in userInfo.SurveyAnswers) {
+                            if (SA.Category.Id > 0) {
+                                var categ = categories.SingleOrDefault(C => C.Id == SA.Category.Id);
+                                SA.Category = categ;
+                                UoW.Entry(SA.Category).State = EntityState.Unchanged;
+                            }
+                            else {
+                                SA.Category.DefinedByUser = userInfo.Email;
+                                UoW.Category.Add(SA.Category);
+                            }                          
+                        }
+
                         UoW.UserInfo.Add(userInfo);                                        
                     }
                     else {
@@ -83,8 +117,37 @@ namespace FSRSurveys.API.Service
                         dbUser.PropertyType = userInfo.PropertyType;
                         dbUser.UnitsTotal = userInfo.UnitsTotal;
                         dbUser.AssociationsNumber = userInfo.AssociationsNumber;
-                        dbUser.SurveyAnswers = userInfo.SurveyAnswers;
+                        dbUser.PropertiesTotal = userInfo.PropertiesTotal;
+
+                        if (dbUser is ManagerInfo)
+                        {
+                            ((ManagerInfo)dbUser).RdSupervisorName = ((ManagerInfo)userInfo).RdSupervisorName;
+                            ((ManagerInfo)dbUser).VpSupervisorName = ((ManagerInfo)userInfo).VpSupervisorName;
+                            ((ManagerInfo)dbUser).TotalBoardMeetingsHeldPerYear = ((ManagerInfo)userInfo).TotalBoardMeetingsHeldPerYear;
+                        }
+                        else {
+                            ((AdminInfo)dbUser).ManagersNumber = ((AdminInfo)userInfo).ManagersNumber;
+                        }
+
+                        for (int index = 0; index < dbUser.SurveyAnswers.Count; index++)
+                        {
+                            var DbSA = dbUser.SurveyAnswers.ElementAt(index);
+                            var SA = userInfo.SurveyAnswers.ElementAt(index);                            
+
+                            DbSA.TimeEffort = SA.TimeEffort;
+                            DbSA.ActivityOwner = SA.ActivityOwner;
+                            DbSA.ActivityPerformed = SA.ActivityPerformed;
+                            DbSA.Technology = SA.Technology;
+                            DbSA.Date = SA.Date;
+
+                            if (DbSA.Category.Name.Equals("Other"))
+                            {
+                                DbSA.Category.JobActivity = SA.Category.JobActivity;
+                                UoW.Entry(DbSA.Category).State = EntityState.Modified;
+                            }
+                        }
                     }
+
                     UoW.SaveChanges();
                 }
             }

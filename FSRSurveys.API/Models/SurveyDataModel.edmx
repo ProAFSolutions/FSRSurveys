@@ -11,6 +11,8 @@
           </Key>
           <Property Name="ManagersNumber" Type="int" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TotalBoardMeetingsAttendedPerYear" Type="int" Nullable="false" />
+          <Property Name="SupervisorName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -19,7 +21,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="JobActivity" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DefinedByUser" Type="int" />
+          <Property Name="DefinedByUser" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ManagerInfo">
           <Key>
@@ -138,6 +140,8 @@
       <Schema Namespace="SurveyDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AdminInfo" BaseType="SurveyDataModel.UserInfo">
           <Property Name="ManagersNumber" Type="Int32" Nullable="false" />
+          <Property Name="TotalBoardMeetingsAttendedPerYear" Type="Int32" Nullable="false" />
+          <Property Name="SupervisorName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ManagerInfo" BaseType="SurveyDataModel.UserInfo">
           <Property Name="RdSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -206,7 +210,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="JobActivity" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DefinedByUser" Type="Int32" />
+          <Property Name="DefinedByUser" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="SurveyAnswers" Relationship="SurveyDataModel.FK_CategorySurvey" FromRole="Category" ToRole="SurveyAnswers" />
         </EntityType>
         <Association Name="FK_CategorySurvey">
@@ -257,6 +261,8 @@
             </EntityTypeMapping>
             <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.AdminInfo)">
               <MappingFragment StoreEntitySet="AdminInfo">
+                <ScalarProperty Name="SupervisorName" ColumnName="SupervisorName" />
+                <ScalarProperty Name="TotalBoardMeetingsAttendedPerYear" ColumnName="TotalBoardMeetingsAttendedPerYear" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ManagersNumber" ColumnName="ManagersNumber" />
               </MappingFragment>

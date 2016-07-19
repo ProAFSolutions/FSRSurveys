@@ -13,7 +13,7 @@ var survey;
             this.init();
         }
         WizardController.prototype.init = function () {
-            this.currentStep = 2;
+            this.currentStep = 1;
             this.visibleNext = true;
             this.visibleSubmit = false;
             this.visiblePrev = false;
@@ -36,9 +36,12 @@ var survey;
             });
         };
         WizardController.prototype.closeClick = function () {
+            location.href = "http://www.google.com";
         };
         WizardController.prototype.stepClick = function (step) {
             if (step > 1 && !this.dataContext.userInfo.validate())
+                return;
+            if (step > 2 && this.dataContext.sumbitBtnDisabled)
                 return;
             this.currentStep = step;
             switch (step) {
