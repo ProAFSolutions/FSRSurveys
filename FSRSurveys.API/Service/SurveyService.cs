@@ -18,7 +18,9 @@ namespace FSRSurveys.API.Service
 
         UserInfo GetUserInfo(string userEmail);
 
-        List<UserInfo> GetAllUserData();
+        List<ManagerInfo> GetManagersData();
+
+        List<AdminInfo> GetAdminsData();
 
         bool CheckIfUserExists(string userEmail);
     }
@@ -36,13 +38,25 @@ namespace FSRSurveys.API.Service
             return user != null;
         }
 
-        public List<UserInfo> GetAllUserData()
+        public List<ManagerInfo> GetManagersData()
         {
-            List<UserInfo> result = null;
+            List<ManagerInfo> result = null;
             using (var UoW = new SurveyDbContext())
             {
                 UoW.Configuration.LazyLoadingEnabled = true;
-                result = UoW.UserInfo.ToList();
+                result = UoW.UserInfo.OfType<ManagerInfo>().ToList();
+            }
+
+            return result;
+        }
+
+        public List<AdminInfo> GetAdminsData()
+        {
+            List<AdminInfo> result = null;
+            using (var UoW = new SurveyDbContext())
+            {
+                UoW.Configuration.LazyLoadingEnabled = true;
+                result = UoW.UserInfo.OfType<AdminInfo>().ToList();
             }
 
             return result;

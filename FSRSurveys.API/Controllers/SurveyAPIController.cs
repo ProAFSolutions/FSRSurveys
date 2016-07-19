@@ -59,7 +59,7 @@ namespace FSRSurveys.API.Controllers
                 else {
                     userInfo = data.adminInfo.ToAdminInfo();
                 }
-              
+                
                 data.items.ForEach(I => {
                     userInfo.SurveyAnswers.Add(new SurveyAnswer
                     {
