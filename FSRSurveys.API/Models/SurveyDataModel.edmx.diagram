@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bcda3fbc4a79427994adec9e5ba1d103" Name="Diagram1">
-        <EntityTypeShape EntityType="SurveyDataModel.AdminInfo" Width="1.5" PointX="2.875" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SurveyDataModel.ManagerInfo" Width="1.5" PointX="0.875" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.AdminInfo" Width="1.5" PointX="3.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.ManagerInfo" Width="2.25" PointX="0.875" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SurveyDataModel.SurveyAnswer" Width="1.5" PointX="7" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SurveyDataModel.UserInfo" Width="1.5" PointX="1.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.UserInfo" Width="2.875" PointX="1.875" PointY="0.625" IsExpanded="true" />
         <AssociationConnector Association="SurveyDataModel.FK_UserInfoSurvey" ManuallyRouted="false" />
         <InheritanceConnector EntityType="SurveyDataModel.AdminInfo" />
         <InheritanceConnector EntityType="SurveyDataModel.ManagerInfo" />

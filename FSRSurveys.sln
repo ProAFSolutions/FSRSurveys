@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSRSurveys", "FSRSurveys\FS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSRSurveys.API", "FSRSurveys.API\FSRSurveys.API.csproj", "{627BF67B-F724-4CB9-8165-EC3A34BE97A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{0DCD22FA-A379-4BAC-B49D-E02AED1814E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{627BF67B-F724-4CB9-8165-EC3A34BE97A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{627BF67B-F724-4CB9-8165-EC3A34BE97A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{627BF67B-F724-4CB9-8165-EC3A34BE97A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DCD22FA-A379-4BAC-B49D-E02AED1814E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DCD22FA-A379-4BAC-B49D-E02AED1814E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DCD22FA-A379-4BAC-B49D-E02AED1814E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DCD22FA-A379-4BAC-B49D-E02AED1814E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,7 +15,6 @@ namespace FSRSurveys.API.Models
     public partial class AdminInfo : UserInfo
     {
         public int ManagersNumber { get; set; }
-        public int TotalBoardMeetingsAttendedPerYear { get; set; }
         public string SupervisorName { get; set; }
     }
 }

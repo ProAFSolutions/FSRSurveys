@@ -1,6 +1,6 @@
-﻿using ExcelLibrary.SpreadSheet;
+﻿using FSRSurveys.API.Models;
 using FSRSurveys.API.Service;
-using QiHe.CodeLib;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,149 +13,154 @@ namespace FSRSurveys.API.Controllers
 {
     public class ReportController : Controller
     {
+
         private ISurveyService _surveyService = new SurveyService();
 
-        // GET: Report
-        public FileResult SurveyExcelReport()
+        public ActionResult Index()
         {
-
-            var managersDataSource = _surveyService.GetManagersData();
-            var managersWorksheet = GetManagersWorksheet();           
-            managersDataSource.ForEach(M =>
-            {
-                for (int rowIndex = managersWorksheet.Cells.FirstRowIndex; rowIndex <= managersWorksheet.Cells.LastRowIndex; rowIndex++)
-                {
-                    Row row = managersWorksheet.Cells.GetRow(rowIndex);
-                    for (int colIndex = row.FirstColIndex; colIndex <= row.LastColIndex; colIndex++)
-                    {
-                        Cell cell = row.GetCell(colIndex);
-                    }
-                }               
-            });
-
-            var adminsDataSource = _surveyService.GetAdminsData();
-            var adminWorksheet = GetAdminWorksheet();    
-                     
-            Workbook book = new Workbook();
-            book.Worksheets.Add(managersWorksheet);
-            book.Worksheets.Add(managersWorksheet);
-
-            var stream = new MemoryStream();
-            book.SaveToStream(stream);
-
-            return null;
+            return View();
         }
 
-        private Worksheet PopulateWorkseet() {
-
-            var managersDataSource = _surveyService.GetManagersData();
-            var managersWorksheet = CreateManagersWorksheet();
-            managersDataSource.ForEach(M =>
+        // GET: Report
+        public FileStreamResult Report()
+        {
+            var templateFile = new FileInfo(Server.MapPath("~/Views/Report/FSRSurveyTemplate.xlsx"));
+            Stream result = new MemoryStream();
+            using (var excelDoc = new ExcelPackage(templateFile))
             {
-               
-            });
+                PopulateManagersWorkSheet(excelDoc.Workbook.Worksheets["MANAGER"]);
 
-            return managersWorksheet;
+                //PopulateAdminsWorkSheet(excelDoc.Workbook.Worksheets["Administrators"]);
+
+                excelDoc.SaveAs(result);
+            }
+
+            return new FileStreamResult(result, "application/ms-excel")
+            {
+                FileDownloadName = "FSRSurveyReport.xlsx"                
+            };
         }
 
 
-        #region Worksheets Structure
+        #region Populate Excel
 
-            private List<Cell> ManagerWorkSheetHeader {
-                get {
-                    var dataHeader = new List<Cell>();
-                    dataHeader.Add(new Cell("ASSOCIATE TYPE"));
-                    dataHeader.Add(new Cell("MANAGER NAME"));
-                    dataHeader.Add(new Cell("MANAGER EMAIL"));
-                    dataHeader.Add(new Cell("PROPERTY TYPE MANAGED"));
-                    dataHeader.Add(new Cell("PROPERTY NAME"));
-                    dataHeader.Add(new Cell("MARKET"));
-                    dataHeader.Add(new Cell("CITY"));
-                    dataHeader.Add(new Cell("TOTAL # OF ASSOCIATIONS MANAGED"));
-                    dataHeader.Add(new Cell("TOTAL # OF BOARD MEETINGS ATTENDED"));
-                    dataHeader.Add(new Cell("TOTAL # OF BOARD MEETING HELD PER YEAR"));
-                    dataHeader.Add(new Cell("RD SUPERVISOR NAME"));
-                    dataHeader.Add(new Cell("VP SUPERVISOR NAME"));
+        private void PopulateManagersWorkSheet(ExcelWorksheet managersWorksheet)
+        {              
+            var dataSource = _surveyService.GetManagersData();
 
-                    PopulateDataHeaders(dataHeader);
-
-                     return dataHeader;
-                }
-            }
-
-            private List<Cell> AdminWorkSheetHeader
+            var rowIndex = 2;            
+            dataSource.ForEach(M =>
             {
-                get
-                  {
-                    var dataHeader = new List<Cell>();
-                    dataHeader.Add(new Cell("ASSOCIATE TYPE"));
-                    dataHeader.Add(new Cell("ADMINISTRATOR NAME"));
-                    dataHeader.Add(new Cell("ADMINISTRATOR EMAIL"));
-                    dataHeader.Add(new Cell("PROPERTY TYPE SUPPORTED"));
-                    dataHeader.Add(new Cell("MARKET"));
-                    dataHeader.Add(new Cell("CITY"));
-                    dataHeader.Add(new Cell("TOTAL # OF ASSOCIATIONS SUPPORTED"));
-                    dataHeader.Add(new Cell("TOTAL # OF UNITS SUPPORTED"));
-                    dataHeader.Add(new Cell("TOTAL # OF MANAGERS SUPPORTED"));
-                    dataHeader.Add(new Cell("TOTAL # OF BOARD MEETINGS ATTENDED"));
-                    dataHeader.Add(new Cell("SUPERVISOR NAME"));
+                var colIndex = 1;
 
-                    PopulateDataHeaders(dataHeader);
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = "Property Manager";
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.Name;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.Email;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.PropertyType;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.PropertyName;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.MarketName;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.City;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.AssociationsNumber;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.PropertiesTotal;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.UnitsTotal;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.TotalBoardMeetingsHeldPerYear;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.TotalNumberBoardMeetingAttendedPerYear;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.RdSupervisorName;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.VpSupervisorName;
 
-                     return dataHeader;
-                }
-            }
+                PopulateCommonDataCells(managersWorksheet, M.SurveyAnswers, rowIndex, colIndex);
 
-            private Worksheet CreateManagersWorksheet()
+                rowIndex++;
+            });                
+        }
+
+        private void PopulateAdminsWorkSheet(ExcelWorksheet adminsWorksheet)
+        {
+            var dataSource = _surveyService.GetAdminsData();
+
+            var rowIndex = 2;
+            dataSource.ForEach(A =>
             {
-                var managersWorksheet = new Worksheet("Property Manager");
-                for (int col = 0; col < ManagerWorkSheetHeader.Count; col++)
+                var colIndex = 1;
+
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = "Property Manager";
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.Name;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.Email;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertyType;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertyName;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.MarketName;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.City;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.AssociationsNumber;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertiesTotal;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.UnitsTotal;               
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.TotalNumberBoardMeetingAttendedPerYear;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.SupervisorName;
+
+                PopulateCommonDataCells(adminsWorksheet, A.SurveyAnswers, rowIndex, colIndex);
+
+                rowIndex++;
+            });
+        }
+
+
+        private void PopulateCommonDataCells(ExcelWorksheet worksheet, IEnumerable<SurveyAnswer> userInfoSurveyAnswers, int rowIndex, int colIndex) {
+
+            for (int fieldNumber = 1; fieldNumber <= 4; fieldNumber++)
+            {
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Board Relations", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Board Meetings & Management Reports", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Resident Inquiries", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Move In/Move Out", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Annual Meeting & Elections", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Communications", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Community", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Preventative Maintenance", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Violations", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Arch Mods", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Project Mgmt", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Procurement", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Accounts Payable", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Accounts Receivable", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "General Ledger", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Human Resources", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Commuting", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Emergency", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Corporate", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Other", fieldNumber);
+
+                if (fieldNumber == 1)
                 {
-                    managersWorksheet.Cells[0, col + 1] = ManagerWorkSheetHeader[col];
+                    worksheet.Cells[rowIndex, colIndex++].Value = "100%";
                 }
-                return managersWorksheet;
             }
+            rowIndex++;
+        }
 
-            private Worksheet CreateAdminWorksheet()
+        private string GetFieldValue(IEnumerable<SurveyAnswer> answers, string category, int fieldNumber)
+        {
+            foreach (var answer in answers)
             {
-                var adminWorksheet = new Worksheet("Property Administrator");
-                for (int col = 0; col < AdminWorkSheetHeader.Count; col++)
-                {
-                    adminWorksheet.Cells[0, col + 1] = AdminWorkSheetHeader[col];
-                }
-                return adminWorksheet;
-            }
-
-
-            private void PopulateDataHeaders(List<Cell> dataHeader)
-            {
-                for (int i = 1; i < 5; i++)
-                {
-                    dataHeader.Add(new Cell("BOARD RELATIONS " + i));
-                    dataHeader.Add(new Cell("BOARD MEETINGS & MANAGEMENT REPORTS " + i));
-                    dataHeader.Add(new Cell("RESIDENT INQUIRIES " + i));
-                    dataHeader.Add(new Cell("MOVE IN/MOVE OUT " + i));
-                    dataHeader.Add(new Cell("ANNUAL MEETING & ELECTIONS " + i));
-                    dataHeader.Add(new Cell("COMMUNICATIONS " + i));
-                    dataHeader.Add(new Cell("COMMUNITY " + i));
-                    dataHeader.Add(new Cell("PREVENTATIVE MAINTENANCE " + i));
-                    dataHeader.Add(new Cell("VIOLATIONS " + i));
-                    dataHeader.Add(new Cell("ARCH MODS " + i));
-                    dataHeader.Add(new Cell("PROJECT MANAGEMENT " + i));
-                    dataHeader.Add(new Cell("PROCUREMENT " + i));
-                    dataHeader.Add(new Cell("ACCOUNTS PAYABLE " + i));
-                    dataHeader.Add(new Cell("ACCOUNTS RECEIVABLE " + i));
-                    dataHeader.Add(new Cell("GENERAL LEDGER " + i));
-                    dataHeader.Add(new Cell("HUMAN RESOURCES " + i));
-                    dataHeader.Add(new Cell("COMMUTING " + i));
-                    dataHeader.Add(new Cell("EMERGENCY " + i));
-                    dataHeader.Add(new Cell("CORPORATE " + i));
-                    dataHeader.Add(new Cell("OTHER " + i));
-
-                    if (i == 1)
-                        dataHeader.Add(new Cell("TOTAL 1"));
+                if (answer.Category.Name.Equals(category)) {
+                    return GetValueByFieldNumber(answer, fieldNumber);
                 }
             }
+            return string.Empty;
+        }
+
+        private string GetValueByFieldNumber(SurveyAnswer answer, int fieldNumber) {
+            switch (fieldNumber) {
+                case 1: return answer.TimeEffort + "%";
+                case 2: return answer.ActivityOwner;
+                case 3: return answer.ActivityPerformed;
+                case 4: return answer.Technology;
+            }
+            return string.Empty;
+        }
+
         #endregion
+
+     
     }
+
+    
 }

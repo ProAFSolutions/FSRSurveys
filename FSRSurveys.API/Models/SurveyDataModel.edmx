@@ -11,7 +11,6 @@
           </Key>
           <Property Name="ManagersNumber" Type="int" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="TotalBoardMeetingsAttendedPerYear" Type="int" Nullable="false" />
           <Property Name="SupervisorName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
@@ -58,6 +57,8 @@
           <Property Name="MarketName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UnitsTotal" Type="int" Nullable="false" />
           <Property Name="PropertiesTotal" Type="int" Nullable="false" />
+          <Property Name="TotalNumberBoardMeetingAttendedPerYear" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_AdminInfo_inherits_UserInfo">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1">
@@ -140,7 +141,6 @@
       <Schema Namespace="SurveyDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AdminInfo" BaseType="SurveyDataModel.UserInfo">
           <Property Name="ManagersNumber" Type="Int32" Nullable="false" />
-          <Property Name="TotalBoardMeetingsAttendedPerYear" Type="Int32" Nullable="false" />
           <Property Name="SupervisorName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ManagerInfo" BaseType="SurveyDataModel.UserInfo">
@@ -177,6 +177,8 @@
           <Property Name="UnitsTotal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SurveyAnswers" Relationship="Self.FK_UserInfoSurvey" FromRole="UserInfo" ToRole="SurveyAnswers" />
           <Property Name="PropertiesTotal" Type="Int32" Nullable="false" />
+          <Property Name="TotalNumberBoardMeetingAttendedPerYear" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_UserInfoSurvey">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
@@ -248,6 +250,8 @@
           <EntitySetMapping Name="UserInfo">
             <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.UserInfo)">
               <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="TotalNumberBoardMeetingAttendedPerYear" ColumnName="TotalNumberBoardMeetingAttendedPerYear" />
                 <ScalarProperty Name="PropertiesTotal" ColumnName="PropertiesTotal" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UnitsTotal" ColumnName="UnitsTotal" />
@@ -262,7 +266,6 @@
             <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.AdminInfo)">
               <MappingFragment StoreEntitySet="AdminInfo">
                 <ScalarProperty Name="SupervisorName" ColumnName="SupervisorName" />
-                <ScalarProperty Name="TotalBoardMeetingsAttendedPerYear" ColumnName="TotalBoardMeetingsAttendedPerYear" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ManagersNumber" ColumnName="ManagersNumber" />
               </MappingFragment>

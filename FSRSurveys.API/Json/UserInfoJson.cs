@@ -16,6 +16,7 @@ namespace FSRSurveys.API.Json
         public int unitsTotal { get; set; }
         public string marketName { get; set; }
         public int propertiesTotal { get; set; }
+        public int totalNumberBoardMeetingAttendedPerYear { get; set; }
 
     }
 
@@ -39,7 +40,8 @@ namespace FSRSurveys.API.Json
                 PropertiesTotal = propertiesTotal,
                 RdSupervisorName = rdSupervisorName,
                 VpSupervisorName = vpSupervisorName,
-                TotalBoardMeetingsHeldPerYear = totalBoardMeetingsHeldPerYear
+                TotalBoardMeetingsHeldPerYear = totalBoardMeetingsHeldPerYear,
+                TotalNumberBoardMeetingAttendedPerYear = totalNumberBoardMeetingAttendedPerYear
             };
         }
     }
@@ -66,7 +68,7 @@ namespace FSRSurveys.API.Json
                 UnitsTotal = unitsTotal,
                 PropertiesTotal = propertiesTotal,
                 ManagersNumber = managersNumber,
-                TotalBoardMeetingsAttendedPerYear = totalBoardMeetingsAttendedPerYear,
+                TotalNumberBoardMeetingAttendedPerYear = totalNumberBoardMeetingAttendedPerYear,
                 SupervisorName = supervisorName
             };
         }
