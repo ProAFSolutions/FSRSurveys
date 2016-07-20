@@ -44,7 +44,7 @@ namespace FSRSurveys.API.Service
             using (var UoW = new SurveyDbContext())
             {
                 UoW.Configuration.LazyLoadingEnabled = true;
-                result = UoW.UserInfo.OfType<ManagerInfo>().ToList();
+                result = UoW.UserInfo.OfType<ManagerInfo>().Include("SurveyAnswers.Category").ToList();
             }
 
             return result;
@@ -56,7 +56,7 @@ namespace FSRSurveys.API.Service
             using (var UoW = new SurveyDbContext())
             {
                 UoW.Configuration.LazyLoadingEnabled = true;
-                result = UoW.UserInfo.OfType<AdminInfo>().ToList();
+                result = UoW.UserInfo.OfType<AdminInfo>().Include("SurveyAnswers.Category").ToList();
             }
 
             return result;
@@ -89,7 +89,10 @@ namespace FSRSurveys.API.Service
             using (var UoW = new SurveyDbContext())
             {
                 UoW.Configuration.LazyLoadingEnabled = true;
-                result = UoW.UserInfo.SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));                
+                result = UoW.UserInfo.OfType<ManagerInfo>().Include("SurveyAnswers.Category").SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));
+                if (result == null) {
+                    result = UoW.UserInfo.OfType<AdminInfo>().Include("SurveyAnswers.Category").SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));
+                }         
             }
             return result;
         }
@@ -127,11 +130,13 @@ namespace FSRSurveys.API.Service
                     else {
                         dbUser.Name = userInfo.Name;                       
                         dbUser.MarketName = userInfo.MarketName;
+                        dbUser.City = userInfo.City;
                         dbUser.PropertyName = userInfo.PropertyName;
                         dbUser.PropertyType = userInfo.PropertyType;
                         dbUser.UnitsTotal = userInfo.UnitsTotal;
                         dbUser.AssociationsNumber = userInfo.AssociationsNumber;
                         dbUser.PropertiesTotal = userInfo.PropertiesTotal;
+                        dbUser.TotalNumberBoardMeetingAttendedPerYear = userInfo.TotalNumberBoardMeetingAttendedPerYear;
 
                         if (dbUser is ManagerInfo)
                         {
@@ -141,6 +146,7 @@ namespace FSRSurveys.API.Service
                         }
                         else {
                             ((AdminInfo)dbUser).ManagersNumber = ((AdminInfo)userInfo).ManagersNumber;
+                            ((AdminInfo)dbUser).SupervisorName = ((AdminInfo)userInfo).SupervisorName;
                         }
 
                         for (int index = 0; index < dbUser.SurveyAnswers.Count; index++)

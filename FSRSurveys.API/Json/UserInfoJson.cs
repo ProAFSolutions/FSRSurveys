@@ -15,6 +15,7 @@ namespace FSRSurveys.API.Json
         public int associationsNumber { get; set; }
         public int unitsTotal { get; set; }
         public string marketName { get; set; }
+        public string city { get; set; }
         public int propertiesTotal { get; set; }
         public int totalNumberBoardMeetingAttendedPerYear { get; set; }
 
@@ -26,6 +27,25 @@ namespace FSRSurveys.API.Json
         public string vpSupervisorName { get; set; }
         public int totalBoardMeetingsHeldPerYear { get; set; }
 
+        public ManagerInfoJson() { }
+
+        public ManagerInfoJson(ManagerInfo managerInfo) {
+            email = managerInfo.Email;
+            name = managerInfo.Name;
+            marketName = managerInfo.MarketName;
+            city = managerInfo.City;
+            propertyName = managerInfo.PropertyName;
+            propertyType = managerInfo.PropertyType;
+            associationsNumber = managerInfo.AssociationsNumber;
+            unitsTotal = managerInfo.UnitsTotal;
+            propertiesTotal = managerInfo.PropertiesTotal;
+            rdSupervisorName = managerInfo.RdSupervisorName;
+            vpSupervisorName = managerInfo.VpSupervisorName;
+            totalBoardMeetingsHeldPerYear = managerInfo.TotalBoardMeetingsHeldPerYear;
+            totalNumberBoardMeetingAttendedPerYear = managerInfo.TotalNumberBoardMeetingAttendedPerYear;
+        }
+        
+
         public ManagerInfo ToManagerInfo()
         {
             return new ManagerInfo
@@ -33,6 +53,7 @@ namespace FSRSurveys.API.Json
                 Email = email,
                 Name = name,
                 MarketName = marketName,
+                City = city,
                 PropertyName = propertyName,
                 PropertyType = propertyType,
                 AssociationsNumber = associationsNumber,
@@ -43,7 +64,7 @@ namespace FSRSurveys.API.Json
                 TotalBoardMeetingsHeldPerYear = totalBoardMeetingsHeldPerYear,
                 TotalNumberBoardMeetingAttendedPerYear = totalNumberBoardMeetingAttendedPerYear
             };
-        }
+        }       
     }
 
     public class AdminInfoJson : UserInfoJson
@@ -52,7 +73,22 @@ namespace FSRSurveys.API.Json
 
         public string supervisorName { get; set; }
 
-        public int totalBoardMeetingsAttendedPerYear { get; set; }
+        public AdminInfoJson() { }
+
+        public AdminInfoJson(AdminInfo adminInfo) {
+            email = adminInfo.Email;
+            name = adminInfo.Name;
+            marketName = adminInfo.MarketName;
+            city = adminInfo.City;
+            propertyName = adminInfo.PropertyName;
+            propertyType = adminInfo.PropertyType;
+            associationsNumber = adminInfo.AssociationsNumber;
+            unitsTotal = adminInfo.UnitsTotal;
+            propertiesTotal = adminInfo.PropertiesTotal;
+            managersNumber = adminInfo.ManagersNumber;
+            totalNumberBoardMeetingAttendedPerYear = adminInfo.TotalNumberBoardMeetingAttendedPerYear;
+            supervisorName = adminInfo.SupervisorName;
+        }
 
 
         public AdminInfo ToAdminInfo()
@@ -62,6 +98,7 @@ namespace FSRSurveys.API.Json
                 Email = email,
                 Name = name,
                 MarketName = marketName,
+                City = city,
                 PropertyName = propertyName,
                 PropertyType = propertyType,
                 AssociationsNumber = associationsNumber,
@@ -72,6 +109,8 @@ namespace FSRSurveys.API.Json
                 SupervisorName = supervisorName
             };
         }
+
+       
     }
 
 

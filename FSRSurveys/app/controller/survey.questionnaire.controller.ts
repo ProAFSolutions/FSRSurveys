@@ -55,8 +55,7 @@
                 let categories = response;
                 for (var category of categories) {
                     this.dataContext.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
-                }
-                this.dataContext.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
+                }                
             });
         }
 

@@ -30,7 +30,7 @@ namespace FSRSurveys.API.Controllers
             {
                 PopulateManagersWorkSheet(excelDoc.Workbook.Worksheets["MANAGER"]);
 
-                //PopulateAdminsWorkSheet(excelDoc.Workbook.Worksheets["Administrators"]);
+                PopulateAdminsWorkSheet(excelDoc.Workbook.Worksheets["ADMIN"]);
 
                 excelDoc.SaveAs(result);
             }
@@ -83,7 +83,7 @@ namespace FSRSurveys.API.Controllers
             {
                 var colIndex = 1;
 
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = "Property Manager";
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = "Property Administrator";
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.Name;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.Email;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertyType;
@@ -92,7 +92,8 @@ namespace FSRSurveys.API.Controllers
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.City;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.AssociationsNumber;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertiesTotal;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.UnitsTotal;               
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.UnitsTotal;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.ManagersNumber;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.TotalNumberBoardMeetingAttendedPerYear;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.SupervisorName;
 

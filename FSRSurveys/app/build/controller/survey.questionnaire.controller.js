@@ -42,7 +42,6 @@ var survey;
                     var category = categories_1[_i];
                     _this.dataContext.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
                 }
-                _this.dataContext.questionnaireData.push(new survey.QuestionnaireItem(new survey.Category(0, "Other", ""), new survey.Answer()));
             });
         };
         QuestionnaireController.prototype.calculateTotals = function () {

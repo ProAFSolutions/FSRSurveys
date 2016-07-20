@@ -29,7 +29,7 @@
                     <div ng-if="questionnaireItem.category.id > 0">
                         <b>{{questionnaireItem.category.name}}: </b>{{questionnaireItem.category.jobActivity}}
                     </div>
-                    <div ng-if="questionnaireItem.category.id == 0">
+                    <div ng-if="questionnaireItem.category.name === 'Other'">
                         <b class="left">{{questionnaireItem.category.name}}: </b><textarea ng-model="questionnaireItem.category.jobActivity" placeholder="Type description here..." class="no-border"></textarea>
                     </div>
                 </div>

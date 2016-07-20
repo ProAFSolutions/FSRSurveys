@@ -44,7 +44,49 @@ namespace FSRSurveys.API.Controllers
 
             return Ok(result);
         }
-       
+
+        [HttpGet]
+        [Route("questionnaire-data/{email}")]
+        public IHttpActionResult RequestUserData(string email)
+        {
+            var result = _surveyService.GetUserInfo(email);
+
+            if (result != null) {
+
+                var data = new QuestionnaireDataJson(); 
+
+                if (result is ManagerInfo) 
+                    data.managerInfo = new ManagerInfoJson((ManagerInfo) result);                    
+                else
+                    data.adminInfo = new AdminInfoJson((AdminInfo) result);
+
+                data.items = new List<QuestionnaireItemJson>();
+                foreach (var SA in result.SurveyAnswers) {
+
+                    data.items.Add(new QuestionnaireItemJson
+                    {
+                        category = new CategoryJson
+                        {
+                            id = SA.Category.Id,
+                            name = SA.Category.Name,
+                            jobActivity = SA.Category.JobActivity
+                        },
+
+                        answer = new AnswerJson
+                        {
+                            timeEffort = (int)SA.TimeEffort,
+                            activityOwner = SA.ActivityOwner,
+                            activityPerformed = SA.ActivityPerformed,
+                            technology = SA.Technology
+                        }
+                    });
+                }
+                return Ok(data);
+            }
+
+            return Ok("empty");
+        }
+
         [HttpOptions, HttpPost]
         [Route("save")]
         public IHttpActionResult Save(QuestionnaireDataJson data)

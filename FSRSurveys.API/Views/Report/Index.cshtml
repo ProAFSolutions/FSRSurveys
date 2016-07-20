@@ -21,9 +21,18 @@
     </script>
 </head>
 <body onload=display_ct();>
-    <div style="text-align:center; position: fixed; top:calc(50% - 30px); left: calc(50% - 150px); background-color: #58585B">
+    <div style="text-align:center; position: fixed; top:calc(50% - 100px); left: calc(50% - 150px); background-color: #000">
         <div style="font-size: 20px; color: #fff; padding-bottom: 10px">FSR Survey WEB API is running!!!</div>
         <div id='ct' style="font-size: 18px; margin-top: 10px; color: #fff"></div>
+
+        <h3 style="color: #fff">List of functions:</h3>
+        <ol style="color: #fff; text-align: left">
+            <li><a style="color: #fff" href="">http://[server-name]/api/survey/categories: GET</a></li>
+            <li><a style="color: #fff" href="">http://[server-name]/api/survey/markets: GET</a></li>
+            <li><a style="color: #fff" href="">http://[server-name]/api/survey/save: POST</a></li>
+            <li><a style="color: #fff" href="">http://[server-name]/api/survey/user/{email} : GET</a></li>
+        </ol>
+
     </div>
 </body>
 </html>

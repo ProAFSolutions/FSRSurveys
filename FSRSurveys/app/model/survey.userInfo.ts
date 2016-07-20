@@ -9,6 +9,7 @@
         public associationsNumber: number; 
         public unitsTotal: number;     
         public marketName: string;
+        public city: string;
         public propertiesTotal: number; 
         public totalNumberBoardMeetingAttendedPerYear: number;   
 

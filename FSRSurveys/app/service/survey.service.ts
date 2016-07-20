@@ -23,6 +23,10 @@
             this.$http = $httpService;
         }  
 
+        public getQuestionnaireData(email: string): ng.IPromise<any> {
+            return this.$http.get(SURVEY_API_BASE_URL + "/questionnaire-data/" + email).then(response => response.data);
+        }
+
         public saveSurvey(userInfo: any, items: Array<QuestionnaireItem>): ng.IPromise<any>
         {
             if (userInfo.rdSupervisorName) {
@@ -37,7 +41,8 @@
             return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
         }
 
-        public resolveMarkets(): ng.IPromise<Array<Market>> {
+        public resolveMarkets(): ng.IPromise<Array<Market>>
+        {
             return this.$http.get(SURVEY_API_BASE_URL + "/markets").then(response => response.data);
         }      
     }
