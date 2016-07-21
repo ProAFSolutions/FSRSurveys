@@ -5,8 +5,16 @@ var survey;
         function SurveyService($httpService) {
             this.$http = $httpService;
         }
+        SurveyService.prototype.getQuestionnaireData = function (email) {
+            return this.$http.get(SURVEY_API_BASE_URL + "/questionnaire-data/" + email).then(function (response) { return response.data; });
+        };
         SurveyService.prototype.saveSurvey = function (userInfo, items) {
-            return null;
+            if (userInfo.rdSupervisorName) {
+                return this.$http.post(SURVEY_API_BASE_URL + "/save", { managerInfo: userInfo, items: items }).then(function (response) { return response.data; });
+            }
+            else {
+                return this.$http.post(SURVEY_API_BASE_URL + "/save", { adminInfo: userInfo, items: items }).then(function (response) { return response.data; });
+            }
         };
         SurveyService.prototype.resolveCategories = function () {
             return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(function (response) { return response.data; });

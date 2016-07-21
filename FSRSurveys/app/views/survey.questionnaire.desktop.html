@@ -13,7 +13,7 @@
                     Who is primarily responsible for performing each activity:
                 </div>
                 <div class="col-md-2">
-                    <!--<i class="fa fa-info-circle" uib-tooltip="Manual vs Electronic"></i>-->
+                    <!--<i class="fa fa-info-circle" uib-tooltip="Method"></i>-->
                     Is this activity performed manually or using technology:
                 </div>
                 <div class="col-md-2">
@@ -26,10 +26,10 @@
         <li class="category" ng-repeat="questionnaireItem in vm.dataContext.questionnaireData">
             <div class="row">
                 <div class="category-field col-md-4">                   
-                    <div ng-if="questionnaireItem.category.id > 0">
+                    <div ng-if="questionnaireItem.category.name != 'Other'">
                         <b>{{questionnaireItem.category.name}}: </b>{{questionnaireItem.category.jobActivity}}
                     </div>
-                    <div ng-if="questionnaireItem.category.name === 'Other'">
+                    <div ng-if="questionnaireItem.category.name == 'Other'">
                         <b class="left">{{questionnaireItem.category.name}}: </b><textarea ng-model="questionnaireItem.category.jobActivity" placeholder="Type description here..." class="no-border"></textarea>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="category-field col-md-2">
                     <ui-select ng-model="questionnaireItem.answer.activityPerformed" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Manual vs. Elect:">{{$select.selected}}</ui-select-match>
+                        <ui-select-match class="ui-select-match" placeholder="Select Method:">{{$select.selected}}</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="activityPerformedItem in vm.activityPerformedOptions | filter: $select.search">
                             <div ng-bind-html="activityPerformedItem | highlight: $select.search"></div>
                         </ui-select-choices>
@@ -87,7 +87,7 @@
                     <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
                 <div class="col-md-2">
-                    <label>Manul vs. Elect:</label>
+                    <label>Method:</label>
                     <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
                 <div class="col-md-2">

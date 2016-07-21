@@ -21,6 +21,7 @@
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="JobActivity" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DefinedByUser" Type="nvarchar(max)" />
+          <Property Name="Sort" Type="int" />
         </EntityType>
         <EntityType Name="ManagerInfo">
           <Key>
@@ -29,7 +30,6 @@
           <Property Name="RdSupervisorName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="VpSupervisorName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="TotalBoardMeetingsHeldPerYear" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyAnswers">
           <Key>
@@ -53,7 +53,6 @@
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PropertyType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PropertyName" Type="nvarchar(max)" />
-          <Property Name="AssociationsNumber" Type="int" Nullable="false" />
           <Property Name="MarketName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UnitsTotal" Type="int" Nullable="false" />
           <Property Name="PropertiesTotal" Type="int" Nullable="false" />
@@ -146,7 +145,6 @@
         <EntityType Name="ManagerInfo" BaseType="SurveyDataModel.UserInfo">
           <Property Name="RdSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VpSupervisorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TotalBoardMeetingsHeldPerYear" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyAnswer">
           <Key>
@@ -172,7 +170,6 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PropertyType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PropertyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AssociationsNumber" Type="Int32" Nullable="false" />
           <Property Name="MarketName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UnitsTotal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SurveyAnswers" Relationship="Self.FK_UserInfoSurvey" FromRole="UserInfo" ToRole="SurveyAnswers" />
@@ -214,6 +211,7 @@
           <Property Name="JobActivity" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DefinedByUser" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="SurveyAnswers" Relationship="SurveyDataModel.FK_CategorySurvey" FromRole="Category" ToRole="SurveyAnswers" />
+          <Property Name="Sort" Type="Int32" />
         </EntityType>
         <Association Name="FK_CategorySurvey">
           <End Type="SurveyDataModel.Category" Role="Category" Multiplicity="1" />
@@ -256,7 +254,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UnitsTotal" ColumnName="UnitsTotal" />
                 <ScalarProperty Name="MarketName" ColumnName="MarketName" />
-                <ScalarProperty Name="AssociationsNumber" ColumnName="AssociationsNumber" />
                 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
                 <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -272,7 +269,6 @@
             </EntityTypeMapping>
             <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.ManagerInfo)">
               <MappingFragment StoreEntitySet="ManagerInfo">
-                <ScalarProperty Name="TotalBoardMeetingsHeldPerYear" ColumnName="TotalBoardMeetingsHeldPerYear" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="VpSupervisorName" ColumnName="VpSupervisorName" />
                 <ScalarProperty Name="RdSupervisorName" ColumnName="RdSupervisorName" />
@@ -282,6 +278,7 @@
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="SurveyDataModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
                 <ScalarProperty Name="DefinedByUser" ColumnName="DefinedByUser" />
                 <ScalarProperty Name="JobActivity" ColumnName="JobActivity" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

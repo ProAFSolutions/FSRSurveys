@@ -5,19 +5,19 @@
         public name: string;       
         public email: string;
         public propertyType: string;
-        public propertyName: string;  
-        public associationsNumber: number; 
-        public unitsTotal: number;     
+        public propertyName: string;         
+        public unitsTotal: number;        
         public marketName: string;
         public city: string;
         public propertiesTotal: number; 
-        public totalNumberBoardMeetingAttendedPerYear: number;   
+        public totalNumberBoardMeetingAttendedPerYear: number;  
+
+        public market: Market;
 
         constructor() {
-            this.unitsTotal = 0;
-            this.associationsNumber = 0;
+            this.unitsTotal = 0;           
             this.propertiesTotal = 0;
-            this.totalNumberBoardMeetingAttendedPerYear = 0;
+            this.totalNumberBoardMeetingAttendedPerYear = 0;         
         } 
 
         public isNullOrEmpty(value: string) {
@@ -28,8 +28,7 @@
             return !this.isNullOrEmpty(this.name) &&
                    !this.isNullOrEmpty(this.email) &&
                    !this.isNullOrEmpty(this.propertyType) &&
-                   !this.isNullOrEmpty(this.marketName) &&
-                   this.associationsNumber > 0 &&
+                   !this.isNullOrEmpty(this.marketName) &&                   
                    this.unitsTotal > 0 &&
                    this.propertiesTotal > 0 &&
                    this.totalNumberBoardMeetingAttendedPerYear > 0;           
@@ -39,10 +38,10 @@
             this.name = updated.name;
             this.email = updated.email;
             this.marketName = updated.marketName;
+            this.city = updated.city;
             this.propertyType = updated.propertyType;
             this.propertyName = updated.propertyName;
-            this.unitsTotal = updated.unitsTotal;
-            this.associationsNumber = updated.associationsNumber;
+            this.unitsTotal = updated.unitsTotal;           
             this.propertiesTotal = updated.propertiesTotal;
             this.totalNumberBoardMeetingAttendedPerYear = updated.totalNumberBoardMeetingAttendedPerYear;
         }
@@ -68,16 +67,14 @@
             
         public rdSupervisorName: string;
         public vpSupervisorName: string;        
-        public totalBoardMeetingsHeldPerYear : number;
+       
 
         constructor() {
-            super();
-            this.totalBoardMeetingsHeldPerYear = 0;
+            super();           
         }
 
         public validate(): boolean {
-            return super.validate() && !this.isNullOrEmpty(this.rdSupervisorName) && !this.isNullOrEmpty(this.vpSupervisorName) &&
-                   this.totalBoardMeetingsHeldPerYear > 0;
+            return super.validate() && !this.isNullOrEmpty(this.rdSupervisorName) && !this.isNullOrEmpty(this.vpSupervisorName);               
         }
 
         

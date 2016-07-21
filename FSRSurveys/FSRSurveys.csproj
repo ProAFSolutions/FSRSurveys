@@ -41,8 +41,6 @@
     <Content Include="assets\styles\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
-    <Content Include="dist\app.min.js" />
-    <Content Include="dist\libs.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
@@ -161,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\build\" />
+    <Folder Include="dist\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\controller\survey.questionnaire.controller.ts" />

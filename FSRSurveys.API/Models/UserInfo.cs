@@ -25,7 +25,6 @@ namespace FSRSurveys.API.Models
         public string Email { get; set; }
         public string PropertyType { get; set; }
         public string PropertyName { get; set; }
-        public int AssociationsNumber { get; set; }
         public string MarketName { get; set; }
         public int UnitsTotal { get; set; }
         public int PropertiesTotal { get; set; }

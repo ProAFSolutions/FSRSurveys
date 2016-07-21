@@ -67,7 +67,7 @@ namespace FSRSurveys.API.Service
             List<Category> result = null;
             using (var UoW = new SurveyDbContext())
             {
-                result =  UoW.Category.ToList();
+                result =  UoW.Category.OrderBy(C => C.Sort).ToList();
             }
             return result;
         }
@@ -133,16 +133,14 @@ namespace FSRSurveys.API.Service
                         dbUser.City = userInfo.City;
                         dbUser.PropertyName = userInfo.PropertyName;
                         dbUser.PropertyType = userInfo.PropertyType;
-                        dbUser.UnitsTotal = userInfo.UnitsTotal;
-                        dbUser.AssociationsNumber = userInfo.AssociationsNumber;
+                        dbUser.UnitsTotal = userInfo.UnitsTotal;                       
                         dbUser.PropertiesTotal = userInfo.PropertiesTotal;
                         dbUser.TotalNumberBoardMeetingAttendedPerYear = userInfo.TotalNumberBoardMeetingAttendedPerYear;
 
                         if (dbUser is ManagerInfo)
                         {
                             ((ManagerInfo)dbUser).RdSupervisorName = ((ManagerInfo)userInfo).RdSupervisorName;
-                            ((ManagerInfo)dbUser).VpSupervisorName = ((ManagerInfo)userInfo).VpSupervisorName;
-                            ((ManagerInfo)dbUser).TotalBoardMeetingsHeldPerYear = ((ManagerInfo)userInfo).TotalBoardMeetingsHeldPerYear;
+                            ((ManagerInfo)dbUser).VpSupervisorName = ((ManagerInfo)userInfo).VpSupervisorName;                           
                         }
                         else {
                             ((AdminInfo)dbUser).ManagersNumber = ((AdminInfo)userInfo).ManagersNumber;

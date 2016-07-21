@@ -24,6 +24,7 @@ namespace FSRSurveys.API.Models
         public string Name { get; set; }
         public string JobActivity { get; set; }
         public string DefinedByUser { get; set; }
+        public Nullable<int> Sort { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SurveyAnswer> SurveyAnswers { get; set; }

@@ -1,13 +1,8 @@
 ﻿namespace survey {
 
-    export class Market {
-               
-        public name: string;       
-
-        constructor(marketName: string) {
-            this.name = marketName;
-        }
+    export class Market {               
+      
+        constructor(public name: string, public country: string) { }          
+        
     }
-
-
 }

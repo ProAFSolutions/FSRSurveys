@@ -8,7 +8,6 @@ var survey;
     var UserInfo = (function () {
         function UserInfo() {
             this.unitsTotal = 0;
-            this.associationsNumber = 0;
             this.propertiesTotal = 0;
             this.totalNumberBoardMeetingAttendedPerYear = 0;
         }
@@ -20,7 +19,6 @@ var survey;
                 !this.isNullOrEmpty(this.email) &&
                 !this.isNullOrEmpty(this.propertyType) &&
                 !this.isNullOrEmpty(this.marketName) &&
-                this.associationsNumber > 0 &&
                 this.unitsTotal > 0 &&
                 this.propertiesTotal > 0 &&
                 this.totalNumberBoardMeetingAttendedPerYear > 0;
@@ -29,10 +27,10 @@ var survey;
             this.name = updated.name;
             this.email = updated.email;
             this.marketName = updated.marketName;
+            this.city = updated.city;
             this.propertyType = updated.propertyType;
             this.propertyName = updated.propertyName;
             this.unitsTotal = updated.unitsTotal;
-            this.associationsNumber = updated.associationsNumber;
             this.propertiesTotal = updated.propertiesTotal;
             this.totalNumberBoardMeetingAttendedPerYear = updated.totalNumberBoardMeetingAttendedPerYear;
         };
@@ -56,11 +54,9 @@ var survey;
         __extends(ManagerInfo, _super);
         function ManagerInfo() {
             _super.call(this);
-            this.totalBoardMeetingsHeldPerYear = 0;
         }
         ManagerInfo.prototype.validate = function () {
-            return _super.prototype.validate.call(this) && !this.isNullOrEmpty(this.rdSupervisorName) && !this.isNullOrEmpty(this.vpSupervisorName) &&
-                this.totalBoardMeetingsHeldPerYear > 0;
+            return _super.prototype.validate.call(this) && !this.isNullOrEmpty(this.rdSupervisorName) && !this.isNullOrEmpty(this.vpSupervisorName);
         };
         return ManagerInfo;
     }(UserInfo));

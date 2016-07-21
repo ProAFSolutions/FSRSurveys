@@ -9,6 +9,7 @@ var survey;
         __extends(WizardController, _super);
         function WizardController($scope, dataContext, surveyService) {
             _super.call(this, $scope, dataContext, surveyService);
+            this.isRunningMobile = false;
             this.init();
         }
         WizardController.prototype.init = function () {
@@ -17,6 +18,7 @@ var survey;
             this.visibleSubmit = false;
             this.visiblePrev = false;
             this.visibleFinish = false;
+            this.checkIfUserDirty();
         };
         WizardController.prototype.nextClick = function () {
             this.stepClick(++this.currentStep);
@@ -25,11 +27,21 @@ var survey;
             this.stepClick(--this.currentStep);
         };
         WizardController.prototype.submitClick = function () {
-            this.stepClick(++this.currentStep);
+            var _this = this;
+            this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(function (response) {
+                if (response && response === 'success') {
+                    _this.stepClick(++_this.currentStep);
+                }
+            });
         };
         WizardController.prototype.closeClick = function () {
+            location.href = "http://www.google.com";
         };
         WizardController.prototype.stepClick = function (step) {
+            if (step > 1 && !this.dataContext.userInfo.validate())
+                return;
+            if (step > 2 && this.dataContext.sumbitBtnDisabled)
+                return;
             this.currentStep = step;
             switch (step) {
                 case 1:
@@ -58,8 +70,18 @@ var survey;
                     break;
             }
         };
+        WizardController.prototype.checkIfUserDirty = function () {
+            var _this = this;
+            var currentController = this;
+            this.$scope.$watch(function () { return _this.dataContext.userInfo; }, function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    currentController.isUserInfoValid = newValue.validate();
+                }
+            }, true);
+        };
         return WizardController;
     }(survey.AbstractController));
+    survey.WizardController = WizardController;
     angular.module("survey")
         .controller("WizardController", WizardController);
 })(survey || (survey = {}));

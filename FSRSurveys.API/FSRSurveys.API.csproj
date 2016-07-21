@@ -278,6 +278,7 @@
     <None Include="Properties\PublishProfiles\QA - Server.pubxml" />
     <Content Include="Views\Report\FSRSurveyTemplate.xlsx" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -21,24 +21,26 @@ namespace FSRSurveys.API.Controllers
             return View();
         }
 
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         // GET: Report
-        public FileStreamResult Report()
+        public ActionResult Report()
         {
             var templateFile = new FileInfo(Server.MapPath("~/Views/Report/FSRSurveyTemplate.xlsx"));
-            Stream result = new MemoryStream();
+            byte[] result;
             using (var excelDoc = new ExcelPackage(templateFile))
             {
                 PopulateManagersWorkSheet(excelDoc.Workbook.Worksheets["MANAGER"]);
 
                 PopulateAdminsWorkSheet(excelDoc.Workbook.Worksheets["ADMIN"]);
 
-                excelDoc.SaveAs(result);
+                result = excelDoc.GetAsByteArray();
             }
-
-            return new FileStreamResult(result, "application/ms-excel")
-            {
-                FileDownloadName = "FSRSurveyReport.xlsx"                
-            };
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "FSRSurveyTemplate.xlsx");
         }
 
 
@@ -59,11 +61,9 @@ namespace FSRSurveys.API.Controllers
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.PropertyType;
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.PropertyName;
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.MarketName;
-                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.City;
-                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.AssociationsNumber;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.City;               
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.PropertiesTotal;
-                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.UnitsTotal;
-                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.TotalBoardMeetingsHeldPerYear;
+                managersWorksheet.Cells[rowIndex, colIndex++].Value = M.UnitsTotal;              
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.TotalNumberBoardMeetingAttendedPerYear;
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.RdSupervisorName;
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.VpSupervisorName;
@@ -89,8 +89,7 @@ namespace FSRSurveys.API.Controllers
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertyType;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertyName;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.MarketName;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.City;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.AssociationsNumber;
+                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.City;               
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertiesTotal;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.UnitsTotal;
                 adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.ManagersNumber;
