@@ -5,15 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bcda3fbc4a79427994adec9e5ba1d103" Name="Diagram1">
-        <EntityTypeShape EntityType="SurveyDataModel.AdminInfo" Width="1.5" PointX="3.875" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SurveyDataModel.ManagerInfo" Width="2.25" PointX="0.875" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SurveyDataModel.SurveyAnswer" Width="1.5" PointX="7" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SurveyDataModel.UserInfo" Width="2.875" PointX="1.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.AdminInfo" Width="1.5" PointX="3.875" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.ManagerInfo" Width="1.75" PointX="1.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.SurveyAnswer" Width="1.5" PointX="9.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyDataModel.UserInfo" Width="2.875" PointX="3.25" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="SurveyDataModel.FK_UserInfoSurvey" ManuallyRouted="false" />
         <InheritanceConnector EntityType="SurveyDataModel.AdminInfo" />
         <InheritanceConnector EntityType="SurveyDataModel.ManagerInfo" />
-        <EntityTypeShape EntityType="SurveyDataModel.Category" Width="1.5" PointX="7" PointY="4.625" />
+        <EntityTypeShape EntityType="SurveyDataModel.Category" Width="1.5" PointX="12.75" PointY="1.125" />
         <AssociationConnector Association="SurveyDataModel.FK_CategorySurvey" />
+        <EntityTypeShape EntityType="SurveyDataModel.AssistantInfo" Width="1.75" PointX="5.75" PointY="5.125" />
+        <InheritanceConnector EntityType="SurveyDataModel.AssistantInfo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

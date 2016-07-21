@@ -20,19 +20,15 @@
 
         private init(): void {            
 
-            this.initTotals();
-
-            /*this.sliderOptions = {
-                floor: 0,
-                ceil: 25,
-                step: 1,
-                translate: function (value) {
-                    return value + " %";
-                }
-            };*/
+            this.initTotals();           
 
             this.percentageTimeEffortOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100];
-            this.activityOwnerOptions = ['Manager', 'Admin', 'Accounting', 'Joint Manager & Admin', 'Joint Manager & Accounting', 'Other', 'N/A'];
+            this.activityOwnerOptions = [
+                'Manager', 'Admin', 'Accounting', 'Asst Mgr',
+                'Joint Mgr & Admin', 'Joint Mgr & Accounting',
+                'Joint Mgr & Asst Mgr', 'Joint Asst Mgr & Admin',
+                'Joint Mgr & Asst Mgr & Admin', 'Other', 'N/A'
+            ];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
 
             this.populateQuestionnaire();    
@@ -51,11 +47,15 @@
 
             this.dataContext.questionnaireData = new Array<QuestionnaireItem>();   
 
-            this.surveyService.resolveCategories().then(response => {
+            this.surveyService.resolveCategories(this.dataContext.userInfo.email).then(response => {
                 let categories = response;
                 for (var category of categories) {
                     this.dataContext.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
-                }                
+                }
+
+                if (categories[categories.length - 1].name !== 'Other') {
+                    categories.push(new Category(0, 'Other', ''));
+                }
             });
         }
 
@@ -114,16 +114,7 @@
             this.totalActivityPerformed == totalItems &&
             this.totalTechnology == totalItems);
         }
-       
-        /*public addQuestionnaireItemClick(): void {           
-            this.dataContext.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
-
-            //TODO create an Angular Directive for this
-            setTimeout(() => {
-                $("textarea.no-border:last").focus();
-            }, 500);
-        }*/
-
+               
         public closeOtherClick(index: number): void {
             this.dataContext.questionnaireData.splice(index, 1);
         }

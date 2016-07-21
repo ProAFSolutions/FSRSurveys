@@ -13,6 +13,14 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="SupervisorName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="AssistantInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ManagersNumber" Type="int" Nullable="false" />
+          <Property Name="SupervisorName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -73,6 +81,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AssistantInfo_inherits_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssistantInfo" Type="Self.AssistantInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssistantInfo">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CategorySurvey">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="SurveyAnswers" Type="Self.SurveyAnswers" Multiplicity="*" />
@@ -113,6 +135,7 @@
         </Association>
         <EntityContainer Name="NpsSurveyModelStoreContainer">
           <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssistantInfo" EntityType="Self.AssistantInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ManagerInfo" EntityType="Self.ManagerInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyAnswers" EntityType="Self.SurveyAnswers" Schema="dbo" store:Type="Tables" />
@@ -120,6 +143,10 @@
           <AssociationSet Name="FK_AdminInfo_inherits_UserInfo" Association="Self.FK_AdminInfo_inherits_UserInfo">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="AdminInfo" EntitySet="AdminInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssistantInfo_inherits_UserInfo" Association="Self.FK_AssistantInfo_inherits_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="AssistantInfo" EntitySet="AssistantInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_CategorySurvey" Association="Self.FK_CategorySurvey">
             <End Role="Category" EntitySet="Category" />
@@ -225,6 +252,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AssistantInfo" BaseType="SurveyDataModel.UserInfo">
+          <Property Name="ManagersNumber" Type="Int32" Nullable="false" />
+          <Property Name="SupervisorName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -272,6 +303,13 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="VpSupervisorName" ColumnName="VpSupervisorName" />
                 <ScalarProperty Name="RdSupervisorName" ColumnName="RdSupervisorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.AssistantInfo)">
+              <MappingFragment StoreEntitySet="AssistantInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ManagersNumber" ColumnName="ManagersNumber" />
+                <ScalarProperty Name="SupervisorName" ColumnName="SupervisorName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

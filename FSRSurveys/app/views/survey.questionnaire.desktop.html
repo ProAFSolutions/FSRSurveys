@@ -26,10 +26,10 @@
         <li class="category" ng-repeat="questionnaireItem in vm.dataContext.questionnaireData">
             <div class="row">
                 <div class="category-field col-md-4">                   
-                    <div ng-if="questionnaireItem.category.name != 'Other'">
+                    <div ng-if="questionnaireItem.category.id > 0 && questionnaireItem.category.name !== 'Other'">
                         <b>{{questionnaireItem.category.name}}: </b>{{questionnaireItem.category.jobActivity}}
                     </div>
-                    <div ng-if="questionnaireItem.category.name == 'Other'">
+                    <div ng-if="questionnaireItem.category.name === 'Other'">
                         <b class="left">{{questionnaireItem.category.name}}: </b><textarea ng-model="questionnaireItem.category.jobActivity" placeholder="Type description here..." class="no-border"></textarea>
                     </div>
                 </div>

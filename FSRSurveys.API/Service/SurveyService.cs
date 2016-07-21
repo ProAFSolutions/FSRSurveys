@@ -12,7 +12,7 @@ namespace FSRSurveys.API.Service
 
         void SaveSurvey(UserInfo userInfo);
 
-        List<Category> GetCategories();
+        List<Category> GetCategories(string email);
 
         List<Market> GetMarkets();
 
@@ -62,12 +62,16 @@ namespace FSRSurveys.API.Service
             return result;
         }
 
-        public List<Category> GetCategories()
+        public List<Category> GetCategories(string email)
         {
             List<Category> result = null;
             using (var UoW = new SurveyDbContext())
             {
-                result =  UoW.Category.OrderBy(C => C.Sort).ToList();
+                result =  UoW.Category.Where(C => !C.Name.Equals("Other")).OrderBy(C => C.Sort).ToList();
+                var otherDefinedByUser = UoW.Category.SingleOrDefault(C => C.DefinedByUser != null && C.DefinedByUser.ToLower().Equals(email.ToLower()));
+                if (result != null && otherDefinedByUser != null) {
+                    result.Add(otherDefinedByUser);
+                }
             }
             return result;
         }
@@ -105,10 +109,15 @@ namespace FSRSurveys.API.Service
                 {
                     UoW.Configuration.LazyLoadingEnabled = true;
                     UserInfo dbUser = null;
+
                     if (userInfo is ManagerInfo)
                         dbUser = UoW.UserInfo.OfType<ManagerInfo>().SingleOrDefault(U => U.Email.ToLower().Equals(userInfo.Email.ToLower()));
-                    else
+
+                    else if(userInfo is AdminInfo)
                         dbUser = UoW.UserInfo.OfType<AdminInfo>().SingleOrDefault(U => U.Email.ToLower().Equals(userInfo.Email.ToLower()));
+
+                    else
+                        dbUser = UoW.UserInfo.OfType<AssistantInfo>().SingleOrDefault(U => U.Email.ToLower().Equals(userInfo.Email.ToLower()));
 
                     if (dbUser == null)
                     {
@@ -142,9 +151,15 @@ namespace FSRSurveys.API.Service
                             ((ManagerInfo)dbUser).RdSupervisorName = ((ManagerInfo)userInfo).RdSupervisorName;
                             ((ManagerInfo)dbUser).VpSupervisorName = ((ManagerInfo)userInfo).VpSupervisorName;                           
                         }
-                        else {
+                        else if(dbUser is AdminInfo)
+                        {
                             ((AdminInfo)dbUser).ManagersNumber = ((AdminInfo)userInfo).ManagersNumber;
                             ((AdminInfo)dbUser).SupervisorName = ((AdminInfo)userInfo).SupervisorName;
+                        }
+                        else
+                        {
+                            ((AssistantInfo)dbUser).ManagersNumber = ((AssistantInfo)userInfo).ManagersNumber;
+                            ((AssistantInfo)dbUser).SupervisorName = ((AssistantInfo)userInfo).SupervisorName;
                         }
 
                         for (int index = 0; index < dbUser.SurveyAnswers.Count; index++)

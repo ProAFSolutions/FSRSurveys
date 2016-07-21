@@ -106,5 +106,48 @@ namespace FSRSurveys.API.Json
        
     }
 
+    public class AssistantInfoJson : UserInfoJson
+    {
+        public int managersNumber { get; set; }
+
+        public string supervisorName { get; set; }
+
+        public AssistantInfoJson() { }
+
+        public AssistantInfoJson(AssistantInfo assistantInfo)
+        {
+            email = assistantInfo.Email;
+            name = assistantInfo.Name;
+            marketName = assistantInfo.MarketName;
+            city = assistantInfo.City;
+            propertyName = assistantInfo.PropertyName;
+            propertyType = assistantInfo.PropertyType;
+            unitsTotal = assistantInfo.UnitsTotal;
+            propertiesTotal = assistantInfo.PropertiesTotal;
+            managersNumber = assistantInfo.ManagersNumber;
+            totalNumberBoardMeetingAttendedPerYear = assistantInfo.TotalNumberBoardMeetingAttendedPerYear;
+            supervisorName = assistantInfo.SupervisorName;
+        }
+
+
+        public AssistantInfo ToAssistantInfo()
+        {
+            return new AssistantInfo
+            {
+                Email = email,
+                Name = name,
+                MarketName = marketName,
+                City = city,
+                PropertyName = propertyName,
+                PropertyType = propertyType,
+                UnitsTotal = unitsTotal,
+                PropertiesTotal = propertiesTotal,
+                ManagersNumber = managersNumber,
+                TotalNumberBoardMeetingAttendedPerYear = totalNumberBoardMeetingAttendedPerYear,
+                SupervisorName = supervisorName
+            };
+        }
+    }
+
 
 }

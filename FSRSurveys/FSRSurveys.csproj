@@ -30,6 +30,7 @@
     <Content Include="app\views\survey.user.html" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\img\favicon.ico" />
+    <Content Include="assets\img\loading.gif" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\scripts\base.js" />
     <Content Include="assets\img\background-image.jpg" />

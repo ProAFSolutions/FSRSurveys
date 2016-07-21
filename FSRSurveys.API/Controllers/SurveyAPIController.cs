@@ -20,7 +20,7 @@ namespace FSRSurveys.API.Controllers
 
 
         [HttpGet]
-        [Route("categories")]
+        [Route("categories/{email}")]
         public IHttpActionResult RequestCategories()
         {
             var result = _surveyService.GetCategories().Select(C => new
@@ -33,18 +33,7 @@ namespace FSRSurveys.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("markets")]
-        public IHttpActionResult RequestMarkets()
-        {
-            var result = _surveyService.GetMarkets().Select(M => new
-            {
-                name = M.marketName
-            });
-
-            return Ok(result);
-        }
-
+        
         [HttpGet]
         [Route("questionnaire-data/{email}")]
         public IHttpActionResult RequestUserData(string email)
@@ -56,9 +45,13 @@ namespace FSRSurveys.API.Controllers
                 var data = new QuestionnaireDataJson(); 
 
                 if (result is ManagerInfo) 
-                    data.managerInfo = new ManagerInfoJson((ManagerInfo) result);                    
-                else
+                    data.managerInfo = new ManagerInfoJson((ManagerInfo) result);
+
+                else if(result is AdminInfo)
                     data.adminInfo = new AdminInfoJson((AdminInfo) result);
+
+                else
+                    data.assistantInfo = new AssistantInfoJson((AssistantInfo)result);
 
                 data.items = new List<QuestionnaireItemJson>();
                 foreach (var SA in result.SurveyAnswers) {
@@ -94,14 +87,15 @@ namespace FSRSurveys.API.Controllers
             if (data != null)
             {                
                 UserInfo userInfo;
-                if (data.managerInfo != null)
-                {                  
+                if (data.managerInfo != null)                
                     userInfo = data.managerInfo.ToManagerInfo();
-                }
-                else {
-                    userInfo = data.adminInfo.ToAdminInfo();
-                }
                 
+                else if (data.adminInfo != null)                
+                    userInfo = data.adminInfo.ToAdminInfo();
+                
+                else
+                    userInfo = data.assistantInfo.ToAssistantInfo();
+                                
                 data.items.ForEach(I => {
                     userInfo.SurveyAnswers.Add(new SurveyAnswer
                     {

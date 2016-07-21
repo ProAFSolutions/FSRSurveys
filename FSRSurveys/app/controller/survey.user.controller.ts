@@ -18,6 +18,7 @@
             this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mix of Sited and Non-Sited'];
             this.associateType = "Manager";
             this.dataContext.userInfo = new ManagerInfo();
+            this.dataContext.userInfo.associateType = this.associateType;
             this.populateMarkets();
             this.setupWatchers();
         } 
@@ -29,13 +30,21 @@
                 if (newValue != oldValue) {
                     if (newValue === 'Manager') {
                         var managerInfo = new ManagerInfo();
+                        managerInfo.associateType = 'Manager';
                         managerInfo.copyFrom(this.dataContext.userInfo);
                         this.dataContext.userInfo = managerInfo;
                     }
-                    else {
+                    else if (newValue === 'Administrator') {
                         var adminInfo = new AdminInfo();
+                        adminInfo.associateType = 'Administrator';
                         adminInfo.copyFrom(this.dataContext.userInfo);
                         this.dataContext.userInfo = adminInfo;
+                    }
+                    else {
+                        var assistantInfo = new AssistantInfo();
+                        assistantInfo.associateType = 'Assistant';
+                        assistantInfo.copyFrom(this.dataContext.userInfo);
+                        this.dataContext.userInfo = assistantInfo;
                     }
                 }
             });

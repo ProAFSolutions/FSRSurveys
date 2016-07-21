@@ -50,6 +50,19 @@ var survey;
         return AdminInfo;
     }(UserInfo));
     survey.AdminInfo = AdminInfo;
+    var AssistantInfo = (function (_super) {
+        __extends(AssistantInfo, _super);
+        function AssistantInfo() {
+            _super.call(this);
+            this.managersNumber = 0;
+        }
+        AssistantInfo.prototype.validate = function () {
+            return _super.prototype.validate.call(this) && this.managersNumber > 0 &&
+                !this.isNullOrEmpty(this.supervisorName);
+        };
+        return AssistantInfo;
+    }(UserInfo));
+    survey.AssistantInfo = AssistantInfo;
     var ManagerInfo = (function (_super) {
         __extends(ManagerInfo, _super);
         function ManagerInfo() {

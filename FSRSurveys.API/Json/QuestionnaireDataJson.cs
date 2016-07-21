@@ -12,6 +12,8 @@ namespace FSRSurveys.API.Json
 
         public AdminInfoJson adminInfo { get; set; }
 
+        public AssistantInfoJson assistantInfo { get; set; }
+
         private List<QuestionnaireItemJson> _items = new List<QuestionnaireItemJson>();
 
         public List<QuestionnaireItemJson> items

@@ -2,6 +2,7 @@
 
     export class UserInfo {
 
+        public associateType: string;  
         public name: string;       
         public email: string;
         public propertyType: string;
@@ -61,6 +62,21 @@
             return super.validate() && this.managersNumber > 0 &&              
                 !this.isNullOrEmpty(this.supervisorName);
         }       
+    }
+
+    export class AssistantInfo extends UserInfo {
+        public managersNumber: number;
+        public supervisorName: string;
+
+        constructor() {
+            super();
+            this.managersNumber = 0;
+        }
+
+        public validate(): boolean {
+            return super.validate() && this.managersNumber > 0 &&
+                !this.isNullOrEmpty(this.supervisorName);
+        }
     }
 
     export class ManagerInfo extends UserInfo {       

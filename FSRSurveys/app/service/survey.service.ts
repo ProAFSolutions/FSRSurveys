@@ -7,7 +7,7 @@
 
         resolveMarkets(): ng.IPromise<Array<Market>>;
 
-        resolveCategories(): ng.IPromise<Array<Category>>;
+        resolveCategories(email: string): ng.IPromise<Array<Category>>;
 
         saveSurvey(userInfo: any, items: Array<QuestionnaireItem>): ng.IPromise<any>;      
     }
@@ -29,16 +29,19 @@
 
         public saveSurvey(userInfo: any, items: Array<QuestionnaireItem>): ng.IPromise<any>
         {
-            if (userInfo.rdSupervisorName) {
+            if (userInfo.associateType === 'Manager') 
                 return this.$http.post(SURVEY_API_BASE_URL + "/save", { managerInfo: userInfo, items: items }).then(response => response.data);
-            } else {
+            
+            else if (userInfo.associateType === 'Administrator') 
                 return this.$http.post(SURVEY_API_BASE_URL + "/save", { adminInfo: userInfo, items: items }).then(response => response.data);
-            }
+            
+            else 
+                return this.$http.post(SURVEY_API_BASE_URL + "/save", { assistantInfo: userInfo, items: items }).then(response => response.data);            
         }       
 
-        public resolveCategories(): ng.IPromise<Array<Category>>
+        public resolveCategories(email: string): ng.IPromise<Array<Category>>
         {
-            return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
+            return this.$http.get(SURVEY_API_BASE_URL + "/categories" + email).then(response => response.data);                  
         }
 
         public resolveMarkets(): ng.IPromise<Array<Market>>

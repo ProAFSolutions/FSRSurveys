@@ -208,6 +208,9 @@
     <Compile Include="Models\AdminInfo.cs">
       <DependentUpon>SurveyDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssistantInfo.cs">
+      <DependentUpon>SurveyDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>SurveyDataModel.tt</DependentUpon>
     </Compile>

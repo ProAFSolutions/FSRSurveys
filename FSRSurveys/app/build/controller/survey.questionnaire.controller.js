@@ -13,16 +13,13 @@ var survey;
         }
         QuestionnaireController.prototype.init = function () {
             this.initTotals();
-            /*this.sliderOptions = {
-                floor: 0,
-                ceil: 25,
-                step: 1,
-                translate: function (value) {
-                    return value + " %";
-                }
-            };*/
             this.percentageTimeEffortOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100];
-            this.activityOwnerOptions = ['Manager', 'Admin', 'Accounting', 'Joint Manager & Admin', 'Joint Manager & Accounting', 'Other', 'N/A'];
+            this.activityOwnerOptions = [
+                'Manager', 'Admin', 'Accounting', 'Asst Mgr',
+                'Joint Mgr & Admin', 'Joint Mgr & Accounting',
+                'Joint Mgr & Asst Mgr', 'Joint Asst Mgr & Admin',
+                'Joint Mgr & Asst Mgr & Admin', 'Other', 'N/A'
+            ];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
             this.populateQuestionnaire();
             this.calculateTotals();
@@ -36,11 +33,14 @@ var survey;
         QuestionnaireController.prototype.populateQuestionnaire = function () {
             var _this = this;
             this.dataContext.questionnaireData = new Array();
-            this.surveyService.resolveCategories().then(function (response) {
+            this.surveyService.resolveCategories(this.dataContext.userInfo.email).then(function (response) {
                 var categories = response;
                 for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
                     var category = categories_1[_i];
                     _this.dataContext.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
+                }
+                if (categories[categories.length - 1].name !== 'Other') {
+                    categories.push(new survey.Category(0, 'Other', ''));
                 }
             });
         };
@@ -89,14 +89,6 @@ var survey;
                 this.totalActivityPerformed == totalItems &&
                 this.totalTechnology == totalItems);
         };
-        /*public addQuestionnaireItemClick(): void {
-            this.dataContext.questionnaireData.push(new QuestionnaireItem(new Category(0, "Other", ""), new Answer()));
-
-            //TODO create an Angular Directive for this
-            setTimeout(() => {
-                $("textarea.no-border:last").focus();
-            }, 500);
-        }*/
         QuestionnaireController.prototype.closeOtherClick = function (index) {
             this.dataContext.questionnaireData.splice(index, 1);
         };

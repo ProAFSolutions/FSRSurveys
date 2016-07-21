@@ -36,7 +36,9 @@ namespace FSRSurveys.API.Controllers
             {
                 PopulateManagersWorkSheet(excelDoc.Workbook.Worksheets["MANAGER"]);
 
-                PopulateAdminsWorkSheet(excelDoc.Workbook.Worksheets["ADMIN"]);
+                PopulateAdminsOrAssistantWorkSheet(excelDoc.Workbook.Worksheets["ADMIN"], "Property Administrator");
+
+                PopulateAdminsOrAssistantWorkSheet(excelDoc.Workbook.Worksheets["ASSISTANT"], "Assistant Property Manager");
 
                 result = excelDoc.GetAsByteArray();
             }
@@ -54,7 +56,6 @@ namespace FSRSurveys.API.Controllers
             dataSource.ForEach(M =>
             {
                 var colIndex = 1;
-
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = "Property Manager";
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.Name;
                 managersWorksheet.Cells[rowIndex, colIndex++].Value = M.Email;
@@ -74,7 +75,7 @@ namespace FSRSurveys.API.Controllers
             });                
         }
 
-        private void PopulateAdminsWorkSheet(ExcelWorksheet adminsWorksheet)
+        private void PopulateAdminsOrAssistantWorkSheet(ExcelWorksheet worksheet, string type)
         {
             var dataSource = _surveyService.GetAdminsData();
 
@@ -82,21 +83,20 @@ namespace FSRSurveys.API.Controllers
             dataSource.ForEach(A =>
             {
                 var colIndex = 1;
+                worksheet.Cells[rowIndex, colIndex++].Value = type;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.Name;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.Email;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.PropertyType;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.PropertyName;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.MarketName;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.City;               
+                worksheet.Cells[rowIndex, colIndex++].Value = A.PropertiesTotal;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.UnitsTotal;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.ManagersNumber;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.TotalNumberBoardMeetingAttendedPerYear;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.SupervisorName;
 
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = "Property Administrator";
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.Name;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.Email;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertyType;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertyName;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.MarketName;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.City;               
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.PropertiesTotal;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.UnitsTotal;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.ManagersNumber;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.TotalNumberBoardMeetingAttendedPerYear;
-                adminsWorksheet.Cells[rowIndex, colIndex++].Value = A.SupervisorName;
-
-                PopulateCommonDataCells(adminsWorksheet, A.SurveyAnswers, rowIndex, colIndex);
+                PopulateCommonDataCells(worksheet, A.SurveyAnswers, rowIndex, colIndex);
 
                 rowIndex++;
             });
@@ -110,14 +110,14 @@ namespace FSRSurveys.API.Controllers
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Board Relations", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Board Meetings & Management Reports", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Resident Inquiries", fieldNumber);
-                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Move In/Move Out", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Move In / Move Out", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Annual Meeting & Elections", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Communications", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Community", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Preventative Maintenance", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Violations", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Arch Mods", fieldNumber);
-                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Project Mgmt", fieldNumber);
+                worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Project Management", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Procurement", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Accounts Payable", fieldNumber);
                 worksheet.Cells[rowIndex, colIndex++].Value = GetFieldValue(userInfoSurveyAnswers, "Accounts Receivable", fieldNumber);
@@ -149,7 +149,7 @@ namespace FSRSurveys.API.Controllers
 
         private string GetValueByFieldNumber(SurveyAnswer answer, int fieldNumber) {
             switch (fieldNumber) {
-                case 1: return answer.TimeEffort + "%";
+                case 1: return answer.TimeEffort.ToString();
                 case 2: return answer.ActivityOwner;
                 case 3: return answer.ActivityPerformed;
                 case 4: return answer.Technology;

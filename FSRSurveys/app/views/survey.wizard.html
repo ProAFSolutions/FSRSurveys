@@ -1,4 +1,13 @@
 ﻿<div ng-controller="WizardController as vm">
+
+    <div id="loader">
+        <div class="loader-indicator">
+            <img width="50px" src="/assets/img/loading.gif" />
+            <img src="../../assets/img/logo.png" />
+            <div>Please wait while your answers are being saved...</div>
+        </div>
+    </div>
+
     <div class="top-content" resize resize-mobile="vm.isRunningMobile" ng-class="{ 'mobile': vm.isRunningMobile, 'desktop': !vm.isRunningMobile }">
         <div class="container">
             <div class="row">

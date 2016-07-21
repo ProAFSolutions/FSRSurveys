@@ -15,6 +15,7 @@ var survey;
             this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mix of Sited and Non-Sited'];
             this.associateType = "Manager";
             this.dataContext.userInfo = new survey.ManagerInfo();
+            this.dataContext.userInfo.associateType = this.associateType;
             this.populateMarkets();
             this.setupWatchers();
         };
@@ -25,13 +26,21 @@ var survey;
                 if (newValue != oldValue) {
                     if (newValue === 'Manager') {
                         var managerInfo = new survey.ManagerInfo();
+                        managerInfo.associateType = 'Manager';
                         managerInfo.copyFrom(_this.dataContext.userInfo);
                         _this.dataContext.userInfo = managerInfo;
                     }
-                    else {
+                    else if (newValue === 'Administrator') {
                         var adminInfo = new survey.AdminInfo();
+                        adminInfo.associateType = 'Administrator';
                         adminInfo.copyFrom(_this.dataContext.userInfo);
                         _this.dataContext.userInfo = adminInfo;
+                    }
+                    else {
+                        var assistantInfo = new survey.AssistantInfo();
+                        assistantInfo.associateType = 'Assistant';
+                        assistantInfo.copyFrom(_this.dataContext.userInfo);
+                        _this.dataContext.userInfo = assistantInfo;
                     }
                 }
             });
