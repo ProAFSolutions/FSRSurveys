@@ -3,7 +3,7 @@
     export class DataContext {             
         public sumbitBtnDisabled = true;
         public userInfo: any; 
-        public questionnaireData: Array<QuestionnaireItem>;
+        public questionnaireData = new Array<QuestionnaireItem>();
     }
 
     angular.module("survey").service("DataContext", DataContext);

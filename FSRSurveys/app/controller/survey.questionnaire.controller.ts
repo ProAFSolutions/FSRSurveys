@@ -31,8 +31,6 @@
             ];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
 
-            this.populateQuestionnaire();    
-
             this.calculateTotals();
         }   
 
@@ -42,22 +40,6 @@
             this.totalActivityPerformed = 0;
             this.totalTechnology = 0;
         } 
-
-        private populateQuestionnaire(): void {
-
-            this.dataContext.questionnaireData = new Array<QuestionnaireItem>();   
-
-            this.surveyService.resolveCategories(this.dataContext.userInfo.email).then(response => {
-                let categories = response;
-                for (var category of categories) {
-                    this.dataContext.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
-                }
-
-                if (categories[categories.length - 1].name !== 'Other') {
-                    categories.push(new Category(0, 'Other', ''));
-                }
-            });
-        }
 
         private calculateTotals(): void
         {

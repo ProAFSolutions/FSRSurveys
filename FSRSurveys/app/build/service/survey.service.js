@@ -5,19 +5,25 @@ var survey;
         function SurveyService($httpService) {
             this.$http = $httpService;
         }
-        SurveyService.prototype.getQuestionnaireData = function (email) {
-            return this.$http.get(SURVEY_API_BASE_URL + "/questionnaire-data/" + email).then(function (response) { return response.data; });
+        SurveyService.prototype.getQuestionnaireData = function (email, password) {
+            return this.$http.get(SURVEY_API_BASE_URL + "/questionnaire-data/" + email + "/" + password).then(function (response) { return response.data; });
         };
         SurveyService.prototype.saveSurvey = function (userInfo, items) {
+            var questionnaireData = new survey.QuestionnaireData();
+            questionnaireData.items = items;
             if (userInfo.associateType === 'Manager')
-                return this.$http.post(SURVEY_API_BASE_URL + "/save", { managerInfo: userInfo, items: items }).then(function (response) { return response.data; });
+                questionnaireData.managerInfo = userInfo;
             else if (userInfo.associateType === 'Administrator')
-                return this.$http.post(SURVEY_API_BASE_URL + "/save", { adminInfo: userInfo, items: items }).then(function (response) { return response.data; });
+                questionnaireData.adminInfo = userInfo;
             else
-                return this.$http.post(SURVEY_API_BASE_URL + "/save", { assistantInfo: userInfo, items: items }).then(function (response) { return response.data; });
+                questionnaireData.assistantInfo = userInfo;
+            return this.$http.post(SURVEY_API_BASE_URL + "/save", questionnaireData).then(function (response) { return response.data; });
         };
-        SurveyService.prototype.resolveCategories = function (email) {
-            return this.$http.get(SURVEY_API_BASE_URL + "/categories" + email).then(function (response) { return response.data; });
+        SurveyService.prototype.resolveCategories = function () {
+            return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(function (response) { return response.data; });
+        };
+        SurveyService.prototype.checkUser = function (email) {
+            return this.$http.get(SURVEY_API_BASE_URL + "/check/" + email).then(function (response) { return response.data; });
         };
         SurveyService.prototype.resolveMarkets = function () {
             return this.$http.get(SURVEY_API_BASE_URL + "/markets").then(function (response) { return response.data; });

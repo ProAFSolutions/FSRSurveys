@@ -257,6 +257,7 @@
       <DependentUpon>SurveyDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Encryptor.cs" />
     <Compile Include="Service\SurveyService.cs" />
   </ItemGroup>
   <ItemGroup>

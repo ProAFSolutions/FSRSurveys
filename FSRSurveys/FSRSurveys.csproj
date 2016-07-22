@@ -169,6 +169,7 @@
     <TypeScriptCompile Include="app\controller\survey.wizard.controller.ts" />
     <TypeScriptCompile Include="app\directives\resize.directive.ts" />
     <TypeScriptCompile Include="app\model\survey.market.ts" />
+    <TypeScriptCompile Include="app\model\survey.questionnaireData.ts" />
     <TypeScriptCompile Include="app\model\survey.questionnaireItem.ts" />
     <TypeScriptCompile Include="app\model\survey.category.ts" />
     <TypeScriptCompile Include="app\model\survey.answer.ts" />

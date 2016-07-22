@@ -17,6 +17,7 @@ namespace FSRSurveys.API.Json
         public string city { get; set; }
         public int propertiesTotal { get; set; }
         public int totalNumberBoardMeetingAttendedPerYear { get; set; }
+        public string recoveryPassword { get; set; }
 
     }
 
@@ -39,7 +40,7 @@ namespace FSRSurveys.API.Json
             propertiesTotal = managerInfo.PropertiesTotal;
             rdSupervisorName = managerInfo.RdSupervisorName;
             vpSupervisorName = managerInfo.VpSupervisorName;           
-            totalNumberBoardMeetingAttendedPerYear = managerInfo.TotalNumberBoardMeetingAttendedPerYear;
+            totalNumberBoardMeetingAttendedPerYear = managerInfo.TotalNumberBoardMeetingAttendedPerYear;           
         }
         
 
@@ -52,13 +53,14 @@ namespace FSRSurveys.API.Json
                 MarketName = marketName,
                 City = city,
                 PropertyName = propertyName,
-                PropertyType = propertyType,                
+                PropertyType = propertyType,
                 UnitsTotal = unitsTotal,
                 PropertiesTotal = propertiesTotal,
                 RdSupervisorName = rdSupervisorName,
-                VpSupervisorName = vpSupervisorName,               
-                TotalNumberBoardMeetingAttendedPerYear = totalNumberBoardMeetingAttendedPerYear
-            };
+                VpSupervisorName = vpSupervisorName,
+                TotalNumberBoardMeetingAttendedPerYear = totalNumberBoardMeetingAttendedPerYear,
+                RecoveryPassword = recoveryPassword
+        };
         }       
     }
 
@@ -81,7 +83,7 @@ namespace FSRSurveys.API.Json
             propertiesTotal = adminInfo.PropertiesTotal;
             managersNumber = adminInfo.ManagersNumber;
             totalNumberBoardMeetingAttendedPerYear = adminInfo.TotalNumberBoardMeetingAttendedPerYear;
-            supervisorName = adminInfo.SupervisorName;
+            supervisorName = adminInfo.SupervisorName;           
         }
 
 
@@ -99,7 +101,8 @@ namespace FSRSurveys.API.Json
                 PropertiesTotal = propertiesTotal,
                 ManagersNumber = managersNumber,
                 TotalNumberBoardMeetingAttendedPerYear = totalNumberBoardMeetingAttendedPerYear,
-                SupervisorName = supervisorName
+                SupervisorName = supervisorName,
+                RecoveryPassword = recoveryPassword
             };
         }
 
@@ -144,7 +147,8 @@ namespace FSRSurveys.API.Json
                 PropertiesTotal = propertiesTotal,
                 ManagersNumber = managersNumber,
                 TotalNumberBoardMeetingAttendedPerYear = totalNumberBoardMeetingAttendedPerYear,
-                SupervisorName = supervisorName
+                SupervisorName = supervisorName,
+                RecoveryPassword = recoveryPassword
             };
         }
     }

@@ -1,9 +1,7 @@
 var survey;
 (function (survey) {
     var QuestionnaireData = (function () {
-        function QuestionnaireData(userInfo, items) {
-            this.userInfo = userInfo;
-            this.items = items;
+        function QuestionnaireData() {
         }
         return QuestionnaireData;
     }());

@@ -7,6 +7,7 @@
         public marketsOptions: Array<Market>;
         public propertyTypeOptions: Array<string>;      
         public associateType: string;
+        public emailExists = false;
        
 
         constructor($scope: ng.IScope, dataContext: DataContext, surveyService: SurveyService) {
@@ -53,7 +54,7 @@
                 if (newValue != oldValue) {
                     currentController.dataContext.userInfo.marketName = newValue.name;
                 }
-            });
+            });            
         }
 
         private populateMarkets() {
@@ -89,20 +90,34 @@
             return !value && value <= 0; 
         }       
 
+
         public checkUser(): void {
             let controller = this;
             if (this.dataContext.userInfo.email) {
-                this.surveyService.getQuestionnaireData(this.dataContext.userInfo.email).then(response => {
-                    if (response === 'empty')
-                        return;
-
-                    if (confirm("The system has detected previous information associated to your email. Do you want to reload it?")) {
-                        this.dataContext.userInfo = response.managerInfo != null ? response.managerInfo : response.adminInfo
-                        this.dataContext.questionnaireData = response.items;                       
-                    }
+                this.surveyService.checkUser(this.dataContext.userInfo.email).then(response => {
+                    controller.emailExists = response && response === true;                   
                 });
+            } else {
+                this.emailExists = false;
+                this.dataContext.userInfo.recoveryPassword = '';
             }            
         }
+
+        public reloadDataClick(): void{
+            if (confirm("Do you confirm you want to reload your information ?")) {
+                this.surveyService.getQuestionnaireData(this.dataContext.userInfo.email, this.dataContext.userInfo.recoveryPassword).then(response => {
+                    if (response && response.items.length > 0) {
+                        this.dataContext.userInfo = response.managerInfo ? response.managerInfo : response.adminInfo ? response.adminInfo : response.assistantInfo;
+                        this.dataContext.questionnaireData = response.items;
+                    } else {
+                        alert("Sorry, your recovery password does not match our records, please try again, otherwise you won't be able to use the entered email address");
+                        this.dataContext.userInfo.recoveryPassword = '';
+                    }
+                });
+            }
+        }
+
+       
     }
 
     angular.module("survey")

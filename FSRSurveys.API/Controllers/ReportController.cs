@@ -34,11 +34,13 @@ namespace FSRSurveys.API.Controllers
             byte[] result;
             using (var excelDoc = new ExcelPackage(templateFile))
             {
-                PopulateManagersWorkSheet(excelDoc.Workbook.Worksheets["MANAGER"]);
+                var users = _surveyService.GetAllUsers();
 
-                PopulateAdminsOrAssistantWorkSheet(excelDoc.Workbook.Worksheets["ADMIN"], "Property Administrator");
+                PopulateManagersWorkSheet(excelDoc.Workbook.Worksheets["MANAGER"], users);
 
-                PopulateAdminsOrAssistantWorkSheet(excelDoc.Workbook.Worksheets["ASSISTANT"], "Assistant Property Manager");
+                PopulateAdminsWorkSheet(excelDoc.Workbook.Worksheets["ADMIN"], users);
+
+                PopulateAssistantsWorkSheet(excelDoc.Workbook.Worksheets["ASSISTANT"], users);
 
                 result = excelDoc.GetAsByteArray();
             }
@@ -48,9 +50,9 @@ namespace FSRSurveys.API.Controllers
 
         #region Populate Excel
 
-        private void PopulateManagersWorkSheet(ExcelWorksheet managersWorksheet)
-        {              
-            var dataSource = _surveyService.GetManagersData();
+        private void PopulateManagersWorkSheet(ExcelWorksheet managersWorksheet, List<UserInfo> users)
+        {
+            var dataSource = users.OfType<ManagerInfo>().ToList();
 
             var rowIndex = 2;            
             dataSource.ForEach(M =>
@@ -75,21 +77,48 @@ namespace FSRSurveys.API.Controllers
             });                
         }
 
-        private void PopulateAdminsOrAssistantWorkSheet(ExcelWorksheet worksheet, string type)
+        private void PopulateAdminsWorkSheet(ExcelWorksheet worksheet, List<UserInfo> users)
         {
-            var dataSource = _surveyService.GetAdminsData();
+            var dataSource = users.OfType<AdminInfo>().ToList();
 
             var rowIndex = 2;
             dataSource.ForEach(A =>
             {
                 var colIndex = 1;
-                worksheet.Cells[rowIndex, colIndex++].Value = type;
+                worksheet.Cells[rowIndex, colIndex++].Value = "Property Administrator";
                 worksheet.Cells[rowIndex, colIndex++].Value = A.Name;
                 worksheet.Cells[rowIndex, colIndex++].Value = A.Email;
                 worksheet.Cells[rowIndex, colIndex++].Value = A.PropertyType;
                 worksheet.Cells[rowIndex, colIndex++].Value = A.PropertyName;
                 worksheet.Cells[rowIndex, colIndex++].Value = A.MarketName;
                 worksheet.Cells[rowIndex, colIndex++].Value = A.City;               
+                worksheet.Cells[rowIndex, colIndex++].Value = A.PropertiesTotal;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.UnitsTotal;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.ManagersNumber;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.TotalNumberBoardMeetingAttendedPerYear;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.SupervisorName;
+
+                PopulateCommonDataCells(worksheet, A.SurveyAnswers, rowIndex, colIndex);
+
+                rowIndex++;
+            });
+        }
+
+        private void PopulateAssistantsWorkSheet(ExcelWorksheet worksheet, List<UserInfo> users)
+        {
+            var dataSource = users.OfType<AssistantInfo>().ToList();
+
+            var rowIndex = 2;
+            dataSource.ForEach(A =>
+            {
+                var colIndex = 1;
+                worksheet.Cells[rowIndex, colIndex++].Value = "Assistant Property Manager";
+                worksheet.Cells[rowIndex, colIndex++].Value = A.Name;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.Email;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.PropertyType;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.PropertyName;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.MarketName;
+                worksheet.Cells[rowIndex, colIndex++].Value = A.City;
                 worksheet.Cells[rowIndex, colIndex++].Value = A.PropertiesTotal;
                 worksheet.Cells[rowIndex, colIndex++].Value = A.UnitsTotal;
                 worksheet.Cells[rowIndex, colIndex++].Value = A.ManagersNumber;

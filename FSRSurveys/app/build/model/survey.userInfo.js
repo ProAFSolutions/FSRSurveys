@@ -10,6 +10,7 @@ var survey;
             this.unitsTotal = 0;
             this.propertiesTotal = 0;
             this.totalNumberBoardMeetingAttendedPerYear = 0;
+            this.recoveryPassword = '';
         }
         UserInfo.prototype.isNullOrEmpty = function (value) {
             return value == null || value === '' || value.length === 0;

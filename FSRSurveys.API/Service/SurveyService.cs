@@ -12,15 +12,19 @@ namespace FSRSurveys.API.Service
 
         void SaveSurvey(UserInfo userInfo);
 
-        List<Category> GetCategories(string email);
+        List<Category> GetCategories();
 
         List<Market> GetMarkets();
 
         UserInfo GetUserInfo(string userEmail);
 
+        List<UserInfo> GetAllUsers();
+
         List<ManagerInfo> GetManagersData();
 
         List<AdminInfo> GetAdminsData();
+
+        List<AssistantInfo> GetAssistantData();
 
         bool CheckIfUserExists(string userEmail);
     }
@@ -36,6 +40,18 @@ namespace FSRSurveys.API.Service
             }
 
             return user != null;
+        }
+
+        public List<UserInfo> GetAllUsers()
+        {
+            List<UserInfo> result = null;
+            using (var UoW = new SurveyDbContext())
+            {
+                UoW.Configuration.LazyLoadingEnabled = true;
+                result = UoW.UserInfo.Include("SurveyAnswers.Category").ToList();
+            }
+
+            return result;
         }
 
         public List<ManagerInfo> GetManagersData()
@@ -62,20 +78,34 @@ namespace FSRSurveys.API.Service
             return result;
         }
 
-        public List<Category> GetCategories(string email)
+        public List<AssistantInfo> GetAssistantData()
+        {
+            List<AssistantInfo> result = null;
+            using (var UoW = new SurveyDbContext())
+            {
+                UoW.Configuration.LazyLoadingEnabled = true;
+                result = UoW.UserInfo.OfType<AssistantInfo>().Include("SurveyAnswers.Category").ToList();
+            }
+
+            return result;
+        }
+
+
+        public List<Category> GetCategories()
         {
             List<Category> result = null;
             using (var UoW = new SurveyDbContext())
             {
-                result =  UoW.Category.Where(C => !C.Name.Equals("Other")).OrderBy(C => C.Sort).ToList();
+                result = UoW.Category.Where(C => !C.Name.Equals("Other")).OrderBy(C => C.Sort).ToList();
+
+                /*result =  UoW.Category.Where(C => !C.Name.Equals("Other")).OrderBy(C => C.Sort).ToList();
                 var otherDefinedByUser = UoW.Category.SingleOrDefault(C => C.DefinedByUser != null && C.DefinedByUser.ToLower().Equals(email.ToLower()));
                 if (result != null && otherDefinedByUser != null) {
                     result.Add(otherDefinedByUser);
-                }
+                }*/
             }
             return result;
-        }
-
+        }        
 
         public List<Market> GetMarkets()
         {
@@ -92,12 +122,18 @@ namespace FSRSurveys.API.Service
             UserInfo result = null;
             using (var UoW = new SurveyDbContext())
             {
-                UoW.Configuration.LazyLoadingEnabled = true;
+                UoW.Configuration.LazyLoadingEnabled = true;               
+               
                 result = UoW.UserInfo.OfType<ManagerInfo>().Include("SurveyAnswers.Category").SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));
+
                 if (result == null) {
-                    result = UoW.UserInfo.OfType<AdminInfo>().Include("SurveyAnswers.Category").SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));
-                }         
+                     result = UoW.UserInfo.OfType<AdminInfo>().Include("SurveyAnswers.Category").SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));
+
+                     if (result == null)
+                         result = UoW.UserInfo.OfType<AssistantInfo>().Include("SurveyAnswers.Category").SingleOrDefault(U => U.Email.ToLower().Equals(userEmail.ToLower()));
+                 }
             }
+
             return result;
         }
 
@@ -134,6 +170,9 @@ namespace FSRSurveys.API.Service
                             }                          
                         }
 
+                        if(!string.IsNullOrEmpty(userInfo.RecoveryPassword))
+                            userInfo.RecoveryPassword = Encryptor.Encrypt(userInfo.RecoveryPassword);
+
                         UoW.UserInfo.Add(userInfo);                                        
                     }
                     else {
@@ -145,6 +184,9 @@ namespace FSRSurveys.API.Service
                         dbUser.UnitsTotal = userInfo.UnitsTotal;                       
                         dbUser.PropertiesTotal = userInfo.PropertiesTotal;
                         dbUser.TotalNumberBoardMeetingAttendedPerYear = userInfo.TotalNumberBoardMeetingAttendedPerYear;
+
+                        if (!string.IsNullOrEmpty(userInfo.RecoveryPassword))
+                            dbUser.RecoveryPassword = Encryptor.Encrypt(userInfo.RecoveryPassword);
 
                         if (dbUser is ManagerInfo)
                         {
@@ -185,5 +227,7 @@ namespace FSRSurveys.API.Service
                 }
             }
         }
+
+        
     }
 }

@@ -9,7 +9,11 @@
 
         resolveCategories(email: string): ng.IPromise<Array<Category>>;
 
-        saveSurvey(userInfo: any, items: Array<QuestionnaireItem>): ng.IPromise<any>;      
+        saveSurvey(userInfo: any, items: Array<QuestionnaireItem>): ng.IPromise<any>;   
+
+        getQuestionnaireData(email: string, password: string): ng.IPromise<QuestionnaireData>;
+
+        checkUser(email: string): ng.IPromise<boolean>;
     }
     
     export class SurveyService implements ISurveyService {
@@ -23,25 +27,34 @@
             this.$http = $httpService;
         }  
 
-        public getQuestionnaireData(email: string): ng.IPromise<any> {
-            return this.$http.get(SURVEY_API_BASE_URL + "/questionnaire-data/" + email).then(response => response.data);
+        public getQuestionnaireData(email: string, password: string): ng.IPromise<QuestionnaireData> {
+            return this.$http.get(SURVEY_API_BASE_URL + "/questionnaire-data/" + email + "/" + password).then(response => response.data);
         }
 
         public saveSurvey(userInfo: any, items: Array<QuestionnaireItem>): ng.IPromise<any>
         {
-            if (userInfo.associateType === 'Manager') 
-                return this.$http.post(SURVEY_API_BASE_URL + "/save", { managerInfo: userInfo, items: items }).then(response => response.data);
-            
-            else if (userInfo.associateType === 'Administrator') 
-                return this.$http.post(SURVEY_API_BASE_URL + "/save", { adminInfo: userInfo, items: items }).then(response => response.data);
-            
-            else 
-                return this.$http.post(SURVEY_API_BASE_URL + "/save", { assistantInfo: userInfo, items: items }).then(response => response.data);            
+            var questionnaireData = new QuestionnaireData();
+            questionnaireData.items = items;
+
+            if (userInfo.associateType === 'Manager')
+                questionnaireData.managerInfo = userInfo;
+
+            else if (userInfo.associateType === 'Administrator')
+                questionnaireData.adminInfo = userInfo;
+
+            else
+                questionnaireData.assistantInfo = userInfo;
+
+            return this.$http.post(SURVEY_API_BASE_URL + "/save", questionnaireData).then(response => response.data);
         }       
 
-        public resolveCategories(email: string): ng.IPromise<Array<Category>>
+        public resolveCategories(): ng.IPromise<Array<Category>>
         {
-            return this.$http.get(SURVEY_API_BASE_URL + "/categories" + email).then(response => response.data);                  
+            return this.$http.get(SURVEY_API_BASE_URL + "/categories").then(response => response.data);                  
+        }
+
+        public checkUser(email: string): ng.IPromise<boolean> {
+            return this.$http.get(SURVEY_API_BASE_URL + "/check/" + email).then(response => response.data);
         }
 
         public resolveMarkets(): ng.IPromise<Array<Market>>

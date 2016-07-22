@@ -27,7 +27,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="JobActivity" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JobActivity" Type="nvarchar(max)" />
           <Property Name="DefinedByUser" Type="nvarchar(max)" />
           <Property Name="Sort" Type="int" />
         </EntityType>
@@ -66,6 +66,7 @@
           <Property Name="PropertiesTotal" Type="int" Nullable="false" />
           <Property Name="TotalNumberBoardMeetingAttendedPerYear" Type="int" Nullable="false" />
           <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="RecoveryPassword" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_AdminInfo_inherits_UserInfo">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1">
@@ -203,6 +204,7 @@
           <Property Name="PropertiesTotal" Type="Int32" Nullable="false" />
           <Property Name="TotalNumberBoardMeetingAttendedPerYear" Type="Int32" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecoveryPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_UserInfoSurvey">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
@@ -235,7 +237,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="JobActivity" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobActivity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DefinedByUser" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="SurveyAnswers" Relationship="SurveyDataModel.FK_CategorySurvey" FromRole="Category" ToRole="SurveyAnswers" />
           <Property Name="Sort" Type="Int32" />
@@ -279,6 +281,7 @@
           <EntitySetMapping Name="UserInfo">
             <EntityTypeMapping TypeName="IsTypeOf(SurveyDataModel.UserInfo)">
               <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="RecoveryPassword" ColumnName="RecoveryPassword" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="TotalNumberBoardMeetingAttendedPerYear" ColumnName="TotalNumberBoardMeetingAttendedPerYear" />
                 <ScalarProperty Name="PropertiesTotal" ColumnName="PropertiesTotal" />

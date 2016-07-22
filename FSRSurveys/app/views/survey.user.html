@@ -3,7 +3,7 @@
         <fieldset class="row">
             <ul class="col-lg-12 col-md-12 col-sm-12">
                 <li class="row">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"><b>Select Associate Type:</b></label>
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-5"><b>Select Associate Type</b></label>
                     <div class="btn-group">
                         <label class="btn btn-primary" ng-model="vm.associateType" uib-btn-radio="'Manager'">Property Manager</label>
                         <label class="btn btn-primary" ng-model="vm.associateType" uib-btn-radio="'Administrator'">Property Administrator</label>
@@ -18,10 +18,17 @@
                     <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-6">{{vm.associateType === "Manager" ? "Property Manager Email"  : vm.associateType === "Administrator" ? "Property Administrator Email:" : "Assistant Manager Email:" }}</label>
                     <input placeholder="Ex: john.smith@fsresidential.com" class="col-lg-4 col-md-6 col-sm-6 col-xs-11" ng-blur="vm.checkUser()" ng-model="vm.dataContext.userInfo.email" type="text" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-class="{ 'required': !vm.dataContext.userInfo.email }" />
                     <b ng-show="!vm.dataContext.userInfo.email" class="asterisk"><span ng-show="userForm.email.$error.pattern">Invalid</span>*</b>
+                    <i class="fa fa-refresh" title="Reload Data" uib-tooltip="The email address already exists, click this button if you want to reload your information" ng-show="vm.emailExists && vm.dataContext.userInfo.email" ng-click="vm.reloadDataClick()"></i>
                 </li>
 
+                <!--<li class="row">
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-6">Recovery Password<i class="fa fa-info-circle" uib-tooltip="Provide a 'Recovery Password' in case you want to restore previous information provided"></i></label>
+                    <input placeholder="Optional" ng-model="vm.dataContext.userInfo.recoveryPassword" ng-disabled="!vm.dataContext.userInfo.email" class="col-lg-4 col-md-6 col-sm-6 col-xs-11" type="password" />
+                    <i class="fa fa-refresh" title="Reload Data" ng-show="vm.emailExists && vm.dataContext.userInfo.email && vm.dataContext.userInfo.recoveryPassword" ng-click="vm.reloadDataClick()"></i>
+                </li>-->
+
                 <li class="row">
-                    <hr class="separator"/>
+                    <hr class="separator" />
                 </li>
 
                 <li class="row">
@@ -44,13 +51,13 @@
                 </li>
 
                 <li class="row" ng-show="vm.dataContext.userInfo.propertyType == 'Sited'">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">Property Name:</label>
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">Property Name</label>
                     <input class="col-lg-4 col-md-6 col-sm-6 col-xs-11" type="text" ng-model="vm.dataContext.userInfo.propertyName" ng-class="{ 'required': !vm.dataContext.userInfo.propertyName }" />
                     <b ng-show="!vm.dataContext.userInfo.propertyName" class="asterisk">*</b>
                 </li>
 
                 <li class="row">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">Market(State / Province):</label>
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">Market(State / Province)</label>
                     <div class="dropdown-container col-lg-4 col-md-6 col-sm-6 col-xs-11" ng-class="{ 'required': !vm.dataContext.userInfo.marketName }">
                         <ui-select ng-model="vm.marketSelected" theme="bootstrap">
                             <ui-select-match class="ui-select-match" placeholder="Select">{{$select.selected.name}}</ui-select-match>
@@ -63,58 +70,58 @@
                         </ui-select>
                     </div>
                     <b ng-show="!vm.dataContext.userInfo.marketName" class="asterisk">*</b>
-                </li>               
+                </li>
 
                 <li class="row">
                     <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">City:</label>
                     <input class="col-lg-4 col-md-6 col-sm-6 col-xs-11" type="text" ng-model="vm.dataContext.userInfo.city" ng-class="{ 'required': !vm.dataContext.userInfo.city }" />
                     <b ng-show="!vm.dataContext.userInfo.city" class="asterisk">*</b>
-                </li>                
+                </li>
 
                 <li class="row">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">{{vm.associateType === "Manager" ? "Total # of Properties Managed:" : "Total # of Properties Supported:"}}</label>
-                    <input class="col-lg-4 col-md-6 col-sm-6 col-xs-11" min="1" max="9999999" type="number" 
-                           ng-model="vm.dataContext.userInfo.propertiesTotal" 
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">{{vm.associateType === "Manager" ? "Total # of Properties Managed" : "Total # of Properties Supported"}}</label>
+                    <input class="col-lg-4 col-md-6 col-sm-6 col-xs-11" min="1" max="9999999" type="number"
+                           ng-model="vm.dataContext.userInfo.propertiesTotal"
                            ng-class="{ 'required': !vm.dataContext.userInfo.propertiesTotal || vm.dataContext.userInfo.propertiesTotal <= 0 }" />
                     <b ng-show="!vm.dataContext.userInfo.propertiesTotal || vm.dataContext.userInfo.propertiesTotal <= 0" class="asterisk">*</b>
                 </li>
 
                 <li class="row">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">{{vm.associateType === "Manager" ? "Total # of Units Managed" : "Total # of Units Supported:"}}</label>
-                    <input class="col-lg-6 col-md-6 col-sm-6 col-xs-11" min="1" max="9999999" type="number" 
-                           ng-model="vm.dataContext.userInfo.unitsTotal" 
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">{{vm.associateType === "Manager" ? "Total # of Units Managed" : "Total # of Units Supported"}}</label>
+                    <input class="col-lg-6 col-md-6 col-sm-6 col-xs-11" min="1" max="9999999" type="number"
+                           ng-model="vm.dataContext.userInfo.unitsTotal"
                            ng-class="{ 'required': !vm.dataContext.userInfo.unitsTotal || vm.dataContext.userInfo.unitsTotal <= 0 }" />
                     <b ng-show="!vm.dataContext.userInfo.unitsTotal || vm.dataContext.userInfo.unitsTotal <= 0" class="asterisk">*</b>
                 </li>
 
                 <li class="row">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">Total # of Board Meetings Attended Per Year:</label>
-                    <input class="col-lg-6 col-md-6 col-sm-6 col-xs-11" min="1" max="9999999" type="number" 
-                           ng-model="vm.dataContext.userInfo.totalNumberBoardMeetingAttendedPerYear" 
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">Total # of Board Meetings Attended</label>
+                    <input class="col-lg-6 col-md-6 col-sm-6 col-xs-11" min="1" max="9999999" type="number"
+                           ng-model="vm.dataContext.userInfo.totalNumberBoardMeetingAttendedPerYear"
                            ng-class="{ 'required': !vm.dataContext.userInfo.totalNumberBoardMeetingAttendedPerYear || vm.dataContext.userInfo.totalNumberBoardMeetingAttendedPerYear <= 0 }" />
                     <b ng-show="!vm.dataContext.userInfo.totalNumberBoardMeetingAttendedPerYear || vm.dataContext.userInfo.totalNumberBoardMeetingAttendedPerYear <= 0" class="asterisk">*</b>
-                </li>               
+                </li>
 
                 <li class="row" ng-show="vm.associateType === 'Manager'">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">RD Supervisor Name:</label>
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">RD Supervisor Name</label>
                     <input class="col-lg-4 col-md-6 col-sm-6 col-xs-11" type="text" ng-model="vm.dataContext.userInfo.rdSupervisorName" ng-class="{ 'required': !vm.dataContext.userInfo.rdSupervisorName }" />
                     <b ng-show="!vm.dataContext.userInfo.rdSupervisorName" class="asterisk">*</b>
                 </li>
 
                 <li class="row" ng-show="vm.associateType === 'Manager'">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">VP Supervisor Name:</label>
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">VP Supervisor Name</label>
                     <input class="col-lg-4 col-md-6 col-sm-6 col-xs-11" type="text" ng-model="vm.dataContext.userInfo.vpSupervisorName" ng-class="{ 'required': !vm.dataContext.userInfo.vpSupervisorName }" />
                     <b ng-show="!vm.dataContext.userInfo.vpSupervisorName" class="asterisk">*</b>
                 </li>
 
                 <li class="row" ng-show="vm.associateType === 'Administrator' || vm.associateType === 'Assistant'">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12"># of Managers Supported:</label>
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12"># of Managers Supported</label>
                     <input class="col-lg-6 col-md-6 col-sm-6 col-xs-11" min="1" max="9999999" type="number" ng-model="vm.dataContext.userInfo.managersNumber" ng-class="{ 'required': !vm.dataContext.userInfo.managersNumber ||  vm.dataContext.userInfo.managersNumber <= 0 }" />
                     <b ng-show="!vm.dataContext.userInfo.managersNumber ||  vm.dataContext.userInfo.managersNumber <= 0" class="asterisk">*</b>
                 </li>
 
                 <li class="row" ng-show="vm.associateType === 'Administrator' || vm.associateType === 'Assistant'">
-                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">Supervisor Name:</label>
+                    <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-12">Supervisor Name</label>
                     <input class="col-lg-4 col-md-6 col-sm-6 col-xs-11" type="text" ng-model="vm.dataContext.userInfo.supervisorName" ng-class="{ 'required': !vm.dataContext.userInfo.supervisorName }" />
                     <b ng-show="!vm.dataContext.userInfo.supervisorName" class="asterisk">*</b>
                 </li>

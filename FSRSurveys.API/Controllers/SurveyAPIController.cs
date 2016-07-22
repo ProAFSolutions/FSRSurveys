@@ -20,7 +20,7 @@ namespace FSRSurveys.API.Controllers
 
 
         [HttpGet]
-        [Route("categories/{email}")]
+        [Route("categories")]
         public IHttpActionResult RequestCategories()
         {
             var result = _surveyService.GetCategories().Select(C => new
@@ -33,30 +33,37 @@ namespace FSRSurveys.API.Controllers
             return Ok(result);
         }
 
-        
+        [HttpGet]
+        [Route("check/{email}")]
+        public IHttpActionResult CheckEmail(string email)
+        {
+            return Ok(_surveyService.CheckIfUserExists(email));
+        }
+
+
         [HttpGet]
         [Route("questionnaire-data/{email}")]
         public IHttpActionResult RequestUserData(string email)
         {
-            var result = _surveyService.GetUserInfo(email);
+            var userinfo = _surveyService.GetUserInfo(email);
+            var result = new QuestionnaireDataJson();
 
-            if (result != null) {
+            if (userinfo != null) {
 
-                var data = new QuestionnaireDataJson(); 
+                if (userinfo is ManagerInfo)
+                    result.managerInfo = new ManagerInfoJson((ManagerInfo)userinfo);
 
-                if (result is ManagerInfo) 
-                    data.managerInfo = new ManagerInfoJson((ManagerInfo) result);
-
-                else if(result is AdminInfo)
-                    data.adminInfo = new AdminInfoJson((AdminInfo) result);
+                else if (userinfo is AdminInfo)
+                    result.adminInfo = new AdminInfoJson((AdminInfo)userinfo);
 
                 else
-                    data.assistantInfo = new AssistantInfoJson((AssistantInfo)result);
+                    result.assistantInfo = new AssistantInfoJson((AssistantInfo)userinfo);
 
-                data.items = new List<QuestionnaireItemJson>();
-                foreach (var SA in result.SurveyAnswers) {
+                result.items = new List<QuestionnaireItemJson>();
+                foreach (var SA in userinfo.SurveyAnswers)
+                {
 
-                    data.items.Add(new QuestionnaireItemJson
+                    result.items.Add(new QuestionnaireItemJson
                     {
                         category = new CategoryJson
                         {
@@ -74,10 +81,9 @@ namespace FSRSurveys.API.Controllers
                         }
                     });
                 }
-                return Ok(data);
             }
 
-            return Ok("empty");
+            return Ok(result);
         }
 
         [HttpOptions, HttpPost]

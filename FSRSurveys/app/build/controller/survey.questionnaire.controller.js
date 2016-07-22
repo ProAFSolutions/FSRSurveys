@@ -21,7 +21,6 @@ var survey;
                 'Joint Mgr & Asst Mgr & Admin', 'Other', 'N/A'
             ];
             this.activityPerformedOptions = ['Manual', 'Electronic', 'Email', 'N/A'];
-            this.populateQuestionnaire();
             this.calculateTotals();
         };
         QuestionnaireController.prototype.initTotals = function () {
@@ -29,20 +28,6 @@ var survey;
             this.totalActivityOwner = 0;
             this.totalActivityPerformed = 0;
             this.totalTechnology = 0;
-        };
-        QuestionnaireController.prototype.populateQuestionnaire = function () {
-            var _this = this;
-            this.dataContext.questionnaireData = new Array();
-            this.surveyService.resolveCategories(this.dataContext.userInfo.email).then(function (response) {
-                var categories = response;
-                for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
-                    var category = categories_1[_i];
-                    _this.dataContext.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
-                }
-                if (categories[categories.length - 1].name !== 'Other') {
-                    categories.push(new survey.Category(0, 'Other', ''));
-                }
-            });
         };
         QuestionnaireController.prototype.calculateTotals = function () {
             var _this = this;

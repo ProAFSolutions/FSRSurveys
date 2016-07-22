@@ -11,14 +11,16 @@
         public marketName: string;
         public city: string;
         public propertiesTotal: number; 
-        public totalNumberBoardMeetingAttendedPerYear: number;  
-
+        public totalNumberBoardMeetingAttendedPerYear: number; 
+        public recoveryPassword: string;
+        
         public market: Market;
 
         constructor() {
             this.unitsTotal = 0;           
             this.propertiesTotal = 0;
-            this.totalNumberBoardMeetingAttendedPerYear = 0;         
+            this.totalNumberBoardMeetingAttendedPerYear = 0;       
+            this.recoveryPassword = ''; 
         } 
 
         public isNullOrEmpty(value: string) {

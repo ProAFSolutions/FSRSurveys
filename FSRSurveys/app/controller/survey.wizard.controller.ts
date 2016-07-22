@@ -8,7 +8,7 @@
         public visiblePrev: boolean;
         public visibleFinish: boolean;  
         public isUserInfoValid: boolean;
-        public isSaving: boolean;
+        public isBusy: boolean;
         public isRunningMobile = false;
         
                
@@ -24,7 +24,7 @@
             this.visibleSubmit = false;
             this.visiblePrev = false;
             this.visibleFinish = false;
-            this.isSaving = false;          
+            this.isBusy = false;          
             this.checkIfUserDirty();                      
         } 
 
@@ -39,15 +39,44 @@
         }
 
         public submitClick(): void {
-            this.isSaving = true;
+            this.isBusy = true;
             this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(response => {
-                this.isSaving = false;
+                this.isBusy = false;
                 if (response && response === 'success') {                                       
                    this.stepClick(++this.currentStep);
                 }
             }, error => {
-                this.isSaving = false;
+                this.isBusy = false;
+                console.log(error);
             });              
+        }
+
+        public checkIfUserDirty(): void {
+            var currentController = this;
+            this.$scope.$watch(() => this.dataContext.userInfo, (newValue: any, oldValue: any) => {
+                if (newValue != oldValue) {
+                    currentController.isUserInfoValid = newValue.validate();
+                }
+            }, true);
+        }
+
+        private populateQuestionnaire(): void {
+            this.isBusy = true;
+            this.surveyService.resolveCategories().then(response => {
+                let categories = response;
+                for (var category of categories) {
+                    this.dataContext.questionnaireData.push(new QuestionnaireItem(category, new Answer()));
+                }
+
+                if (categories[categories.length - 1].name !== 'Other') {
+                    this.dataContext.questionnaireData.push(new QuestionnaireItem(new Category(0, 'Other', ''), new Answer()));
+                }
+                this.isBusy = false;
+
+            }, error => {
+                this.isBusy = false;
+                console.log(error);
+            });
         }
 
         public closeClick(): void {
@@ -73,6 +102,9 @@
                 } break;
 
                 case 2: {
+                    if (this.dataContext.questionnaireData == null || this.dataContext.questionnaireData.length == 0) {
+                        this.populateQuestionnaire();
+                    }
                     this.visibleNext = false;
                     this.visibleSubmit = true;
                     this.visiblePrev = true;
@@ -86,17 +118,7 @@
                     this.visibleFinish = true;
                 } break;
             }
-        }
-
-        public checkIfUserDirty(): void {
-            var currentController = this;
-            this.$scope.$watch(() => this.dataContext.userInfo, (newValue: any, oldValue: any) => {
-                if (newValue != oldValue) {
-                    currentController.isUserInfoValid = newValue.validate();
-                }               
-            }, true);
-        }
-       
+        }       
     }
 
     angular.module("survey")

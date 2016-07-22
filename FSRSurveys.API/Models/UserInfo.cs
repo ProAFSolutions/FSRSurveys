@@ -30,6 +30,7 @@ namespace FSRSurveys.API.Models
         public int PropertiesTotal { get; set; }
         public int TotalNumberBoardMeetingAttendedPerYear { get; set; }
         public string City { get; set; }
+        public string RecoveryPassword { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SurveyAnswer> SurveyAnswers { get; set; }

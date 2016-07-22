@@ -8014,17 +8014,19 @@ input[type="email"],
 input[type="password"],
 textarea,
 textarea.form-control {
-  height: 30px;
+  height: 34px;
   margin: 0;
   padding: 10px;
   vertical-align: middle;
   background: #fff;
   border: 1px solid #ddd;
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 300;
-  line-height: 30px;
+  line-height: 20px;
   color: #888;
+  padding-top: 8px;
+  margin-bottom: 5px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -8877,7 +8879,7 @@ html, body {
 
 body {
   background-color: #0076A2;
-  font-size: 12px; }
+  font-size: 13px; }
   body #loader {
     opacity: 0.9;
     width: 100%;
@@ -8906,9 +8908,12 @@ body {
   body small {
     font-size: 10px !important; }
   body .btn-default {
-    color: #888; }
+    color: #888;
+    font-size: 12px;
+    padding-top: 8px; }
   body .btn-primary {
-    background-color: #0098D2 !important; }
+    background-color: #0098D2 !important;
+    font-size: 12px; }
   body .btn-group .btn-primary {
     background-color: #58585B !important;
     border-color: #ccc !important;
@@ -8970,6 +8975,19 @@ body {
         background-color: #0098D2; }
       body .form-box .wizard-pages .page1 fieldset label {
         text-align: left; }
+      body .form-box .wizard-pages .page1 fieldset .fa-info-circle {
+        font-size: 20px;
+        cursor: pointer;
+        margin-left: 4px;
+        color: #000; }
+      body .form-box .wizard-pages .page1 fieldset .fa-refresh {
+        font-size: 26px;
+        cursor: pointer;
+        color: #0098D2;
+        margin-left: 5px;
+        float: left; }
+        body .form-box .wizard-pages .page1 fieldset .fa-refresh:hover {
+          color: #ccc; }
       body .form-box .wizard-pages .page1 fieldset .asterisk {
         padding-left: 5px;
         color: red;
@@ -8999,7 +9017,8 @@ body {
               body .form-box .wizard-pages .page2 ul.categories .category .category-field input[type="text"], body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea {
                 width: 100%; }
               body .form-box .wizard-pages .page2 ul.categories .category .category-field input[type="text"] {
-                padding: 15px 10px 15px 10px; }
+                padding: 8px 10px 15px 10px;
+                line-height: 20px; }
               body .form-box .wizard-pages .page2 ul.categories .category .category-field .left {
                 float: left; }
               body .form-box .wizard-pages .page2 ul.categories .category .category-field textarea.no-border {
@@ -9021,10 +9040,13 @@ body {
               body .form-box .wizard-pages .page2 ul.categories .category .category-field .warning-message {
                 display: block !important;
                 position: absolute;
-                top: -8px;
-                left: 178px;
-                width: 200px;
+                top: 24px;
+                left: 12px;
+                width: 198px;
                 z-index: 999; }
+                body .form-box .wizard-pages .page2 ul.categories .category .category-field .warning-message .alert-danger {
+                  height: 20px;
+                  line-height: 0; }
               body .form-box .wizard-pages .page2 ul.categories .category .category-field .rzslider .rz-pointer {
                 background-color: #0098D2; }
               body .form-box .wizard-pages .page2 ul.categories .category .category-field .rzslider .rz-ceil, body .form-box .wizard-pages .page2 ul.categories .category .category-field .rzslider .rz-floor {

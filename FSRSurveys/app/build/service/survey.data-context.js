@@ -3,6 +3,7 @@ var survey;
     var DataContext = (function () {
         function DataContext() {
             this.sumbitBtnDisabled = true;
+            this.questionnaireData = new Array();
         }
         return DataContext;
     }());

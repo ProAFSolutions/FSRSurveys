@@ -18,7 +18,7 @@ var survey;
             this.visibleSubmit = false;
             this.visiblePrev = false;
             this.visibleFinish = false;
-            this.isSaving = false;
+            this.isBusy = false;
             this.checkIfUserDirty();
         };
         //Events
@@ -30,14 +30,42 @@ var survey;
         };
         WizardController.prototype.submitClick = function () {
             var _this = this;
-            this.isSaving = true;
+            this.isBusy = true;
             this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(function (response) {
-                _this.isSaving = false;
+                _this.isBusy = false;
                 if (response && response === 'success') {
                     _this.stepClick(++_this.currentStep);
                 }
             }, function (error) {
-                _this.isSaving = false;
+                _this.isBusy = false;
+                console.log(error);
+            });
+        };
+        WizardController.prototype.checkIfUserDirty = function () {
+            var _this = this;
+            var currentController = this;
+            this.$scope.$watch(function () { return _this.dataContext.userInfo; }, function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    currentController.isUserInfoValid = newValue.validate();
+                }
+            }, true);
+        };
+        WizardController.prototype.populateQuestionnaire = function () {
+            var _this = this;
+            this.isBusy = true;
+            this.surveyService.resolveCategories().then(function (response) {
+                var categories = response;
+                for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
+                    var category = categories_1[_i];
+                    _this.dataContext.questionnaireData.push(new survey.QuestionnaireItem(category, new survey.Answer()));
+                }
+                if (categories[categories.length - 1].name !== 'Other') {
+                    _this.dataContext.questionnaireData.push(new survey.QuestionnaireItem(new survey.Category(0, 'Other', ''), new survey.Answer()));
+                }
+                _this.isBusy = false;
+            }, function (error) {
+                _this.isBusy = false;
+                console.log(error);
             });
         };
         WizardController.prototype.closeClick = function () {
@@ -60,6 +88,9 @@ var survey;
                     break;
                 case 2:
                     {
+                        if (this.dataContext.questionnaireData == null || this.dataContext.questionnaireData.length == 0) {
+                            this.populateQuestionnaire();
+                        }
                         this.visibleNext = false;
                         this.visibleSubmit = true;
                         this.visiblePrev = true;
@@ -75,15 +106,6 @@ var survey;
                     }
                     break;
             }
-        };
-        WizardController.prototype.checkIfUserDirty = function () {
-            var _this = this;
-            var currentController = this;
-            this.$scope.$watch(function () { return _this.dataContext.userInfo; }, function (newValue, oldValue) {
-                if (newValue != oldValue) {
-                    currentController.isUserInfoValid = newValue.validate();
-                }
-            }, true);
         };
         return WizardController;
     }(survey.AbstractController));
