@@ -6,7 +6,7 @@ html, body {
 
 body {
             background-color: #0076A2;
-            font-size: 14px;
+            font-size: 12px;
 
             #loader
             {
@@ -21,12 +21,27 @@ body {
                 
                 .loader-indicator{
                     position: absolute;
-                    top: calc(50% - 25px);
-                    left: calc(50% - 25px);
+                    top: calc(50% - 60px);
+                    left: calc(50% - 50px);
+                    
+                    img.loading-gif{
+                        position: absolute;
+                        top: 42px;
+                        left: 35px;
+                        width: 28px;
+                    }
+
+                    .loading-text{
+                        font-size: 12px;
+                        line-height: 15px;
+                        margin-top: 10px;
+                        color: $color-gray;                       
+                    }
                 }
                  
             }
 
+           
             ul{
                 list-style-type: none;
             }
@@ -111,8 +126,10 @@ body {
                 .f1-steps{ 
                     clear: both;
                        
-                    .f1-progress{                 
-                         .f1-progress-line {
+                    .f1-progress{     
+                          top: 25px;            
+                         
+                          .f1-progress-line {
                              background-color: $color-blue;
                           }   
                     }           
@@ -156,13 +173,15 @@ body {
 
                     .page1{
                         fieldset{
-                           label{
-                                text-align: left;                                    
+                           
+                            label{
+                                text-align: left;                                                
                             }
 
                             .asterisk{
                                 padding-left: 5px;
                                 color: red;
+                                float: left;
                             }
 
                             input.required{
@@ -170,6 +189,10 @@ body {
                                 border-color: #ebccd1 !important;
                             }
 
+                           .separator{
+                               margin-left: 10%;
+                               margin-right: 10%;
+                           }
 
                            .dropdown-container{                     
                                padding: 0 0 5px 0;
@@ -180,7 +203,7 @@ body {
                                         border-color: #ebccd1 !important;
                                    }
                                }
-                           }
+                           }                           
                         }
                     }
 
@@ -325,7 +348,19 @@ body {
 
   //X-Small & Small screens
   .mobile{
-        .wizard-pages{                
+        .wizard-pages{
+                
+                .page1{
+                    .user-fields{
+                        label{
+                            margin-top: 10px;
+                            margin-bottom: 0;   
+                            padding-left: 0; 
+                            height: 24px;     
+                        }                                   
+                    }
+                }
+                            
                 .page2{
                     .categories{
                          .category{                                

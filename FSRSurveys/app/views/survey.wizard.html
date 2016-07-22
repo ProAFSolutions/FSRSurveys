@@ -1,10 +1,10 @@
 ﻿<div ng-controller="WizardController as vm">
 
-    <div id="loader">
+    <div id="loader" ng-show="vm.isSaving">
         <div class="loader-indicator">
-            <img width="50px" src="/assets/img/loading.gif" />
-            <img src="../../assets/img/logo.png" />
-            <div>Please wait while your answers are being saved...</div>
+            <img src="/assets/img/logo.png" />
+            <img class="loading-gif" src="/assets/img/loading.gif" />
+            <div class="loading-text">Please wait...</div>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                                 </div>
                                 <div ng-if="!vm.isRunningMobile">
                                     <div ng-include="'app/views/survey.questionnaire.desktop.html'"></div>
-                                </div>                               
+                                </div>
                             </div>
 
                             <div class="page3" ng-show="vm.currentStep == 3">

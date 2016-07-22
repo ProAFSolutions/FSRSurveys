@@ -8877,7 +8877,7 @@ html, body {
 
 body {
   background-color: #0076A2;
-  font-size: 14px; }
+  font-size: 12px; }
   body #loader {
     opacity: 0.9;
     width: 100%;
@@ -8889,8 +8889,18 @@ body {
     z-index: 100000; }
     body #loader .loader-indicator {
       position: absolute;
-      top: calc(50% - 25px);
-      left: calc(50% - 25px); }
+      top: calc(50% - 60px);
+      left: calc(50% - 50px); }
+      body #loader .loader-indicator img.loading-gif {
+        position: absolute;
+        top: 42px;
+        left: 35px;
+        width: 28px; }
+      body #loader .loader-indicator .loading-text {
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 10px;
+        color: #58585B; }
   body ul {
     list-style-type: none; }
   body small {
@@ -8935,8 +8945,10 @@ body {
       margin-top: 20px; }
     body .form-box .f1-steps {
       clear: both; }
-      body .form-box .f1-steps .f1-progress .f1-progress-line {
-        background-color: #0098D2; }
+      body .form-box .f1-steps .f1-progress {
+        top: 25px; }
+        body .form-box .f1-steps .f1-progress .f1-progress-line {
+          background-color: #0098D2; }
       body .form-box .f1-steps .f1-step.active .f1-step-icon {
         background-color: #0098D2;
         color: #fff; }
@@ -8960,10 +8972,14 @@ body {
         text-align: left; }
       body .form-box .wizard-pages .page1 fieldset .asterisk {
         padding-left: 5px;
-        color: red; }
+        color: red;
+        float: left; }
       body .form-box .wizard-pages .page1 fieldset input.required {
         background-color: #f2dede !important;
         border-color: #ebccd1 !important; }
+      body .form-box .wizard-pages .page1 fieldset .separator {
+        margin-left: 10%;
+        margin-right: 10%; }
       body .form-box .wizard-pages .page1 fieldset .dropdown-container {
         padding: 0 0 5px 0; }
         body .form-box .wizard-pages .page1 fieldset .dropdown-container.required .btn-default {
@@ -9045,6 +9061,12 @@ body {
               text-align: center; }
       body .form-box .wizard-pages .page3 .well {
         font-size: 24px; }
+
+.mobile .wizard-pages .page1 .user-fields label {
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding-left: 0;
+  height: 24px; }
 
 .mobile .wizard-pages .page2 .categories .category {
   border-bottom: none; }

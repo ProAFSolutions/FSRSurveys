@@ -8,7 +8,9 @@
         public visiblePrev: boolean;
         public visibleFinish: boolean;  
         public isUserInfoValid: boolean;
+        public isSaving: boolean;
         public isRunningMobile = false;
+        
                
         constructor($scope: ng.IScope, dataContext: DataContext, surveyService: SurveyService) {
             super($scope, dataContext, surveyService);
@@ -21,7 +23,8 @@
             this.visibleNext = true;
             this.visibleSubmit = false;
             this.visiblePrev = false;
-            this.visibleFinish = false;            
+            this.visibleFinish = false;
+            this.isSaving = false;          
             this.checkIfUserDirty();                      
         } 
 
@@ -36,10 +39,14 @@
         }
 
         public submitClick(): void {
+            this.isSaving = true;
             this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(response => {
-                if (response && response === 'success') {                    
+                this.isSaving = false;
+                if (response && response === 'success') {                                       
                    this.stepClick(++this.currentStep);
                 }
+            }, error => {
+                this.isSaving = false;
             });              
         }
 

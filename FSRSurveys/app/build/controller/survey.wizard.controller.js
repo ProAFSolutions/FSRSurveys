@@ -18,6 +18,7 @@ var survey;
             this.visibleSubmit = false;
             this.visiblePrev = false;
             this.visibleFinish = false;
+            this.isSaving = false;
             this.checkIfUserDirty();
         };
         //Events
@@ -29,10 +30,14 @@ var survey;
         };
         WizardController.prototype.submitClick = function () {
             var _this = this;
+            this.isSaving = true;
             this.surveyService.saveSurvey(this.dataContext.userInfo, this.dataContext.questionnaireData).then(function (response) {
+                _this.isSaving = false;
                 if (response && response === 'success') {
                     _this.stepClick(++_this.currentStep);
                 }
+            }, function (error) {
+                _this.isSaving = false;
             });
         };
         WizardController.prototype.closeClick = function () {

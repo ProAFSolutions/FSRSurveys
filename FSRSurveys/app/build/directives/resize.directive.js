@@ -12,6 +12,8 @@ var survey;
         };
         ResizeDirective.prototype.link = function (scope, elements, attrs) {
             $(window).on("load resize", function () {
+                if (window.innerWidth < 480) {
+                }
                 if (window.innerWidth < 992) {
                     scope.resizeMobile = true;
                 }
