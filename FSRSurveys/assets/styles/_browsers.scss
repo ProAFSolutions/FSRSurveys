@@ -1,0 +1,18 @@
+﻿body {
+
+    &.chrome {
+
+    }
+    
+    &.msie, &.msedge {
+       
+        input[type='text'], 
+        input[type='number'], 
+        input[type='email'], 
+        input[type='password'], 
+        textarea{
+            padding-top: 7px;
+        }
+    }
+
+}

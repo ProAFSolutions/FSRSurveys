@@ -1,6 +1,7 @@
 ﻿namespace survey {    
     
-    export class DataContext {             
+    export class DataContext {    
+        public isRunningMobile = false;         
         public sumbitBtnDisabled = true;
         public userInfo: any; 
         public questionnaireData = new Array<QuestionnaireItem>();

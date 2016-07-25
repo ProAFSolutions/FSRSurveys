@@ -11,11 +11,7 @@
         }
         public link(scope: any, elements: ng.IAugmentedJQuery, attrs: ng.IAttributes): void {
             $(window).on("load resize", () => {               
-                if (window.innerWidth < 480) {
-
-                } 
-
-                if (window.innerWidth < 992) {                                       
+                if (window.innerWidth < 768) {                                       
                     scope.resizeMobile = true;                    
                 } else {
                     scope.resizeMobile = false;

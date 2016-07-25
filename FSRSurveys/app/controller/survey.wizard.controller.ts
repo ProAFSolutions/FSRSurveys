@@ -8,9 +8,7 @@
         public visiblePrev: boolean;
         public visibleFinish: boolean;  
         public isUserInfoValid: boolean;
-        public isBusy: boolean;
-        public isRunningMobile = false;
-        
+        public isBusy: boolean;        
                
         constructor($scope: ng.IScope, dataContext: DataContext, surveyService: SurveyService) {
             super($scope, dataContext, surveyService);

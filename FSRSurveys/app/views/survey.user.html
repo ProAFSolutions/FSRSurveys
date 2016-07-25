@@ -18,7 +18,7 @@
                     <label class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-1 col-sm-4 col-xs-6">{{vm.associateType === "Manager" ? "Property Manager Email"  : vm.associateType === "Administrator" ? "Property Administrator Email:" : "Assistant Manager Email:" }}</label>
                     <input placeholder="Ex: john.smith@fsresidential.com" class="col-lg-4 col-md-6 col-sm-6 col-xs-11" ng-blur="vm.checkUser()" ng-model="vm.dataContext.userInfo.email" type="text" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-class="{ 'required': !vm.dataContext.userInfo.email }" />
                     <b ng-show="!vm.dataContext.userInfo.email" class="asterisk"><span ng-show="userForm.email.$error.pattern">Invalid</span>*</b>
-                    <i class="fa fa-refresh" title="Reload Data" uib-tooltip="The email address already exists, click this button if you want to reload your information" ng-show="vm.emailExists && vm.dataContext.userInfo.email" ng-click="vm.reloadDataClick()"></i>
+                    <!--<i class="fa fa-refresh" title="Reload Data" uib-tooltip="The email address already exists, click this button if you want to reload your information" ng-show="vm.emailExists && vm.dataContext.userInfo.email" ng-click="vm.reloadDataClick()"></i>-->
                 </li>
 
                 <!--<li class="row">

@@ -1,8 +1,31 @@
 ﻿<div ng-controller="QuestionnaireController as vm">
     <ul class="categories">
+        <li class="category-header">
+            <div class="row">              
+
+                <div class="col-sm-4">Job Activity</div>
+                <div class="col-sm-2">
+                    <!--<i class="fa fa-info-circle" uib-tooltip="% Time & Effort"></i>-->
+                    % of time spent performing the following activities in a year:
+                </div>
+                <div class="col-sm-2">
+                    <!--<i class="fa fa-info-circle" uib-tooltip="Activity Owner"></i>-->
+                    Who is primarily responsible for performing each activity:
+                </div>
+                <div class="col-sm-2">
+                    <!--<i class="fa fa-info-circle" uib-tooltip="Method"></i>-->
+                    Is this activity performed manually or using technology:
+                </div>
+                <div class="col-sm-2">
+                    <!--<i class="fa fa-info-circle" uib-tooltip="Technology Used"></i>-->
+                    If technology is being used, name the vendor/program:
+                </div>
+            </div>
+        </li>
+
         <li class="category" ng-repeat="questionnaireItem in vm.dataContext.questionnaireData">
             <div class="row">
-                <div class="category-field col-md-4">
+                <div class="category-field col-sm-4 col-xs-12">                   
                     <div ng-if="questionnaireItem.category.id > 0 && questionnaireItem.category.name !== 'Other'">
                         <b>{{questionnaireItem.category.name}}: </b>{{questionnaireItem.category.jobActivity}}
                     </div>
@@ -10,36 +33,36 @@
                         <b class="left">{{questionnaireItem.category.name}}: </b><textarea ng-model="questionnaireItem.category.jobActivity" placeholder="Type description here..." class="no-border"></textarea>
                     </div>
                 </div>
-                <div class="category-field col-md-2">
+                <div class="category-field col-sm-2 col-xs-12">
                     <div style="display: none" ng-class="{ 'warning-message': (vm.percentageTimeEffort > 100 && questionnaireItem.answer.timeEffort > 0) }">
                         <uib-alert type="danger">Total time effort exceeds 100%</uib-alert>
                     </div>
                     <ui-select ng-model="questionnaireItem.answer.timeEffort" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Slect Time Effort">{{$select.selected}} %</ui-select-match>
+                        <ui-select-match class="ui-select-match" placeholder="Time Effort:">{{$select.selected}} %</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="percentageTimeEffortItem in vm.percentageTimeEffortOptions">
                             <div ng-bind-html="percentageTimeEffortItem + ' %'"></div>
                         </ui-select-choices>
                     </ui-select>
                     <!--<rzslider rz-slider-model="questionnaireItem.answer.timeEffort" rz-slider-options="vm.sliderOptions"></rzslider>-->
                 </div>
-                <div class="category-field col-md-2">
+                <div class="category-field col-sm-2 col-xs-12">
                     <ui-select ng-model="questionnaireItem.answer.activityOwner" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Select Acivity Owner">{{$select.selected}}</ui-select-match>
+                        <ui-select-match class="ui-select-match" placeholder="Acivity Owner:">{{$select.selected}}</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="activityOwnerItem in vm.activityOwnerOptions | filter: $select.search">
                             <div ng-bind-html="activityOwnerItem | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
                 </div>
-                <div class="category-field col-md-2">
+                <div class="category-field col-sm-2 col-xs-12">
                     <ui-select ng-model="questionnaireItem.answer.activityPerformed" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Select Method">{{$select.selected}}</ui-select-match>
+                        <ui-select-match class="ui-select-match" placeholder="Select Method:">{{$select.selected}}</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="activityPerformedItem in vm.activityPerformedOptions | filter: $select.search">
                             <div ng-bind-html="activityPerformedItem | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
                 </div>
-                <div class="category-field col-md-2">
-                    <input type="text" placeholder="Select Technology Used" ng-model="questionnaireItem.answer.technology" />
+                <div class="category-field col-sm-2 col-xs-12">
+                    <input type="text" placeholder="Technology Used:" ng-model="questionnaireItem.answer.technology" />
                 </div>
             </div>
             <!--<i class="fa fa-times-circle" title="Remove questionnaire item" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>-->
@@ -47,32 +70,30 @@
 
         <li class="category-footer">
             <div class="row">
-                <div class="col-md-4">
-                    <div>TOTALS:</div>
-                    <!--<button type="button" class="btn btn-primary" ng-click="vm.addQuestionnaireItemClick()">
-                        <span class="fa fa-plus-circle"></span> Add Other
-                    </button>-->
+                <div class="col-sm-4">
+                    <div>TOTALS:</div>                   
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
                     <div class="completed">
                         <label>Time Effort:</label>
                         <uib-progressbar ng-class="{red: vm.percentageTimeEffort > 100 }" max="100" value="vm.percentageTimeEffort"><span class="progress-text">{{vm.percentageTimeEffort}} %</span></uib-progressbar>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
                     <label>Acivity Owner:</label>
                     <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
                     <label>Method:</label>
                     <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
                     <label>Technology Used:</label>
                     <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
             </div>
-        </li>
+        </li>     
+
     </ul>
 </div>
 

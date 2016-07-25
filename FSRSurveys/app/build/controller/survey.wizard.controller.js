@@ -9,7 +9,6 @@ var survey;
         __extends(WizardController, _super);
         function WizardController($scope, dataContext, surveyService) {
             _super.call(this, $scope, dataContext, surveyService);
-            this.isRunningMobile = false;
             this.init();
         }
         WizardController.prototype.init = function () {

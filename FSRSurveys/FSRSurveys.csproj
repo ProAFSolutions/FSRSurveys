@@ -22,8 +22,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\views\survey.questionnaire.desktop.html" />
-    <Content Include="app\views\survey.questionnaire.mobile.html" />
+    <Content Include="app\views\survey.questionnaire.html" />
     <Content Include="app\views\survey.menu.html" />
     <Content Include="app\views\survey.wizard.html" />
     <Content Include="app\views\survey.user.html" />
@@ -159,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\build\" />
+    <Folder Include="app\definitely-typed\" />
     <Folder Include="dist\" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +167,7 @@
     <TypeScriptCompile Include="app\controller\survey.abstract.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.user.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.wizard.controller.ts" />
+    <TypeScriptCompile Include="app\directives\browser-detection.directive.ts" />
     <TypeScriptCompile Include="app\directives\resize.directive.ts" />
     <TypeScriptCompile Include="app\model\survey.market.ts" />
     <TypeScriptCompile Include="app\model\survey.questionnaireData.ts" />

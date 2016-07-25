@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="top-content" resize resize-mobile="vm.isRunningMobile" ng-class="{ 'mobile': vm.isRunningMobile, 'desktop': !vm.isRunningMobile }">
+    <div class="top-content"  resize resize-mobile="vm.dataContext.isRunningMobile" ng-class="{ 'mobile': vm.dataContext.isRunningMobile, 'desktop': !vm.dataContext.isRunningMobile }">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 col-md-12 form-box">
@@ -43,12 +43,7 @@
                             </div>
 
                             <div class="page2" ng-show="vm.currentStep == 2">
-                                <div ng-if="vm.isRunningMobile">
-                                    <div ng-include="'app/views/survey.questionnaire.mobile.html'"></div>
-                                </div>
-                                <div ng-if="!vm.isRunningMobile">
-                                    <div ng-include="'app/views/survey.questionnaire.desktop.html'"></div>
-                                </div>
+                                <div ng-include="'app/views/survey.questionnaire.html'"></div>
                             </div>
 
                             <div class="page3" ng-show="vm.currentStep == 3">
@@ -58,7 +53,7 @@
                             </div>
 
                             <div class="f1-buttons">
-                                <button type="button" ng-show="vm.visiblePrev" ng-click="vm.prevClick()" class="btn btn-previous"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous</button>
+                                <button type="button" ng-show="vm.visiblePrev" ng-click="vm.prevClick()" class="btn btn-previous"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Back</button>
                                 <button type="button" ng-disabled="!vm.isUserInfoValid" ng-show="vm.visibleNext" ng-click="vm.nextClick()" class="btn btn-next">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
                                 <button type="button" ng-disabled="vm.dataContext.sumbitBtnDisabled" ng-show="vm.visibleSubmit" ng-click="vm.submitClick()" class="btn btn-submit"><i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;Submit</button>
                                 <button type="button" ng-show="vm.visibleFinish" ng-click="vm.closeClick()" class="btn btn-submit"><i class="fa fa-times-circle"></i>&nbsp;&nbsp;Close</button>
