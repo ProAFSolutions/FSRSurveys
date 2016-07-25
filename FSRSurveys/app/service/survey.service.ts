@@ -1,7 +1,7 @@
 ﻿namespace survey { 
 
-    //const SURVEY_API_BASE_URL = "http://localhost:23611/api/survey";  
-    const SURVEY_API_BASE_URL = "http://rolesurvey.fsresidential.com/api/api/survey";    
+    const SURVEY_API_BASE_URL = "http://localhost:23611/api/survey";  
+    //const SURVEY_API_BASE_URL = "http://rolesurvey.fsresidential.com/api/api/survey";    
 
     interface ISurveyService {
 

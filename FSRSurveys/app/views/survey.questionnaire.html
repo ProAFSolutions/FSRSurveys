@@ -14,11 +14,11 @@
                 </div>
                 <div class="col-sm-2">
                     <!--<i class="fa fa-info-circle" uib-tooltip="Method"></i>-->
-                    Is this activity performed manually or using technology:
+                    Is a vendor solution/technology tool used to assist with this process?:
                 </div>
                 <div class="col-sm-2">
                     <!--<i class="fa fa-info-circle" uib-tooltip="Technology Used"></i>-->
-                    If technology is being used, name the vendor/program:
+                    If technology is being used, name the vendor solution / technology tool:
                 </div>
             </div>
         </li>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="category-field col-sm-2 col-xs-12">
                     <ui-select ng-model="questionnaireItem.answer.activityPerformed" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Select Method:">{{$select.selected}}</ui-select-match>
+                        <ui-select-match class="ui-select-match" placeholder="Select:">{{$select.selected}}</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="activityPerformedItem in vm.activityPerformedOptions | filter: $select.search">
                             <div ng-bind-html="activityPerformedItem | highlight: $select.search"></div>
                         </ui-select-choices>
@@ -87,10 +87,10 @@
                     <label>Method:</label>
                     <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
                 </div>
-                <div class="col-sm-2">
+                <!--<div class="col-sm-2">
                     <label>Technology Used:</label>
                     <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
-                </div>
+                </div>-->
             </div>
         </li>     
 

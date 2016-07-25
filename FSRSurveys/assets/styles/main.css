@@ -8285,7 +8285,7 @@ body > .ui-select-bootstrap.open {
   /* Standard Bootstrap dropdown z-index */ }
 
 .dropdown-menu {
-  font-size: 12px; }
+  font-size: 14px; }
 
 .ui-select-multiple.ui-select-bootstrap {
   height: auto;
@@ -8753,6 +8753,9 @@ body {
       body .form-box .wizard-pages button.btn-next,
       body .form-box .wizard-pages button.btn-submit {
         background-color: #0098D2; }
+      body .form-box .wizard-pages #associate-dropdown .ui-select-toggle {
+        background-color: #0098D2;
+        color: #fff; }
       body .form-box .wizard-pages .page1 fieldset label {
         text-align: left; }
       body .form-box .wizard-pages .page1 fieldset .fa-info-circle {
@@ -8776,11 +8779,11 @@ body {
         background-color: #f2dede !important;
         border-color: #ebccd1 !important; }
       body .form-box .wizard-pages .page1 fieldset .separator {
-        margin-left: 10%;
-        margin-right: 10%; }
+        margin-left: 15px;
+        margin-right: 15px; }
       body .form-box .wizard-pages .page1 fieldset .dropdown-container {
         padding: 0 0 5px 0; }
-        body .form-box .wizard-pages .page1 fieldset .dropdown-container.required .btn-default {
+        body .form-box .wizard-pages .page1 fieldset .dropdown-container.required .ui-select-toggle {
           background-color: #f2dede !important;
           border-color: #ebccd1 !important; }
       body .form-box .wizard-pages .page2 {
@@ -8889,6 +8892,9 @@ body {
   float: left;
   width: 40%; }
 
+.desktop .wizard-pages .dropdown-menu {
+  font-size: 13px; }
+
 .desktop .wizard-pages .page2 .categories .category-header {
   border-bottom: solid 1px #ddd;
   border-top: solid 1px #ddd; }
@@ -8920,6 +8926,10 @@ body {
   display: none; }
 
 @media all and (min-width: 768px) and (max-width: 992px) {
+  .dropdown-menu {
+    font-size: 12px; }
+  label.two-lines {
+    line-height: 18px; }
   .page2 {
     font-size: 11px !important; }
     .page2 .categories .category-header .row > div,

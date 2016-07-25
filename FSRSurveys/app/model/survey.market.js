@@ -1,8 +1,9 @@
 var survey;
 (function (survey) {
     var Market = (function () {
-        function Market(marketName) {
-            this.name = marketName;
+        function Market(name, country) {
+            this.name = name;
+            this.country = country;
         }
         return Market;
     }());

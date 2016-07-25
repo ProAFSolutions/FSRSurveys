@@ -6,7 +6,8 @@
         public marketSelected: Market;
         public marketsOptions: Array<Market>;
         public propertyTypeOptions: Array<string>;      
-        public associateType: string;
+        public associateType: any;
+        public associateOptions: Array<any>;
         public emailExists = false;
        
 
@@ -16,10 +17,27 @@
         }
 
         private init(): void {            
-            this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mix of Sited and Non-Sited'];
-            this.associateType = "Manager";
+            this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mix of Sited and Non-Sited'];            
+
+            this.associateOptions = [
+                {
+                    name: 'Property Manager',
+                    value: 'Manager'
+                },
+                {
+                    name: 'Assistant Manager',
+                    value: 'Assistant'
+                },
+                {
+                    name: 'Property Administrator',
+                    value: 'Administrator'
+                }                
+            ];  
+
+            this.associateType = this.associateOptions[0];
+
             this.dataContext.userInfo = new ManagerInfo();
-            this.dataContext.userInfo.associateType = this.associateType;
+            this.dataContext.userInfo.associateType = this.associateType.value;
             this.populateMarkets();
             this.setupWatchers();
         } 
@@ -27,15 +45,15 @@
         private setupWatchers(): void{
             var currentController = this;
 
-            this.$scope.$watch(() => this.associateType, (newValue: string, oldValue: string) => {
-                if (newValue != oldValue) {
-                    if (newValue === 'Manager') {
+            this.$scope.$watch(() => this.associateType, (newValue: any, oldValue: any) => {
+                if (newValue.value != oldValue.value) {
+                    if (newValue.value === 'Manager') {
                         var managerInfo = new ManagerInfo();
                         managerInfo.associateType = 'Manager';
                         managerInfo.copyFrom(this.dataContext.userInfo);
                         this.dataContext.userInfo = managerInfo;
                     }
-                    else if (newValue === 'Administrator') {
+                    else if (newValue.value === 'Administrator') {
                         var adminInfo = new AdminInfo();
                         adminInfo.associateType = 'Administrator';
                         adminInfo.copyFrom(this.dataContext.userInfo);
@@ -48,7 +66,7 @@
                         this.dataContext.userInfo = assistantInfo;
                     }
                 }
-            });
+            }, true);
 
             this.$scope.$watch(() => this.marketSelected, (newValue: Market, oldValue: Market) => {
                 if (newValue != oldValue) {

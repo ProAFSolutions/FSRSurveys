@@ -185,6 +185,13 @@ body {
                     background-color: $color-blue;
             }  
 
+            #associate-dropdown{
+                .ui-select-toggle{
+                    background-color: $color-blue;
+                    color: #fff;
+                }
+            }
+
             .page1{
                 fieldset{
                            
@@ -223,15 +230,15 @@ body {
                     }
 
                     .separator{
-                        margin-left: 10%;
-                        margin-right: 10%;
+                        margin-left: 15px;
+                        margin-right:15px;
                     }
 
                     .dropdown-container{                     
                         padding: 0 0 5px 0;
 
                         &.required{                           
-                            .btn-default{
+                            .ui-select-toggle{
                                 background-color: #f2dede !important;
                                 border-color: #ebccd1 !important;
                             }
@@ -295,17 +302,17 @@ body {
                             } 
                                                                 
                                 .warning-message{
-                                display: block !important;
-                                position: absolute;
-                                top: 24px;
-                                left: 12px;
-                                width: 198px;
-                                z-index: 999;
+                                    display: block !important;
+                                    position: absolute;
+                                    top: 24px;
+                                    left: 12px;
+                                    width: 198px;
+                                    z-index: 999;
 
-                                .alert-danger{
-                                    height: 20px;
-                                    line-height: 0;
-                                }
+                                    .alert-danger{
+                                        height: 20px;
+                                        line-height: 0;
+                                    }
                                 }
 
                                 .rzslider{
@@ -359,11 +366,11 @@ body {
                                         background-color: $color-blue;  
                                      
                                         .progress-text{
-                                        color:#000; 
-                                        white-space:nowrap;  
-                                        left: calc(50% - 12px);
-                                        position: absolute;                           
-                                    }                                                                   
+                                            color:#000; 
+                                            white-space:nowrap;  
+                                            left: calc(50% - 12px);
+                                            position: absolute;                           
+                                        }                                                                   
                                 }
                                 
                             } 
@@ -436,6 +443,11 @@ body {
    //Medium & Large
    .desktop{          
         .wizard-pages{
+
+                   .dropdown-menu {
+                        font-size: 13px;
+                    }
+
                   .page2{
                     .categories{
                          .category-header{
@@ -489,6 +501,15 @@ body {
    //Specific for this screen size range
    @media all and (min-width: 768px) and (max-width: 992px){
    
+    .dropdown-menu {
+        font-size: 12px;
+    }
+
+    label.two-lines{
+        line-height: 18px;
+    }                  
+
+
     .page2{
           font-size: 11px !important;
 

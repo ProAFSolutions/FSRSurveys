@@ -19,6 +19,16 @@ var survey;
             this.visibleFinish = false;
             this.isBusy = false;
             this.checkIfUserDirty();
+            this.preventReload();
+        };
+        WizardController.prototype.preventReload = function () {
+            var _this = this;
+            var currentController = this;
+            $(window).on("beforeunload", function () {
+                if (_this.currentStep < 3 && currentController.dataContext.isSurveyDirty)
+                    return 'Changes you made may not be saved';
+                return;
+            });
         };
         //Events
         WizardController.prototype.nextClick = function () {
@@ -51,6 +61,7 @@ var survey;
         };
         WizardController.prototype.populateQuestionnaire = function () {
             var _this = this;
+            var currentController = this;
             this.isBusy = true;
             this.surveyService.resolveCategories().then(function (response) {
                 var categories = response;
@@ -68,7 +79,7 @@ var survey;
             });
         };
         WizardController.prototype.closeClick = function () {
-            location.href = "http://www.google.com";
+            location.href = "https://www.fsresidential.com";
         };
         WizardController.prototype.stepClick = function (step) {
             if (step > 1 && !this.dataContext.userInfo.validate())

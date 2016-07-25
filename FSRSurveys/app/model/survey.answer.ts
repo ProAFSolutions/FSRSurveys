@@ -1,15 +1,15 @@
 ﻿namespace survey {
 
-    export class Answer {
+    export class Answer {     
 
         public timeEffort: number;
-
         public activityOwner: string;
         public activityPerformed: string;
         public technology: string;
 
-        constructor() { }
-
+        constructor() {
+            
+        }
     }
 
 

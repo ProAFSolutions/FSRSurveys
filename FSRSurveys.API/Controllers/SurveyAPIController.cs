@@ -120,12 +120,18 @@ namespace FSRSurveys.API.Controllers
 
                 });
 
-                _surveyService.SaveSurvey(userInfo);
+                try
+                {
+                    _surveyService.SaveSurvey(userInfo);
+                }
+                catch (Exception ex) {
+                    return Ok("Error: " + ex.Message  + " -> " + ex.StackTrace);
+                }
 
                 return Ok("success");
             }
 
-            return Ok("error");
+            return Ok("empty");
         }       
     }
 }

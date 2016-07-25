@@ -12,7 +12,7 @@ var survey;
         };
         ResizeDirective.prototype.link = function (scope, elements, attrs) {
             $(window).on("load resize", function () {
-                if (window.innerWidth < 992) {
+                if (window.innerWidth < 768) {
                     scope.resizeMobile = true;
                 }
                 else {

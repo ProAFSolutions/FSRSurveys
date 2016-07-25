@@ -14,9 +14,23 @@ var survey;
         }
         UserController.prototype.init = function () {
             this.propertyTypeOptions = ['Sited', 'Non-Sited', 'Mix of Sited and Non-Sited'];
-            this.associateType = "Manager";
+            this.associateOptions = [
+                {
+                    name: 'Property Manager',
+                    value: 'Manager'
+                },
+                {
+                    name: 'Assistant Manager',
+                    value: 'Assistant'
+                },
+                {
+                    name: 'Property Administrator',
+                    value: 'Administrator'
+                }
+            ];
+            this.associateType = this.associateOptions[0];
             this.dataContext.userInfo = new survey.ManagerInfo();
-            this.dataContext.userInfo.associateType = this.associateType;
+            this.dataContext.userInfo.associateType = this.associateType.value;
             this.populateMarkets();
             this.setupWatchers();
         };
@@ -24,14 +38,14 @@ var survey;
             var _this = this;
             var currentController = this;
             this.$scope.$watch(function () { return _this.associateType; }, function (newValue, oldValue) {
-                if (newValue != oldValue) {
-                    if (newValue === 'Manager') {
+                if (newValue.value != oldValue.value) {
+                    if (newValue.value === 'Manager') {
                         var managerInfo = new survey.ManagerInfo();
                         managerInfo.associateType = 'Manager';
                         managerInfo.copyFrom(_this.dataContext.userInfo);
                         _this.dataContext.userInfo = managerInfo;
                     }
-                    else if (newValue === 'Administrator') {
+                    else if (newValue.value === 'Administrator') {
                         var adminInfo = new survey.AdminInfo();
                         adminInfo.associateType = 'Administrator';
                         adminInfo.copyFrom(_this.dataContext.userInfo);
@@ -44,7 +58,7 @@ var survey;
                         _this.dataContext.userInfo = assistantInfo;
                     }
                 }
-            });
+            }, true);
             this.$scope.$watch(function () { return _this.marketSelected; }, function (newValue, oldValue) {
                 if (newValue != oldValue) {
                     currentController.dataContext.userInfo.marketName = newValue.name;

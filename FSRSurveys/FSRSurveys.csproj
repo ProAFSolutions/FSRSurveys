@@ -33,6 +33,7 @@
     <Content Include="assets\scripts\base.js" />
     <Content Include="assets\img\background-image.jpg" />
     <Content Include="assets\scripts\jquery.backstretch.js" />
+    <Content Include="assets\scripts\reload.js" />
     <Content Include="assets\scripts\retina-1.1.0.js" />
     <Content Include="assets\styles\main.css">
       <DependentUpon>main.scss</DependentUpon>
@@ -40,6 +41,8 @@
     <Content Include="assets\styles\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
+    <Content Include="dist\app.min.js" />
+    <Content Include="dist\libs.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
@@ -119,7 +122,6 @@
     <Content Include="assets\styles\bootstrap\mixins\_text-overflow.scss" />
     <Content Include="assets\styles\bootstrap\mixins\_vendor-prefixes.scss" />
     <Content Include="assets\styles\_colors.scss" />
-    <Content Include="assets\styles\_rzslider.scss" />
     <Content Include="assets\styles\_screens.scss" />
     <Content Include="assets\styles\_mixins.scss" />
     <None Include="compilerconfig.json" />
@@ -159,7 +161,6 @@
   <ItemGroup>
     <Folder Include="app\build\" />
     <Folder Include="app\definitely-typed\" />
-    <Folder Include="dist\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\controller\survey.questionnaire.controller.ts" />

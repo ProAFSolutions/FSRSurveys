@@ -45,10 +45,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="TimeEffort" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ActivityOwner" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ActivityPerformed" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Technology" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeEffort" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ActivityOwner" Type="nvarchar(max)" />
+          <Property Name="ActivityPerformed" Type="nvarchar(max)" />
+          <Property Name="Technology" Type="nvarchar(max)" />
           <Property Name="Category_Id" Type="int" Nullable="false" />
           <Property Name="UserInfo_Id" Type="int" Nullable="false" />
         </EntityType>
@@ -180,10 +180,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TimeEffort" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ActivityOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ActivityPerformed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Technology" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeEffort" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ActivityOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityPerformed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Technology" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category_Id" Type="Int32" Nullable="false" />
           <Property Name="UserInfo_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserInfoSurvey" FromRole="SurveyAnswers" ToRole="UserInfo" />

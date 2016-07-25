@@ -23,9 +23,20 @@
             this.visiblePrev = false;
             this.visibleFinish = false;
             this.isBusy = false;          
-            this.checkIfUserDirty();                      
+            this.checkIfUserDirty(); 
+            this.preventReload();          
         } 
 
+
+        private preventReload(): void{
+            var currentController = this;
+            $(window).on("beforeunload", () => {
+                if (this.currentStep < 3 && currentController.dataContext.isSurveyDirty)
+                    return 'Changes you made may not be saved';
+                
+                return;           
+            });
+        }
 
         //Events
         public nextClick(): void {
@@ -58,7 +69,8 @@
             }, true);
         }
 
-        private populateQuestionnaire(): void {
+        private populateQuestionnaire(): void {         
+            var currentController = this;
             this.isBusy = true;
             this.surveyService.resolveCategories().then(response => {
                 let categories = response;
@@ -69,6 +81,7 @@
                 if (categories[categories.length - 1].name !== 'Other') {
                     this.dataContext.questionnaireData.push(new QuestionnaireItem(new Category(0, 'Other', ''), new Answer()));
                 }
+
                 this.isBusy = false;
 
             }, error => {
@@ -78,7 +91,7 @@
         }
 
         public closeClick(): void {
-            location.href = "http://www.google.com";
+            location.href = "https://www.fsresidential.com";
         }
 
         public stepClick(step: number): void {

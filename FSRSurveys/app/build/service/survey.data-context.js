@@ -5,6 +5,7 @@ var survey;
             this.isRunningMobile = false;
             this.sumbitBtnDisabled = true;
             this.questionnaireData = new Array();
+            this.isSurveyDirty = false;
         }
         return DataContext;
     }());

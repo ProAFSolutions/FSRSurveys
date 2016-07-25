@@ -16,7 +16,7 @@ namespace FSRSurveys.API.Models
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public decimal TimeEffort { get; set; }
+        public Nullable<decimal> TimeEffort { get; set; }
         public string ActivityOwner { get; set; }
         public string ActivityPerformed { get; set; }
         public string Technology { get; set; }
