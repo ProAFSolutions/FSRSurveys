@@ -14,6 +14,5 @@ namespace survey {
             });
         }
     }
-
     angular.module('survey').directive('browserDetect', BrowserDetectDirective.instance);
 }

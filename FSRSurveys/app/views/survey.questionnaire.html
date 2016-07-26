@@ -48,34 +48,37 @@
                     </div>
                 </div>
                 <div class="category-field col-sm-2 col-xs-12">
-                    <div style="display: none" ng-class="{ 'warning-message': (vm.percentageTimeEffort > 100 && questionnaireItem.answer.timeEffort > 0) }">
-                        <uib-alert type="danger">Total time effort exceeds 100%</uib-alert>
+                    <div class="dropdown-container" ng-class="{ 'red-border': (vm.percentageTimeEffort > 100 && questionnaireItem.answer.timeEffort > 0) }">
+                        <ui-select ng-model="questionnaireItem.answer.timeEffort" theme="bootstrap">
+                            <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? '% Time Spent Annually:' : 'Time Effort:' }}">{{$select.selected}} %</ui-select-match>
+                            <ui-select-choices class="ui-select-choices" repeat="percentageTimeEffortItem in vm.percentageTimeEffortOptions">
+                                <div ng-bind-html="percentageTimeEffortItem + ' %'"></div>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
-                    <ui-select ng-model="questionnaireItem.answer.timeEffort" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? '% Time Spent Annually:' : 'Time Effort:' }}">{{$select.selected}} %</ui-select-match>
-                        <ui-select-choices class="ui-select-choices" repeat="percentageTimeEffortItem in vm.percentageTimeEffortOptions">
-                            <div ng-bind-html="percentageTimeEffortItem + ' %'"></div>
-                        </ui-select-choices>
-                    </ui-select>
                 </div>
                 <div class="category-field col-sm-2 col-xs-12">
-                    <ui-select ng-model="questionnaireItem.answer.activityOwner" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? 'Primary Activity Owner:' : 'Acivity Owner:' }}">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices class="ui-select-choices" repeat="activityOwnerItem in vm.activityOwnerOptions | filter: $select.search">
-                            <div ng-bind-html="activityOwnerItem | highlight: $select.search"></div>
-                        </ui-select-choices>
-                    </ui-select>
+                    <div class="dropdown-container" ng-class="{ 'required': (!questionnaireItem.answer.activityOwner && questionnaireItem.answer.timeEffort > 0) }">
+                        <ui-select ng-model="questionnaireItem.answer.activityOwner" theme="bootstrap">
+                            <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? 'Primary Activity Owner:' : 'Acivity Owner:' }}">{{$select.selected}}</ui-select-match>
+                            <ui-select-choices class="ui-select-choices" repeat="activityOwnerItem in vm.activityOwnerOptions | filter: $select.search">
+                                <div ng-bind-html="activityOwnerItem | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
                 </div>
                 <div class="category-field col-sm-2 col-xs-12">
-                    <ui-select ng-model="questionnaireItem.answer.activityPerformed" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? 'Is Technology Used?:' : 'Select:' }}">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices class="ui-select-choices" repeat="activityPerformedItem in vm.activityPerformedOptions | filter: $select.search">
-                            <div ng-bind-html="activityPerformedItem | highlight: $select.search"></div>
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
+                    <div class="dropdown-container" ng-class="{ 'required': (!questionnaireItem.answer.activityPerformed && questionnaireItem.answer.timeEffort > 0) }">
+                        <ui-select ng-model="questionnaireItem.answer.activityPerformed" theme="bootstrap">
+                            <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? 'Is Technology Used?:' : 'Select:' }}">{{$select.selected}}</ui-select-match>
+                            <ui-select-choices class="ui-select-choices" repeat="activityPerformedItem in vm.activityPerformedOptions | filter: $select.search">
+                                <div ng-bind-html="activityPerformedItem | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                 </div>
                 <div class="category-field col-sm-2 col-xs-12">
-                    <input type="text" placeholder="{{ vm.dataContext.isRunningMobile ? 'If Yes, Provide Technology Name:' : 'Technology Used'}}" ng-model="questionnaireItem.answer.technology" />
+                    <input type="text" ng-disabled="questionnaireItem.answer.activityPerformed !== 'Yes'" ng-class="{ 'required': !questionnaireItem.answer.technology && questionnaireItem.answer.activityPerformed === 'Yes' }" placeholder="{{ vm.dataContext.isRunningMobile ? 'If Yes, Provide Technology Name:' : 'Technology Used'}}" ng-model="questionnaireItem.answer.technology" />
                 </div>
             </div>
             <!--<i class="fa fa-times-circle" title="Remove questionnaire item" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>-->

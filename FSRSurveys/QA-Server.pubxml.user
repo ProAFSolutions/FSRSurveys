@@ -11,28 +11,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="app/controller/survey.abstract.controller.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/controller/survey.menu.controller.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/controller/survey.questionnaire.controller.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/controller/survey.user.controller.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/controller/survey.wizard.controller..js">
       <publishTime>07/08/2016 15:06:05</publishTime>
     </File>
     <File Include="app/controller/survey.wizard.controller.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/directives/browser-detection.directive.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/directives/resize.directive.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/html/survey.blank.html">
       <publishTime>07/08/2016 13:29:22</publishTime>
@@ -50,34 +50,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/08/2016 13:48:32</publishTime>
     </File>
     <File Include="app/model/survey.answer.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/model/survey.category.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/model/survey.market.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/model/survey.questionnaire-item.js">
       <publishTime>07/08/2016 15:06:05</publishTime>
     </File>
     <File Include="app/model/survey.questionnaireData.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/model/survey.questionnaireItem.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/model/survey.userInfo.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/service/survey.data-context.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/service/survey.service.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/survey.config.js">
-      <publishTime>07/25/2016 12:01:32</publishTime>
+      <publishTime>07/26/2016 12:30:58</publishTime>
     </File>
     <File Include="app/views/survey.blank.html">
       <publishTime>07/18/2016 10:59:41</publishTime>
@@ -89,13 +89,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/20/2016 17:25:25</publishTime>
     </File>
     <File Include="app/views/survey.questionnaire.html">
-      <publishTime>07/25/2016 15:22:16</publishTime>
+      <publishTime>07/26/2016 12:24:12</publishTime>
     </File>
     <File Include="app/views/survey.questionnaire.mobile.html">
       <publishTime>07/20/2016 17:20:30</publishTime>
     </File>
     <File Include="app/views/survey.user.html">
-      <publishTime>07/25/2016 15:07:04</publishTime>
+      <publishTime>07/25/2016 15:28:52</publishTime>
     </File>
     <File Include="app/views/survey.wizard.html">
       <publishTime>07/25/2016 15:11:02</publishTime>
@@ -392,10 +392,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2016 10:59:41</publishTime>
     </File>
     <File Include="assets/styles/main.css">
-      <publishTime>07/25/2016 15:07:39</publishTime>
+      <publishTime>07/26/2016 10:41:11</publishTime>
     </File>
     <File Include="assets/styles/main.min.css">
-      <publishTime>07/25/2016 15:07:39</publishTime>
+      <publishTime>07/26/2016 10:41:11</publishTime>
     </File>
     <File Include="assets/styles/main.scss">
       <publishTime>07/25/2016 08:53:14</publishTime>
@@ -422,7 +422,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2016 10:59:41</publishTime>
     </File>
     <File Include="assets/styles/_screens.scss">
-      <publishTime>07/25/2016 15:07:38</publishTime>
+      <publishTime>07/26/2016 10:41:11</publishTime>
     </File>
     <File Include="bin/dist/app.min.js">
       <publishTime>07/14/2016 13:25:17</publishTime>
@@ -431,19 +431,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2016 13:25:17</publishTime>
     </File>
     <File Include="bin/FSRSurveys.dll">
-      <publishTime>07/25/2016 11:58:57</publishTime>
+      <publishTime>07/26/2016 12:29:00</publishTime>
     </File>
     <File Include="dist/app.min.js">
-      <publishTime>07/25/2016 12:01:31</publishTime>
+      <publishTime>07/26/2016 12:30:57</publishTime>
     </File>
     <File Include="dist/libs.min.js">
-      <publishTime>07/25/2016 12:01:31</publishTime>
+      <publishTime>07/26/2016 12:30:56</publishTime>
     </File>
     <File Include="gulpfile.js">
       <publishTime>07/25/2016 08:53:14</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>07/25/2016 12:01:31</publishTime>
+      <publishTime>07/26/2016 12:30:57</publishTime>
     </File>
     <File Include="package.json">
       <publishTime>07/25/2016 08:53:14</publishTime>
@@ -452,7 +452,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2016 10:59:41</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>07/22/2016 17:32:03</publishTime>
+      <publishTime>07/26/2016 09:37:29</publishTime>
     </File>
   </ItemGroup>
 </Project>

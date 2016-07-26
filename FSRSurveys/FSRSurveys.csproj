@@ -160,7 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\build\" />
-    <Folder Include="app\definitely-typed\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\controller\survey.questionnaire.controller.ts" />
@@ -168,6 +167,7 @@
     <TypeScriptCompile Include="app\controller\survey.abstract.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.user.controller.ts" />
     <TypeScriptCompile Include="app\controller\survey.wizard.controller.ts" />
+    <TypeScriptCompile Include="app\definitely-typed\jquery.browser.d.ts" />
     <TypeScriptCompile Include="app\directives\browser-detection.directive.ts" />
     <TypeScriptCompile Include="app\directives\resize.directive.ts" />
     <TypeScriptCompile Include="app\model\survey.market.ts" />

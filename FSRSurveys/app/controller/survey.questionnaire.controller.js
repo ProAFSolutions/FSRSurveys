@@ -24,6 +24,8 @@ var survey;
             this.totalActivityOwner = 0;
             this.totalActivityPerformed = 0;
             this.totalTechnology = 0;
+            this.totalActivityPerformedYes = 0;
+            this.totalTechnologyYes = 0;
         };
         QuestionnaireController.prototype.calculateTotals = function () {
             var _this = this;
@@ -38,7 +40,6 @@ var survey;
                         if (questionnaireItem.answer.timeEffort != oldTimeEffort && questionnaireItem.answer.timeEffort == 0) {
                             questionnaireItem.answer.activityOwner = 'N/A';
                             questionnaireItem.answer.activityPerformed = 'N/A';
-                            questionnaireItem.answer.technology = 'N/A';
                         }
                         currentController.percentageTimeEffort += questionnaireItem.answer.timeEffort;
                     }
@@ -47,13 +48,26 @@ var survey;
                     }
                     if (questionnaireItem.answer.activityPerformed) {
                         currentController.totalActivityPerformed++;
+                        if (questionnaireItem.answer.activityPerformed === 'Yes') {
+                            currentController.totalActivityPerformedYes++;
+                        }
+                    }
+                    if (questionnaireItem.answer.technology) {
+                        currentController.totalTechnology++;
+                        if (questionnaireItem.answer.activityPerformed) {
+                            if (questionnaireItem.answer.activityPerformed === 'Yes') {
+                                currentController.totalTechnologyYes++;
+                            }
+                            else {
+                                questionnaireItem.answer.technology = null;
+                            }
+                        }
                     }
                     index++;
                 }
             }, true);
             this.$scope.$watch(function () { return _this.percentageTimeEffort; }, function (newValue, oldValue) {
                 if (newValue != oldValue) {
-                    currentController.validateQuestionnaire();
                     if (newValue == 100) {
                         for (var _i = 0, _a = _this.dataContext.questionnaireData; _i < _a.length; _i++) {
                             var questionnaireItem = _a[_i];
@@ -62,6 +76,14 @@ var survey;
                             }
                         }
                     }
+                    else if (oldValue == 100 && newValue != 100) {
+                        if (questionnaireItem.answer.timeEffort == 0 && questionnaireItem.answer.activityOwner == 'N/A' && questionnaireItem.answer.activityPerformed == 'N/A') {
+                            questionnaireItem.answer.activityOwner = null;
+                            questionnaireItem.answer.activityPerformed = null;
+                            questionnaireItem.answer.technology = null;
+                        }
+                    }
+                    currentController.validateQuestionnaire();
                 }
             });
             this.$scope.$watch(function () { return _this.totalActivityOwner; }, function (newValue, oldValue) {
@@ -72,7 +94,11 @@ var survey;
                 if (newValue != oldValue)
                     currentController.validateQuestionnaire();
             });
-            this.$scope.$watch(function () { return _this.totalTechnology; }, function (newValue, oldValue) {
+            this.$scope.$watch(function () { return _this.totalActivityPerformedYes; }, function (newValue, oldValue) {
+                if (newValue != oldValue)
+                    currentController.validateQuestionnaire();
+            });
+            this.$scope.$watch(function () { return _this.totalTechnologyYes; }, function (newValue, oldValue) {
                 if (newValue != oldValue)
                     currentController.validateQuestionnaire();
             });
@@ -82,7 +108,8 @@ var survey;
             var totalItems = this.dataContext.questionnaireData.length;
             this.dataContext.sumbitBtnDisabled = !(this.percentageTimeEffort == 100 &&
                 this.totalActivityOwner == totalItems &&
-                this.totalActivityPerformed == totalItems);
+                this.totalActivityPerformed == totalItems &&
+                this.totalActivityPerformedYes == this.totalTechnologyYes);
         };
         QuestionnaireController.prototype.checkIfDirty = function () {
             this.dataContext.isSurveyDirty = this.percentageTimeEffort > 0 || this.totalActivityOwner > 0 ||

@@ -194,6 +194,27 @@ body {
                 }
             }
 
+            .dropdown-container{                
+
+                &.red-border{                           
+                    .ui-select-toggle{                        
+                        border: solid 2px #ebccd1 !important;
+                    }
+                }
+
+                &.required{                           
+                    .ui-select-toggle{
+                        background-color: #f2dede !important;
+                        border-color: #ebccd1 !important;
+                    }
+                }
+            } 
+
+            input.required{
+                background-color: #f2dede !important;
+                border-color: #ebccd1 !important;
+            }
+
             .page1{
                 fieldset{
                            
@@ -226,25 +247,13 @@ body {
                         float: left;
                     }
 
-                    input.required{
-                        background-color: #f2dede !important;
-                        border-color: #ebccd1 !important;
-                    }
-
                     .separator{
                         margin-left: 15px;
                         margin-right:15px;
                     }
 
                     .dropdown-container{                     
-                        padding: 0 0 5px 0;
-
-                        &.required{                           
-                            .ui-select-toggle{
-                                background-color: #f2dede !important;
-                                border-color: #ebccd1 !important;
-                            }
-                        }
+                        padding: 0 0 5px 0;                        
                     }                           
                 }
             }
