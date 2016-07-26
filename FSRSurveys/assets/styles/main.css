@@ -8702,6 +8702,8 @@ body {
     body .btn-group .btn-primary:hover {
       color: #fff;
       background-color: #ccc !important; }
+  body .ui-select-bootstrap .ui-select-dropdown {
+    max-height: 120px; }
   body .ui-select-bootstrap .ui-select-choices-row > a {
     padding-left: 2px; }
   body .ui-select-bootstrap .ui-select-choices-row.active > a {
@@ -8787,7 +8789,47 @@ body {
           background-color: #f2dede !important;
           border-color: #ebccd1 !important; }
       body .form-box .wizard-pages .page2 {
-        font-size: 12px; }
+        font-size: 12px;
+        /*.category-footer{
+                        margin-top: 10px;
+
+                        .completed{
+                            width: 100%;                           
+                            margin-top: 5px;
+                            font-size: 12px;
+                           
+                            
+                            .progress{
+                                
+                                position: relative;
+
+                                &.red {
+                                    .progress-bar{
+                                        background-color: red;
+                                        .progress-text{
+                                            color: #fff !important;  
+                                        }                                                              
+                                    }
+                                }
+
+                                .progress-bar{
+                                        background-color: $color-blue;  
+                                     
+                                        .progress-text{
+                                            color:#000; 
+                                            white-space:nowrap;  
+                                            left: calc(50% - 12px);
+                                            position: absolute;                           
+                                        }                                                                   
+                                }
+                                
+                            } 
+                        }
+
+                        .counter{
+                            text-align: center;
+                        }
+                    }*/ }
         body .form-box .wizard-pages .page2 ul.categories {
           padding-left: 0;
           text-align: left; }
@@ -8843,27 +8885,27 @@ body {
               color: #58585B; }
               body .form-box .wizard-pages .page2 ul.categories .category .fa-times-circle:hover {
                 color: #ccc; }
-          body .form-box .wizard-pages .page2 ul.categories .category-footer {
-            margin-top: 10px; }
-            body .form-box .wizard-pages .page2 ul.categories .category-footer .completed {
-              width: 100%;
-              margin-top: 5px;
-              font-size: 12px; }
-              body .form-box .wizard-pages .page2 ul.categories .category-footer .completed .progress {
-                position: relative; }
-                body .form-box .wizard-pages .page2 ul.categories .category-footer .completed .progress.red .progress-bar {
-                  background-color: red; }
-                  body .form-box .wizard-pages .page2 ul.categories .category-footer .completed .progress.red .progress-bar .progress-text {
-                    color: #fff !important; }
-                body .form-box .wizard-pages .page2 ul.categories .category-footer .completed .progress .progress-bar {
-                  background-color: #0098D2; }
-                  body .form-box .wizard-pages .page2 ul.categories .category-footer .completed .progress .progress-bar .progress-text {
-                    color: #000;
-                    white-space: nowrap;
-                    left: calc(50% - 12px);
-                    position: absolute; }
-            body .form-box .wizard-pages .page2 ul.categories .category-footer .counter {
-              text-align: center; }
+        body .form-box .wizard-pages .page2 .category-footer {
+          width: 100%;
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          background: #000;
+          opacity: 0.9;
+          z-index: 99999; }
+          body .form-box .wizard-pages .page2 .category-footer .progress {
+            margin-left: 10px; }
+            body .form-box .wizard-pages .page2 .category-footer .progress.red .progress-bar {
+              background-color: red; }
+              body .form-box .wizard-pages .page2 .category-footer .progress.red .progress-bar .progress-text {
+                color: #fff !important; }
+            body .form-box .wizard-pages .page2 .category-footer .progress .progress-bar {
+              background-color: #0098D2; }
+              body .form-box .wizard-pages .page2 .category-footer .progress .progress-bar .progress-text {
+                color: #000;
+                white-space: nowrap;
+                left: calc(50% - 12px);
+                position: absolute; }
       body .form-box .wizard-pages .page3 .well {
         font-size: 24px; }
 
@@ -8880,17 +8922,30 @@ body {
   height: 24px; }
 
 .mobile .wizard-pages .page2 .categories .category-header {
-  display: none; }
+  padding-bottom: 10px; }
+  .mobile .wizard-pages .page2 .categories .category-header .info {
+    line-height: 18px;
+    padding-bottom: 10px;
+    font-size: 11px; }
+    .mobile .wizard-pages .page2 .categories .category-header .info .fa-info-circle {
+      color: #0098D2;
+      font-size: 16px;
+      padding-right: 3px; }
 
 .mobile .wizard-pages .page2 .categories .category {
   border-bottom: none; }
   .mobile .wizard-pages .page2 .categories .category .category-field {
     margin-top: 5px; }
 
-.mobile .wizard-pages .page2 .categories .category-footer label {
-  clear: left;
-  float: left;
-  width: 40%; }
+.mobile .wizard-pages .page2 .category-footer .row > div {
+  font-size: 11px;
+  height: 22px;
+  line-height: 22px;
+  margin-top: -1px; }
+
+.mobile .wizard-pages .page2 .category-footer .progress {
+  margin-top: 0;
+  margin-left: 10px; }
 
 .desktop .wizard-pages .dropdown-menu {
   font-size: 13px; }
@@ -8922,8 +8977,23 @@ body {
 .desktop .wizard-pages .page2 .categories .category {
   border-bottom: solid 1px #ddd; }
 
-.desktop .wizard-pages .page2 .categories .category-footer label {
-  display: none; }
+.desktop .wizard-pages .page2 .category-footer .row > div .completed {
+  position: relative; }
+  .desktop .wizard-pages .page2 .category-footer .row > div .completed .progress {
+    position: absolute;
+    top: 10px;
+    left: 85px;
+    width: 72%; }
+
+.desktop .wizard-pages .page2 .category-footer .row > div label {
+  float: left;
+  line-height: 40px;
+  height: 30px; }
+
+.desktop .wizard-pages .page2 .category-footer .row > div .counter {
+  padding-left: 10px;
+  line-height: 40px;
+  float: left; }
 
 @media all and (min-width: 768px) and (max-width: 992px) {
   .dropdown-menu {

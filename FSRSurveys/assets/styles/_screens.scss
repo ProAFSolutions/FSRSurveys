@@ -85,18 +85,20 @@ body {
     
     .ui-select-bootstrap {
             
+        .ui-select-dropdown{
+            max-height: 120px;
+        }
 
-            .ui-select-choices-row{
-
-                > a{
-                    padding-left: 2px;
-                }
-
-                &.active > a{
-                    background-color: $color-blue !important;
-                    padding-left: 2px;
-                }
+        .ui-select-choices-row {
+            > a{
+                padding-left: 2px;
             }
+
+            &.active > a{
+                background-color: $color-blue !important;
+                padding-left: 2px;
+            }
+        }
     }
 
     .dropdown-menu{
@@ -338,9 +340,44 @@ body {
                                     color: $color-light-gray;
                             }                        
                         }  
-                    }
+                    }                   
+                }
 
-                    .category-footer{
+
+                 .category-footer{
+                        width: 100%;
+                        position: fixed;                        
+                        left: 0;
+                        bottom: 0;
+                        background: #000;                       
+                        opacity: 0.9;
+                        z-index: 99999;
+
+                         .progress{  
+                            margin-left: 10px;
+
+                            &.red {
+                                .progress-bar{
+                                    background-color: red;
+                                    .progress-text{
+                                        color: #fff !important;  
+                                    }                                                              
+                                }
+                            }
+
+                             .progress-bar{
+                                    background-color: $color-blue;                                  
+                                    .progress-text{
+                                        color:#000; 
+                                        white-space:nowrap;  
+                                        left: calc(50% - 12px);
+                                        position: absolute;                           
+                                    }                                                                   
+                                }
+                         }
+
+                 }
+                 /*.category-footer{
                         margin-top: 10px;
 
                         .completed{
@@ -379,8 +416,7 @@ body {
                         .counter{
                             text-align: center;
                         }
-                    }
-                }
+                    }*/
             }
 
             .page3 {                
@@ -418,7 +454,21 @@ body {
                 .page2{
                     .categories {
                          .category-header{
-                            display: none;
+                            padding-bottom: 10px;
+
+                            .info{
+                                line-height: 18px;
+                                padding-bottom: 10px;
+                                font-size: 11px;
+
+                                .fa-info-circle{
+                                   color: $color-blue;
+                                   font-size: 16px;
+                                   padding-right: 3px;
+                                }
+                            }
+
+                           
                          }
 
                          .category{                                
@@ -426,13 +476,23 @@ body {
                                 .category-field {   
                                     margin-top: 5px;
                                 }
-                         }
-                         .category-footer{
-                             label{                                 
-                                 clear: left;
-                                 float: left;
-                                 width: 40%;
-                             }
+                         }                        
+                    }
+
+                    .category-footer{                       
+                        
+                        .row{
+                            > div{
+                                font-size: 11px;
+                                height: 22px;
+                                line-height: 22px;
+                                margin-top: -1px;
+                            }
+                        }
+
+                         .progress{  
+                            margin-top: 0;
+                            margin-left: 10px;                            
                          }
                     }
                 }
@@ -485,13 +545,39 @@ body {
                         
                          .category{                                
                                 border-bottom: solid 1px $color-lines;
-                         }  
-
-                         .category-footer{
-                             label{
-                                 display: none;
-                             }
                          }
+                    }
+
+                    .category-footer{                       
+                        
+                        .row{
+                            > div{
+
+                                .completed{
+                                    position: relative;
+
+                                    .progress{
+                                        position: absolute;
+                                        top: 10px;
+                                        left: 85px;
+                                        width: 72%;
+                                    }
+                                }
+                               
+                                label{
+                                    float: left;
+                                    line-height: 40px;
+                                    height: 30px;
+                                }
+
+                                .counter{
+                                    padding-left: 10px;
+                                    line-height: 40px;
+                                    float: left
+                                }
+                            }
+                        }                       
+                                          
                     }
                }
            }               

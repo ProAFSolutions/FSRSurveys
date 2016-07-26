@@ -1,6 +1,7 @@
 var survey;
 (function (survey) {
-    var SURVEY_API_BASE_URL = "http://localhost:23611/api/survey";
+    //const SURVEY_API_BASE_URL = "http://localhost:23611/api/survey";  
+    var SURVEY_API_BASE_URL = "http://rolesurvey.fsresidential.com/api/api/survey";
     var SurveyService = (function () {
         function SurveyService($httpService) {
             this.$http = $httpService;

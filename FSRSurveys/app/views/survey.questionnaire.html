@@ -1,8 +1,22 @@
 ﻿<div ng-controller="QuestionnaireController as vm">
     <ul class="categories">
         <li class="category-header">
-            <div class="row">              
+            <div class="row" ng-show="vm.dataContext.isRunningMobile">
+                <div class="col-xs-12 info">
+                    <b><i class="fa fa-info-circle"></i>% Time Spent Annually:</b>% of time spent performing the following activities in a year:
+                </div>
+                <div class="col-xs-12 info">
+                    <b><i class="fa fa-info-circle"></i>Primary Activity Owner:</b>Who is primarily responsible for performing each activity:
+                </div>
+                <div class="col-xs-12 info">
+                    <b><i class="fa fa-info-circle"></i>Technology Used:</b> Is a vendor solution/technology tool used to assist with this process?
+                </div>
+                <div class="col-xs-12 info">
+                    <b><i class="fa fa-info-circle"></i>Technology Name: </b>If technology is being used, name the vendor solution / technology tool:
+                </div>
+            </div>
 
+            <div class="row" ng-show="!vm.dataContext.isRunningMobile">
                 <div class="col-sm-4">Job Activity</div>
                 <div class="col-sm-2">
                     <!--<i class="fa fa-info-circle" uib-tooltip="% Time & Effort"></i>-->
@@ -25,7 +39,7 @@
 
         <li class="category" ng-repeat="questionnaireItem in vm.dataContext.questionnaireData">
             <div class="row">
-                <div class="category-field col-sm-4 col-xs-12">                   
+                <div class="category-field col-sm-4 col-xs-12">
                     <div ng-if="questionnaireItem.category.id > 0 && questionnaireItem.category.name !== 'Other'">
                         <b>{{questionnaireItem.category.name}}: </b>{{questionnaireItem.category.jobActivity}}
                     </div>
@@ -38,16 +52,15 @@
                         <uib-alert type="danger">Total time effort exceeds 100%</uib-alert>
                     </div>
                     <ui-select ng-model="questionnaireItem.answer.timeEffort" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Time Effort:">{{$select.selected}} %</ui-select-match>
+                        <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? '% Time Spent Annually:' : 'Time Effort:' }}">{{$select.selected}} %</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="percentageTimeEffortItem in vm.percentageTimeEffortOptions">
                             <div ng-bind-html="percentageTimeEffortItem + ' %'"></div>
                         </ui-select-choices>
                     </ui-select>
-                    <!--<rzslider rz-slider-model="questionnaireItem.answer.timeEffort" rz-slider-options="vm.sliderOptions"></rzslider>-->
                 </div>
                 <div class="category-field col-sm-2 col-xs-12">
                     <ui-select ng-model="questionnaireItem.answer.activityOwner" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Acivity Owner:">{{$select.selected}}</ui-select-match>
+                        <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? 'Primary Activity Owner:' : 'Acivity Owner:' }}">{{$select.selected}}</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="activityOwnerItem in vm.activityOwnerOptions | filter: $select.search">
                             <div ng-bind-html="activityOwnerItem | highlight: $select.search"></div>
                         </ui-select-choices>
@@ -55,45 +68,59 @@
                 </div>
                 <div class="category-field col-sm-2 col-xs-12">
                     <ui-select ng-model="questionnaireItem.answer.activityPerformed" theme="bootstrap">
-                        <ui-select-match class="ui-select-match" placeholder="Select:">{{$select.selected}}</ui-select-match>
+                        <ui-select-match class="ui-select-match" placeholder="{{ vm.dataContext.isRunningMobile ? 'Is Technology Used?:' : 'Select:' }}">{{$select.selected}}</ui-select-match>
                         <ui-select-choices class="ui-select-choices" repeat="activityPerformedItem in vm.activityPerformedOptions | filter: $select.search">
                             <div ng-bind-html="activityPerformedItem | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
                 </div>
                 <div class="category-field col-sm-2 col-xs-12">
-                    <input type="text" placeholder="Technology Used:" ng-model="questionnaireItem.answer.technology" />
+                    <input type="text" placeholder="{{ vm.dataContext.isRunningMobile ? 'If Yes, Provide Technology Name:' : 'Technology Used'}}" ng-model="questionnaireItem.answer.technology" />
                 </div>
             </div>
             <!--<i class="fa fa-times-circle" title="Remove questionnaire item" ng-show="questionnaireItem.category.id == 0" ng-click="vm.closeOtherClick($index)"></i>-->
         </li>
+    </ul>
 
-        <li class="category-footer">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div>TOTALS:</div>                   
+    <div class="category-footer" ng-show="vm.dataContext.isRunningMobile">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <label class="col-xs-4">Time Effort:</label>
+                    <label class="col-xs-4">Acivity Owner:</label>
+                    <label class="col-xs-4">Method:</label>
                 </div>
-                <div class="col-sm-2">
-                    <div class="completed">
-                        <label>Time Effort:</label>
+            </div>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="completed col-xs-4">
                         <uib-progressbar ng-class="{red: vm.percentageTimeEffort > 100 }" max="100" value="vm.percentageTimeEffort"><span class="progress-text">{{vm.percentageTimeEffort}} %</span></uib-progressbar>
                     </div>
-                </div>
-                <div class="col-sm-2">
-                    <label>Acivity Owner:</label>
-                    <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
-                </div>
-                <div class="col-sm-2">
-                    <label>Method:</label>
-                    <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
-                </div>
-                <!--<div class="col-sm-2">
-                    <label>Technology Used:</label>
-                    <div class="counter"><b>{{vm.totalTechnology}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
-                </div>-->
-            </div>
-        </li>     
+                    <div class="counter col-xs-4"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
+                    <div class="counter col-xs-4"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
+                </div>               
+            </div>           
+        </div>
+    </div>
 
-    </ul>
+    <div class="category-footer" ng-show="!vm.dataContext.isRunningMobile">
+        <div class="row">           
+            <div class="col-sm-offset-1 col-sm-3">
+                <div class="completed">
+                    <label>Total Time Effort:</label>
+                    <uib-progressbar ng-class="{red: vm.percentageTimeEffort > 100 }" max="100" value="vm.percentageTimeEffort"><span class="progress-text">{{vm.percentageTimeEffort}} %</span></uib-progressbar>
+                </div>
+            </div>
+            <div class="col-sm-offset-1 col-sm-3">
+                <label>Total Acivity Owner:</label>
+                <div class="counter"><b>{{vm.totalActivityOwner}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
+            </div>
+            <div class="col-sm-offset-1 col-sm-3">
+                <label>Total Method:</label>
+                <div class="counter"><b>{{vm.totalActivityPerformed}}</b> out of <b>{{vm.dataContext.questionnaireData.length}}</b></div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
