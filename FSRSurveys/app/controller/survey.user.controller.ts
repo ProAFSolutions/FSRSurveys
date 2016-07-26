@@ -72,7 +72,15 @@
                 if (newValue != oldValue) {
                     currentController.dataContext.userInfo.marketName = newValue.name;
                 }
-            });            
+            });    
+
+            this.$scope.$watch(() => this.dataContext.userInfo.propertyType, (newValue: string, oldValue: string) => {
+                if (newValue != oldValue) {
+                    if (newValue !== 'Sited') {
+                        this.dataContext.userInfo.propertyName = null;
+                    }
+                }
+            });    
         }
 
         private populateMarkets() {

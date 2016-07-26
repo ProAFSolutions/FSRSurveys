@@ -64,6 +64,13 @@ var survey;
                     currentController.dataContext.userInfo.marketName = newValue.name;
                 }
             });
+            this.$scope.$watch(function () { return _this.dataContext.userInfo.propertyType; }, function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    if (newValue !== 'Sited') {
+                        _this.dataContext.userInfo.propertyName = null;
+                    }
+                }
+            });
         };
         UserController.prototype.populateMarkets = function () {
             this.marketsOptions = new Array();
