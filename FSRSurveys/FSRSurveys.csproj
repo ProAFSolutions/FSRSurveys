@@ -45,6 +45,9 @@
     <Content Include="dist\libs.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
+    <Content Include="robots.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
